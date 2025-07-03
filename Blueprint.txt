@@ -1,0 +1,4 @@
+Lab Management Blueprint:-
+
+1. There will be 2 Kinds of accounts -> Lab Eng and Student Acc
+2. Student Acc will upload their Lab

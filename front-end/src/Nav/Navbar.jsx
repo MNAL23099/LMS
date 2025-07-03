@@ -1,11 +1,18 @@
+import { useNavigate } from "react-router-dom";
+
 function Navbar(){
 
+    const navigate = useNavigate();
+    function goToHomePage(){
+        navigate("/homepage")
+    }
+
     return(
-        <nav class="navbar bg-body-tertiary">
-            <div class="container-fluid">
-                <a class="navbar-brand">Lab Management System</a>
-                <form class="d-flex" role="search">
-                    <button class="btn btn-outline-success" type="submit">Home</button>
+        <nav className="navbar bg-body-tertiary">
+            <div className="container-fluid">
+                <a className="navbar-brand">Lab Management System</a>
+                <form className="d-flex" role="search">
+                    <button className="btn btn-outline-success" type="submit" onClick={goToHomePage}>Home</button>
                 </form>
             </div>
         </nav>

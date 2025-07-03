@@ -1,0 +1,43 @@
+Google classroom <-> Lab Management Portal
+
+Generic Words Of Stakeholder (Mr. Kashif):- 
+Students' labs should be merged together
+Sir Kashif will mark the marks on the spreadsheet and the marks will be put inside the PDFs
+Sir Kashif also wants that on the Lab Management Portal, the combined labs should be present in the form of one pdf for each student
+
+Sir Kashif does Lab Management of:-
+1. Marking
+2. Inventory management
+3. Instrument management
+4. Course teaching
+5. Working according to PEC requirements
+6. Pec guidelines are present in course outline, outline of every course offered, list of expirements, lab inventory, displaying lab staff, displaying time table (made according to courses offered)
+7. Structure of a course -> 13 Labs, 16 Week semester, 1 Mid lab, 1 Final lab, So like without Mid and Final there are 14 Weeks
+8. There are student manuals (PDFs) of each lab
+
+Main Points of Lab Management Portal:
+1. Lab eng
+2. Students
+3. Courses
+4. 13 Labs
+5. Each student submits 13 Labs
+
+Marking of Lab:
+Lab eng marks the lab (On portal?)
+Grade is made automatically
+Each student also has to get notification about their weekly marks about each lab (Coding in google spreadsheet)
+At the end of semester, each student's labs have to be merged into one PDF -> All 13 labs have to be there, if a student didn't submit one lab, then that lab has to be marked as absent
+Mid is optional
+Final is obligatory
+If a project was done, the project has to be joined with those labs too
+Lab 13 is always open ended lab
+
+Blank manual:
+There have to be blank manual of each lab, blank manual means that it was not filled by students/ just questions
+Blank manual is the lab that the teacher uploads on the google classroom (It is not filled, it only has questions)
+So there are two kinds of manuals, student manual and student manual
+
+Sir Asif's Recommendation:
+1. Use moodle api for storing of student labs (He said something about drag and drop)
+2. Sir also said that there is another team working on notifications
+
