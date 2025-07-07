@@ -1,11 +1,9 @@
 import SignUp from "./SignUp/signUp.jsx";
-import Navbar from "./Nav/Navbar.jsx";
 import Homepage from "./Homepage/Homepage.jsx";
-import "./App.css";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import Dashboard from "./Dashboard/Dashboard.jsx";
+import Main_Dashboard from "./Dashboard/Main_Dashboard.jsx";
 import SignIn from "./SignIn/SignIn.jsx";
+import Inventory_Dashboard from "./Inventory_Dashboard/Inventory_Dashboard.jsx";
 
 function App() {
 
@@ -18,7 +16,8 @@ function App() {
     <Route path="/signup" element={<SignUp />}></Route>
     <Route path="/homepage" element={<Homepage />} />
     <Route path="/signin" element={<SignIn />}/>
-    <Route path="/dashboard" element={<Dashboard />}/>
+    <Route path="/dashboard" element={<Main_Dashboard />}/>
+    <Route path="/inventoryDashboard" element={<Inventory_Dashboard />} />
 
     </Routes>
 
