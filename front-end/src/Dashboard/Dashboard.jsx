@@ -5,8 +5,11 @@ function Dashboard(){
 
     return(
 
-        <div>
-            <Navbar />
+        <div id="div_1">
+            <Navbar pageType="Dashboard"/>
+
+            <h1>Dashboard</h1>
+            
         </div>
 
     );  

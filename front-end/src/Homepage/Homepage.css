@@ -1,0 +1,26 @@
+#homepage_div_1{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+#homepage_div_1-buttonsDiv{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    position: relative;
+    top: 100px;
+    right: 30%;
+}
+
+/* #div_1-button_1{
+    position: relative;
+    top: 100px;
+    right: 500px;
+}
+
+#div_1-button_2{
+    position: relative;
+    top: 100px;
+    right: 400px;
+} */

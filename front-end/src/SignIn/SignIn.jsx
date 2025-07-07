@@ -3,7 +3,8 @@ import Navbar from "../Nav/Navbar";
 function SignIn(){
     return (
         <div>
-            <Navbar />
+            <Navbar pageType="Sign In"/>
+
             <form id="form_1">
             <h1>Sign In Page</h1>
 

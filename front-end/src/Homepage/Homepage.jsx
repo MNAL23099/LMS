@@ -4,6 +4,7 @@ import "./Homepage.css";
 
 function Homepage(){
 
+    // The navigation changes when the user clicks on either the sign in or the sign up button
     const navigation = useNavigate();
     function goToSignUp(e){
         e.preventDefault();
@@ -15,14 +16,19 @@ function Homepage(){
     }
 
     return(
-
-        <div id="div_1">
-            <Navbar />
+        <>
+        <Navbar pageType="Home Page"/>
+        <div id="homepage_div_1">
+            
             <h1>Welcome To Lab Management Homepage</h1>
-            <button type="button" className="btn btn-primary" onClick={goToSignUp}>Sign Up</button>
-            <button type="button" className="btn btn-success" onClick={goToSignIn}>Sign In</button>
+
+            <div id="homepage_div_1-buttonsDiv">
+            <button id="div_1-button_1" type="button" className="btn btn-primary" onClick={goToSignUp}>Sign Up</button>
+            <button id="div_1-button_2" type="button" className="btn btn-success" onClick={goToSignIn}>Sign In</button>
+            </div>
 
         </div>
+        </>
     );
 
 }

@@ -14,14 +14,14 @@ function App() {
     
     <Routes>
 
-    <Route path="/" element={<Homepage/ >} />
+    <Route path="/" element={<Homepage />} />
     <Route path="/signup" element={<SignUp />}></Route>
     <Route path="/homepage" element={<Homepage />} />
     <Route path="/signin" element={<SignIn />}/>
+    <Route path="/dashboard" element={<Dashboard />}/>
 
     </Routes>
 
-    
     </BrowserRouter>
   );
 

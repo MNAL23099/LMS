@@ -7,18 +7,24 @@ function SignUp() {
     const navigate = useNavigate();
 
     function goToDashboard(e) {
-        e.preventDefault();         
+        e.preventDefault();
+        console.log("Changing navigation to dashboard!");         
         navigate("/dashboard");
     }
 
     return (
         <div>
 
-            <Navbar />
+            <Navbar pageType="Sign Up"/>
 
             {/* Sign up form */}
             <form id="form_1">
             <h1>Sign Up Page</h1>
+
+            <div className="mb-3">
+                <label htmlFor="exampleInputEmail1" className="form-label">Name</label>
+                <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+            </div>
 
             <div className="mb-3">
                 <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
