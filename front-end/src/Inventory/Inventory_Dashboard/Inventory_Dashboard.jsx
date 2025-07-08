@@ -4,6 +4,51 @@ import generateReportCard from "../../assets/generateReportCard.png";
 import editInventoryCard from "../../assets/editInventoryCard.png";
 
 function Inventory_Dashboard(){
+    //  const [inventoryData, setInventoryData] = useState([]);
+    // const [reportData, setReportData] = useState([]);
+
+    // // ✅ 1. View Inventory Handler
+    // const handleView = () => {
+    //     fetch("http://localhost:5000/inventory")
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         console.log("✅ View Inventory Response:", data);
+    //         setInventoryData(data.data);
+    //     })
+    //     .catch(err => console.error("❌ Error fetching inventory:", err));
+    // };
+
+    // // ✅ 2. Edit Inventory Handler (Dummy Update)
+    // const handleEdit = () => {
+    //     fetch("http://localhost:5000/inventory/edit", {
+    //     method: "PUT",
+    //     headers: {
+    //         "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //         id: 1,
+    //         name: "Beaker",
+    //         quantity: 15,
+    //     }),
+    //     })
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         console.log("✅ Edit Inventory Response:", data);
+    //         alert("Inventory item updated successfully!");
+    //     })
+    //     .catch(err => console.error("❌ Error editing inventory:", err));
+    // };
+
+    // // ✅ 3. Generate Report Handler
+    // const handleGenerate = () => {
+    //     fetch("http://localhost:5000/inventory/report")
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         console.log("✅ Inventory Report:", data);
+    //         setReportData(data.report);
+    //     })
+    //     .catch(err => console.error("❌ Error generating report:", err));
+    // };
     return (
         <>
             <Navbar pageType = "Inventory Dashboard"/>
