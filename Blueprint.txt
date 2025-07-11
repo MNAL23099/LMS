@@ -1,4 +1,7 @@
 Lab Management Blueprint:-
 
 1. There will be 2 Kinds of accounts -> Lab Eng and Student Acc
-2. Student Acc will upload their Lab
+2. Student Acc will upload their Lab on their student account
+3. Lab engineer will be able to handle inventory
+    -> Lab engineer will be able to add, edit, print report of lab inventory
+4. Lab engineer will be able to
