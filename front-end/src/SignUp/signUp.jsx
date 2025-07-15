@@ -24,10 +24,10 @@ function SignUp() {
     function submitForm(e){
         e.preventDefault();
 
-        fetch("http://localhost:5000/addUser", {
+        fetch("http://localhost:5000/signup", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({userName : userName, userPass: userPass, userEmail: userEmail, accountType: accountType})
+            body: JSON.stringify({username : userName, password: userPass, email: userEmail, accountType: accountType})
         }).then((res) => res.json())
         .then((jsonRes) => console.log(jsonRes));
 
@@ -59,8 +59,7 @@ function SignUp() {
                 <input onChange={(e) => setUserPass(e.target.value)} type="password" className="form-control" />
             </div>
 
-            <select onChange={(e) => setAccountType(e.target.value)} className="form-select" aria-label="Default select example">
-                <option selected>Account Type</option>
+            <select defaultValue={"Account Type"} onChange={(e) => setAccountType(e.target.value)} className="form-select" aria-label="Default select example">
                 <option value="1">Lab Engineer</option>
                 <option value="2">Student</option>
             </select>

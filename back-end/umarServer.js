@@ -2,7 +2,7 @@
 
 const express = require("express");
 const cors = require("cors");
-const {Pool} = require("pg");
+const {Pool} = require("pg"); //This is the library for postgres SQL
 
 const app = express();
 const PORT = 5000;
@@ -11,6 +11,7 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 
+//Creating a new object of PostGres Sql, and sending a JSON object in its constructor
 const pool = new Pool({
     user: "postgres",
     host: "localhost",
@@ -20,10 +21,15 @@ const pool = new Pool({
     }
 );
 
+//Query to add 
+const query_MakeTable_Users = `CREATE TABLE IF NOT EXISTS Users
+(ID INT PRIMARY KEY, 
+Name VARCHAR(100), 
+Password VARCHAR(100), 
+Account_Type VARCHAR(100), 
+Email VARCHAR(100))`;
 
-const query = "CREATE TABLE IF NOT EXISTS Users(ID INT PRIMARY KEY, Name VARCHAR(100), Password VARCHAR(100), Account_Type VARCHAR(100), Email VARCHAR(100))";
-
-pool.query(query, (err, data) => {
+pool.query(query_MakeTable_Users, (err, data) => {
     if (err){
         console.log("Table can not be created!");
     }

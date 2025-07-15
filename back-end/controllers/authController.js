@@ -3,7 +3,8 @@ const users = [];
 
 // Sign Up logic
 const signUpUser = (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, accountType, email } = req.body;
+  console.log(username);
 
   // Check if user already exists
   const userExists = users.find((user) => user.username === username);
@@ -12,7 +13,8 @@ const signUpUser = (req, res) => {
   }
 
   // Add new user
-  users.push({ username, password });
+  users.push({ username, password, accountType, email});
+  
   res.status(201).json({ message: "User registered successfully" });
 };
 
