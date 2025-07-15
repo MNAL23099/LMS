@@ -24,7 +24,7 @@ function SignUp() {
     function submitForm(e){
         e.preventDefault();
 
-        fetch("http://localhost:5000/signup", {
+        fetch("http://localhost:5000/auth/signup", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({username : userName, password: userPass, email: userEmail, accountType: accountType})

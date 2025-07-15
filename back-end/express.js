@@ -2,7 +2,6 @@
 
 const express = require("express");
 const cors = require("cors");
-const {Pool} = require("pg");
 
 const app = express();
 const PORT = 5000;
@@ -22,20 +21,13 @@ app.get("/", (req, res) => {
   res.send("Backend is working!");
 });
 
-app.post("/signup", (req, res)=>{
-  const {username, password, email, accountType} = req.body;
-  console.log(username);
-  console.log(email);
-  console.log(password);
-  console.log(accountType);
-})
-
 // Start the server
 app.listen(PORT, () => {
   console.log(`✅ Server running at http://localhost:${PORT}`);
 });
 
 //Make the users table
-require(".//models/users");
+require(".//models/users.js");
+
 
 
