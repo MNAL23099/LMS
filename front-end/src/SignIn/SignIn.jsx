@@ -34,18 +34,18 @@ function SignIn(){
                         }}>Sign In</h1>
 
                         <div className="mb-3">
-                            <label htmlFor="signin-email" className="form-label" style={{ fontWeight: 500, color: '#ffd700' }}>Email address</label>
+                            <label htmlFor="signin-email" className="form-label" style={{ fontWeight: 500, color: ' #bfa14a' }}>Email address</label>
                             <input type="email" className="form-control" id="signin-email" style={{ borderRadius: "8px", background: '#fff', color: '#222', border: '1px solid #ffd700' }} aria-describedby="emailHelp" />
-                            <div id="emailHelp" className="form-text" style={{ color: '#ffd700' }}>We'll never share your email with anyone else.</div>
+                            <div id="emailHelp" className="form-text" style={{ color: ' #bfa14a' }}>We'll never share your email with anyone else.</div>
                         </div>
 
                         <div className="mb-3">
-                            <label htmlFor="signin-password" className="form-label" style={{ fontWeight: 500, color: '#ffd700' }}>Password</label>
+                            <label htmlFor="signin-password" className="form-label" style={{ fontWeight: 500, color: ' #bfa14a' }}>Password</label>
                             <input type="password" className="form-control" id="signin-password" style={{ borderRadius: "8px", background: '#fff', color: '#222', border: '1px solid #ffd700' }} />
                         </div>
 
                         <div className="mb-3">
-                            <label htmlFor="signin-accountType" className="form-label" style={{ fontWeight: 500, color: '#ffd700' }}>Account Type</label>
+                            <label htmlFor="signin-accountType" className="form-label" style={{ fontWeight: 500, color: ' #bfa14a'}}>Account Type</label>
                             <select className="form-select" id="signin-accountType" style={{ borderRadius: "8px", background: '#fff', color: '#222', border: '1px solid #ffd700' }} aria-label="Default select example">
                                 <option value="1">Lab Engineer</option>
                                 <option value="2">Student</option>
