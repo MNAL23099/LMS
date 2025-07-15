@@ -4,7 +4,7 @@ function SignIn(){
   
     return (
         <>
-            <Navbar pageType="Sign In" />
+            <Navbar pageType="Sign In" style={{background: '#bfa14a'}} />
             <div style={{
                 minHeight: "100vh",
                 background: "linear-gradient(135deg, #232526 0%, #b59637ff 100%)",
