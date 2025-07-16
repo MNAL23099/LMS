@@ -27,7 +27,10 @@ app.listen(PORT, () => {
 });
 
 //Make the users table
-require(".//models/users.js");
+const createTables = require(".//models/users.js");
+(async()=>{
+  await createTables();
+})();
 
 
 
