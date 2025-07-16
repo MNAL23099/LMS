@@ -15,7 +15,7 @@ async function signUpUser(req, res) {
 
   //Run query to insert data into db
   if (username && password && accountType && email){
-    if (await userAlreadyExists() == false){ //If user already exists then don't add him in db, otherwise do
+    if (await userAlreadyExists(email) == true){ //If user already exists then don't add him in db, otherwise do
       console.log("Sign up user already exists!");
       res.write("user_already_exists");
       res.end();
