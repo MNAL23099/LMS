@@ -1,30 +1,34 @@
-//This is the table in which all the signed up users will be stored
-
-const connectToDatabase = require("./setupDB.js");
+const connectoToDB = require("./setupDB.js");
 
 async function createTables(){
-    const client = await connectToDatabase();
+    await createTable_Users();
+}
 
-    //Query to make the users table
+async function createTable_Users(){
+
+    const client = await connectoToDB();
+    if (!client){ //If client was not returned then just return
+        return;
+    }
+    
     const query_MakeTable_Users = `CREATE TABLE IF NOT EXISTS Users
-    (ID INT PRIMARY KEY, 
-    Name VARCHAR(100), 
-    Password VARCHAR(100), 
-    Account_Type VARCHAR(100), 
-    Email VARCHAR(100))`;
+      (ID SERIAL PRIMARY KEY, 
+      Name VARCHAR(100), 
+      Password VARCHAR(100), 
+      Account_Type VARCHAR(100), 
+      Email VARCHAR(100))`;
 
     client.query(query_MakeTable_Users, (err, data) => {
-        if (err){
-            console.log("Table can not be created!");
+        if (err) {
+            console.log("User Table can not be created!");
+            console.log(err.message);
         }
         else {
-            console.log ("Users table created successfully!");
+            console.log("Users table created!");
         }
-    }
-    );
+    });
 }
 
 module.exports = createTables;
-    
 
 

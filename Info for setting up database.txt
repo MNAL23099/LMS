@@ -1,0 +1,1 @@
+//Run this in sql query tool -> CREATE ROLE superdeveloper WITH LOGIN SUPERUSER PASSWORD '123';

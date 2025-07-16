@@ -1,36 +1,32 @@
-// express.js
-
 const express = require("express");
 const cors = require("cors");
+
+const createTables = require("./models/users.js");
 
 const app = express();
 const PORT = 5000;
 
 // Middleware
-app.use(cors());             // allows frontend (React) to access backend
-app.use(express.json());     // parses JSON from incoming requests
+app.use(cors());
+app.use(express.json());
 
 // Routes
-app.use("/auth", require("./routes/auth")); // signup/signin
-app.use("/dashboard", require("./routes/dashboard")); // dashboard data
-app.use("/inventory", require("./routes/inventory")); // inventory data
-// app.use("/inventory-dashboard", require("./routes/inventoryDashboard")); // optional
+app.use("/auth", require("./routes/auth"));
+app.use("/dashboard", require("./routes/dashboard"));
+app.use("/inventory", require("./routes/inventory"));
 
-// Default route to test server is working
 app.get("/", (req, res) => {
   res.send("Backend is working!");
 });
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`✅ Server running at http://localhost:${PORT}`);
+app.listen(5000, async ()=>{
+  console.log("Server has been started!");
+
+  //Create tables
+  await createTables(); //Create users table
 });
 
-//Make the users table
-const createTables = require(".//models/users.js");
-(async()=>{
-  await createTables();
-})();
+
 
 
 

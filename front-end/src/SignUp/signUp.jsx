@@ -83,9 +83,10 @@ function SignUp() {
 
                         <div className="mb-3">
                             <label htmlFor="signup-accountType" className="form-label" style={{fontWeight: 500, color: '#bfa14a'}}>Account Type</label>
-                            <select defaultValue={"Account Type"} onChange={(e) => setAccountType(e.target.value)} className="form-select" id="signup-accountType" style={{borderRadius: "8px", background: '#232526', color: '#fff', border: '1px solid #bfa14a'}} aria-label="Default select example">
-                                <option value="1">Lab Engineer</option>
-                                <option value="2">Student</option>
+                            <select onChange={(e) => setAccountType(e.target.value)} className="form-select" id="signup-accountType" style={{borderRadius: "8px", background: '#232526', color: '#fff', border: '1px solid #bfa14a'}} aria-label="Default select example">
+                                <option value="not_selected">Account Type</option>
+                                <option value="lab_engineer">Lab Engineer</option>
+                                <option value="student">Student</option>
                             </select>
                         </div>
 
