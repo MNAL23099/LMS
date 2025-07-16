@@ -14,10 +14,13 @@ function SignUp() {
 
     const navigate = useNavigate();
 
-    function goToDashboard(e) {
-        e.preventDefault();
+    function goToDashboard() {
         console.log("Changing navigation to dashboard!");         
         navigate("/dashboard");
+    }
+
+    function goToUserAlreadyExists(){
+        navigate("/useralreadyexists");
     }
 
     //Submit the form
@@ -28,10 +31,17 @@ function SignUp() {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({username : userName, password: userPass, email: userEmail, accountType: accountType})
-        }).then((res) => res.json())
-        .then((jsonRes) => console.log(jsonRes));
-
-        goToDashboard();
+        }).then((res) => res.text())
+        .then((textResponse) => {
+            console.log(textResponse);
+            if (textResponse == "user_already_exists"){
+                window.alert("Account on this email already exists!");
+            }
+            else if (textResponse == "success"){
+                goToDashboard();
+            }
+        });
+           
     }
 
     return (

@@ -2,6 +2,8 @@ import Navbar from "../../Nav/Navbar";
 import viewInventoryCard from "../../assets/viewInventoryCard.jpg";
 import generateReportCard from "../../assets/generateReportCard.png";
 import editInventoryCard from "../../assets/editInventoryCard.png";
+import addInventoryCard from "../../assets/addInventory.png";
+import "./Inventory_Dashboard.css";
 
 function Inventory_Dashboard(){
     //  const [inventoryData, setInventoryData] = useState([]);
@@ -53,12 +55,23 @@ function Inventory_Dashboard(){
         <>
             <Navbar pageType = "Inventory Dashboard"/>
 
+            <div id="inventory-div_1">
             {/* View inventory card */}
             <div className="card" style={{width: "18rem"}}>
             <img src={viewInventoryCard} class="card-img-top" alt="..."/>
             <div className="card-body">
                 <h5 className="card-title">View Current Inventory</h5>
                 <p className="card-text">View the current stats of lab inventory</p>
+                <a className="btn btn-primary">View</a>
+            </div>
+            </div>
+
+            {/* Add inventory card */}
+            <div className="card" style={{width: "18rem"}}>
+            <img src={addInventoryCard} class="card-img-top" alt="..."/>
+            <div className="card-body">
+                <h5 className="card-title">Add new inventory item</h5>
+                <p className="card-text">Add a new inventory component</p>
                 <a className="btn btn-primary">View</a>
             </div>
             </div>
@@ -80,6 +93,7 @@ function Inventory_Dashboard(){
                 <h5 className="card-title">Generate Hardcopy Report</h5>
                 <p className="card-text">Generate & Download Inventory Report</p>
                 <a className="btn btn-primary">Generate</a>
+            </div>
             </div>
             </div>
         

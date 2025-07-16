@@ -8,7 +8,7 @@ async function signUpUser(req, res) {
   
   const lmsClient = await connectToDatabase(); //Get the lmsClient
 
-  //Import the json from frontend
+  //Import the json from request
   const { username, password, accountType, email } = req.body;
   console.log(username); 
   console.log(accountType);
@@ -17,14 +17,17 @@ async function signUpUser(req, res) {
   if (username && password && accountType && email){
     if (await userAlreadyExists() == false){ //If user already exists then don't add him in db, otherwise do
       console.log("Sign up user already exists!");
+      res.write("user_already_exists");
+      res.end();
       return;
     }
     const query = `INSERT INTO users(name, password, account_type, email)
-                  VALUES($1, $2, $3, $4)`;
+    VALUES($1, $2, $3, $4)`;
 
-    try{
+    try{ //Try to add the user to database
       await lmsClient.query(query, [username, password, accountType, email]);
       console.log("User has been added to db!");
+      res.write("success");
     }
     catch (error){
       console.log("Error in putting signed up user to the database");
@@ -35,17 +38,15 @@ async function signUpUser(req, res) {
   else {
     console.log("User did not fill all fields of sign up form");
   }
-  
-  res.status(201).json({ message: "User registered successfully" });
+
 };
 
-async function userAlreadyExists(targetEmail){
+async function userAlreadyExists(targetEmail){// This function returns true if the target email already exists
   const lmsClient = await connectToDatabase();
 
-  const query_get_Users = `SELECT * FROM users`;
   try {
+    const query_get_Users = `SELECT * FROM users`;
     const data = await lmsClient.query(query_get_Users);
-
     for(let i = 0; i < data.rows.length; i++){
       if (data.rows[i].email == targetEmail){
         return true; //If the email already exists inside db then return true
