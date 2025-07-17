@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-
+import "./Navbar.css";
 function Navbar(props){
 
     const navigate = useNavigate();
@@ -8,14 +8,12 @@ function Navbar(props){
     }
 
     return(
-        <nav className="navbar bg-body-tertiary">
+        <nav className="navbar bg-body-tertiary" id="navbar_id">
             <div className="container-fluid">
-                <a className="navbar-brand">{props.pageType}</a>
+                <b className="navbar-brand">{props.pageType}</b>
                 {/* props.pageType means the type of page user is currently inside, like it can be homepage, dashboard, etc */}
 
-                <form className="d-flex" role="search">
-                    <button className="btn btn-outline-success" type="submit" onClick={goToHomePage}>Home</button>
-                </form>
+                
             </div>
         </nav>
     );

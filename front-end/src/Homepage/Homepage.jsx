@@ -18,6 +18,7 @@ function Homepage(){
     return(
         <>
         <Navbar pageType="Home Page"/>
+   
         <div id="homepage_div_1">
             
             <h1>Welcome To Lab Management Homepage</h1>
