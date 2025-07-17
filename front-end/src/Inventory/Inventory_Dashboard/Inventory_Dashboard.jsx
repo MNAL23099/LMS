@@ -4,8 +4,17 @@ import generateReportCard from "../../assets/generateReportCard.png";
 import editInventoryCard from "../../assets/editInventoryCard.png";
 import addInventoryCard from "../../assets/addInventory.png";
 import "./Inventory_Dashboard.css";
+import { useNavigate, useNavigation } from "react-router-dom";
+
 
 function Inventory_Dashboard(){
+
+    const navigation = useNavigate();
+
+    function goToAddItem(){
+        navigation("/addInventory");
+    }
+
     //  const [inventoryData, setInventoryData] = useState([]);
     // const [reportData, setReportData] = useState([]);
 
@@ -67,13 +76,13 @@ function Inventory_Dashboard(){
             </div>
 
             {/* Add inventory card */}
-            <div className="card" style={{width: "18rem"}}>
-            <img src={addInventoryCard} class="card-img-top" alt="..."/>
-            <div className="card-body">
-                <h5 className="card-title">Add new inventory item</h5>
-                <p className="card-text">Add a new inventory component</p>
-                <a className="btn btn-primary">View</a>
-            </div>
+            <div onClick={goToAddItem} className="card" style={{width: "18rem"}}>
+                <img src={addInventoryCard} class="card-img-top" alt="..."/>
+                <div className="card-body">
+                    <h5 className="card-title">Add new inventory item</h5>
+                    <p className="card-text">Add a new inventory component</p>
+                    <a className="btn btn-primary">Add</a>
+                </div>
             </div>
 
             {/* Edit inventory card */}

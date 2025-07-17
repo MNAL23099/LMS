@@ -38,7 +38,11 @@ function SignUp() {
                 window.alert("Account on this email already exists!");
             }
             else if (textResponse == "success"){
+                window.alert("Account has been created!");
                 goToDashboard();
+            }
+            else if (textResponse == "missing_entries"){
+                window.alert("Please fill all the form!");
             }
         });
            

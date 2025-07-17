@@ -1,19 +1,14 @@
 const connectToDatabase = require("../models/setupDB"); //Import the lms client for our database
 
-// Dummy data for now — will replace with DB later
-const users = [];
-
-// Sign Up logic
+// Sign Up logic, this function runs when /signup of backend is accessed
 async function signUpUser(req, res) {
   
   const lmsClient = await connectToDatabase(); //Get the lmsClient
 
   //Import the json from request
   const { username, password, accountType, email } = req.body;
-  console.log(username); 
-  console.log(accountType);
 
-  //Run query to insert data into db
+  //Only proceed if username, password, accountType and email are present
   if (username && password && accountType && email){
     if (await userAlreadyExists(email) == true){ //If user already exists then don't add him in db, otherwise do
       console.log("Sign up user already exists!");
@@ -28,6 +23,7 @@ async function signUpUser(req, res) {
       await lmsClient.query(query, [username, password, accountType, email]);
       console.log("User has been added to db!");
       res.write("success");
+      res.end();
     }
     catch (error){
       console.log("Error in putting signed up user to the database");
@@ -37,6 +33,8 @@ async function signUpUser(req, res) {
   }
   else {
     console.log("User did not fill all fields of sign up form");
+    res.write("missing_entries"); //Return this response to the frontend
+    res.end();
   }
 
 };
@@ -62,18 +60,18 @@ async function userAlreadyExists(targetEmail){// This function returns true if t
 }
 
 // Sign In logic
-const signInUser = (req, res) => {
-  const { username, password } = req.body;
+// const signInUser = (req, res) => {
+//   const { username, password } = req.body;
 
-  const user = users.find(
-    (user) => user.username === username && user.password === password
-  );
+//   const user = users.find(
+//     (user) => user.username === username && user.password === password
+//   );
 
-  if (user) {
-    return res.status(401).json({ message: "Invalid credentials" });
-  }
+//   if (user) {
+//     return res.status(401).json({ message: "Invalid credentials" });
+//   }
 
-  res.json({ message: "Login successful", username });
-};
+//   res.json({ message: "Login successful", username });
+// };
 
-module.exports = { signUpUser, signInUser };
+ module.exports = {signUpUser};
