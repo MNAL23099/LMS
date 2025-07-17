@@ -1,0 +1,11 @@
+
+#navbar_id{
+    background: linear-gradient(135deg, #bfa14a 0%, black 100%);
+    
+}
+.navbar-brand {
+    color: #bfa14a; /* gold inside */
+    -webkit-text-stroke: 1px black; /* black outline for Webkit browsers */
+    text-stroke: 1px black; /* black outline for other browsers */
+    font-weight: bold;
+}
