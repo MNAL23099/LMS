@@ -4,7 +4,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Main_Dashboard from "./Dashboard/Main_Dashboard.jsx";
 import SignIn from "./SignIn/SignIn.jsx";
 import Inventory_Dashboard from "./Inventory/Inventory_Dashboard/Inventory_Dashboard.jsx";
-import AddInventory from "./Inventory/Inventory_Dashboard/AddInventory.jsx";
+import AddInventory from "./Inventory/Inventory_Dashboard/addInventory.jsx";
 
 function App() {
 

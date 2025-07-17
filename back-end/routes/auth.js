@@ -9,6 +9,6 @@ router.post("/signup", async(req, res)=>{
 });
 
 // Route for signing in
-router.post("/signin", signInUser);
+// router.post("/signin", signInUser);
 
 module.exports = router;

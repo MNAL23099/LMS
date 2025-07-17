@@ -10,3 +10,9 @@
     justify-content: center;
     align-content: center;
 }
+
+#inventory-div_1-form_1{
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+}

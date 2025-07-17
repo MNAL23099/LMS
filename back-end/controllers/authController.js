@@ -74,4 +74,4 @@ async function userAlreadyExists(targetEmail){// This function returns true if t
 //   res.json({ message: "Login successful", username });
 // };
 
- module.exports = {signUpUser};
+ module.exports = signUpUser;

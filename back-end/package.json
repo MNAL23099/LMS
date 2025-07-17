@@ -13,7 +13,8 @@
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "pg": "^8.16.3",
-    "prompt-sync": "^4.2.0"
+    "prompt-sync": "^4.2.0",
+    "router": "^2.2.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"

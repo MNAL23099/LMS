@@ -6,7 +6,7 @@ function AddInventory(){
         <Navbar pageType="Add Inventory Item"/>
 
         <div id="addInventory-div_1">
-        <form>
+        <form id="inventory-div_1-form_1">
         <div className="mb-3">
             <label for="exampleInputEmail1" className="form-label">Item Name</label>
             <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
