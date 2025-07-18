@@ -3,7 +3,7 @@ import inventoryPicture from "../assets/inventoryPicture.jpg";
 import { useNavigate } from "react-router-dom"; 
 
 
-function Main_Dashboard(){
+function LabEngineerDashboard(){
 
     const navigation = useNavigate();
 
@@ -32,4 +32,4 @@ function Main_Dashboard(){
     );  
 }
 
-export default Main_Dashboard;
+export default LabEngineerDashboard;

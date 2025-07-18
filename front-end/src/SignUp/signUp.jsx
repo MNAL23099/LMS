@@ -14,9 +14,9 @@ function SignUp() {
 
     const navigate = useNavigate();
 
-    function goToDashboard() {
+    function goToLabEngineerDashboard() {
         console.log("Changing navigation to dashboard!");         
-        navigate("/dashboard");
+        navigate("/labEngineerDashboard");
     }
 
     function goToUserAlreadyExists(){

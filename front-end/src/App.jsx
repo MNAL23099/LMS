@@ -1,7 +1,7 @@
 import SignUp from "./SignUp/signUp.jsx";
 import Homepage from "./Homepage/Homepage.jsx";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import Main_Dashboard from "./Dashboard/Main_Dashboard.jsx";
+import LabEngineerDashboard from "./Lab Engineer/LabEngineerDashboard.jsx";
 import SignIn from "./SignIn/SignIn.jsx";
 import Inventory_Dashboard from "./Inventory/Inventory_Dashboard/Inventory_Dashboard.jsx";
 import AddInventory from "./Inventory/Inventory_Dashboard/addInventory.jsx";
@@ -17,7 +17,7 @@ function App() {
     <Route path="/signup" element={<SignUp />}></Route>
     <Route path="/homepage" element={<Homepage />} />
     <Route path="/signin" element={<SignIn />}/>
-    <Route path="/dashboard" element={<Main_Dashboard />}/>
+    <Route path="/labEngineerDashboard" element={<LabEngineerDashboard />}/>
     <Route path="/inventoryDashboard" element={<Inventory_Dashboard />} />
     <Route path="/addInventory" element={<AddInventory />}></Route>
 

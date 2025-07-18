@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 
-const createTables = require("./models/users.js");
+const createTables = require("./models/allTables.js");
 
 const app = express();
 const PORT = 5000;
