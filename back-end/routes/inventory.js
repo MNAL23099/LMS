@@ -4,7 +4,8 @@ const {
   getInventory,
   editInventory,
   generateInventoryReport,
-  addInventoryItem
+  addInventoryItem,
+  editInventoryItems
 } = require("../controllers/inventoryController");
 
 // Route to view all inventory
@@ -18,6 +19,10 @@ router.get("/report", generateInventoryReport);
 
 router.post("/addInventoryItem", async(request, response)=>{
   await addInventoryItem(request, response);
+});
+
+router.post("/editInventory", async(request, response)=>{
+  await editInventoryItems(request, response);
 });
 
 module.exports = router;

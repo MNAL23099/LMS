@@ -38,7 +38,7 @@ const generateInventoryReport = (req, res) => {
   });
 };
 
-//Add inventory Item
+//--------------------------------------------------------------------Add inventory Item Starts Here--------------------------------------------------------------------//
 async function addInventoryItem(req, res){
 
   const {itemName, itemQuantity} = req.body;
@@ -219,9 +219,13 @@ async function addNewRow(itemName, labName, itemQuantity){ //Add new row to the 
   }
 }
 
+//--------------------------------------------------------------------Add inventory Item Ends Here--------------------------------------------------------------------//
+
+//--------------------------------------------------------------------Edit inventory Item Starts Here--------------------------------------------------------------------//
+
 module.exports = {
   getInventory,
   editInventory,
   generateInventoryReport,
-  addInventoryItem
+  addInventoryItem,
 };

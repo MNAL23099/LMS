@@ -14,6 +14,10 @@ function Inventory_Dashboard(){
     function goToAddItem(){
         navigation("/addInventory");
     }
+    
+    function goToEditItem(){
+        navigation("/editInventory");
+    }
 
     //  const [inventoryData, setInventoryData] = useState([]);
     // const [reportData, setReportData] = useState([]);
