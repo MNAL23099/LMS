@@ -5,6 +5,7 @@ import LabEngineerDashboard from "./Lab Engineer/LabEngineerDashboard.jsx";
 import SignIn from "./SignIn/SignIn.jsx";
 import Inventory_Dashboard from "./Inventory/Inventory_Dashboard/Inventory_Dashboard.jsx";
 import AddInventory from "./Inventory/Inventory_Dashboard/addInventory.jsx";
+import EditInventory from "./Inventory/Inventory_Dashboard/EditInventory.jsx";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
     <Route path="/labEngineerDashboard" element={<LabEngineerDashboard />}/>
     <Route path="/inventoryDashboard" element={<Inventory_Dashboard />} />
     <Route path="/addInventory" element={<AddInventory />}></Route>
+    <Route path="/editInventory" element={<EditInventory />} />
 
     </Routes>
 

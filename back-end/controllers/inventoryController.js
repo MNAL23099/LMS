@@ -17,19 +17,6 @@ const getInventory = (req, res) => {
   });
 };
 
-// Edit Inventory (dummy logic to simulate update)
-const editInventory = (req, res) => {
-  const { id, name, quantity } = req.body;
-
-  const index = inventory.findIndex(item => item.id === id);
-  if (index !== -1) {
-    inventory[index] = { id, name, quantity };
-    return res.json({ message: "Inventory updated", item: inventory[index] });
-  } else {
-    return res.status(404).json({ message: "Item not found" });
-  }
-};
-
 // Generate Report (returning same data for now)
 const generateInventoryReport = (req, res) => {
   res.json({
@@ -109,7 +96,6 @@ async function getCurrentSession(){ //Return the email of the person currently s
 }
 
 async function getLabName(){ //Return the lab assigned to the person currently logged in to the website
-
   const lsmClient = await connectToDB();
 
   const currentSessionMail = await getCurrentSession();
@@ -223,9 +209,59 @@ async function addNewRow(itemName, labName, itemQuantity){ //Add new row to the 
 
 //--------------------------------------------------------------------Edit inventory Item Starts Here--------------------------------------------------------------------//
 
+async function editInventory (req, res){
+  
+  const data = await fetchInventoryItemsFromDB(); //Fetch from DB
+  res.json(data.rows); //Send all the resulting rows in response
+}
+
+async function fetchInventoryItemsFromDB(){ //This function fetches all inventory items for the current session lab engineer from DB and returns them in json
+
+  try{
+    const lsmClient = await connectToDB();
+    const labName = await getLabName();
+    const query = `SELECT * FROM inventory WHERE lab_name = $1`;
+    const data = lsmClient.query(query, [labName]);
+    return data;
+  }
+  catch(error){
+    console.log(`error: fetchInventory()-> ${error.message}`);
+  }
+}
+
+async function saveEditInventoryChanges(req, res){ //This function is called when user clicks on submit inside the edit inventory page
+
+  const {itemName, itemQuantity, itemID} = req.body;
+  if (await entriesExist(itemName, itemQuantity, itemID) == false){
+    res.write("missing_entries");
+    res.end();
+    return;
+  }
+
+  try{
+    const lsmClient = await connectToDB();
+    const query = `UPDATE inventory SET name = $1, quantity = $2 WHERE id = $3`;
+    await lsmClient.query(query, [itemName, itemQuantity, itemID]);
+    res.write("success");
+    res.end();
+  }
+  catch (error){
+    console.log(`error: inventoryController.js -> saveEditInventoryChanges()-> ${error.message}`);
+  }
+}
+
+async function entriesExist(itemName, itemQuantity, itemID){ //Check if all the entries exist
+
+  if (!itemName || !itemQuantity || !itemID){
+    return false;
+  }
+  else return true;
+}
+
 module.exports = {
   getInventory,
   editInventory,
   generateInventoryReport,
   addInventoryItem,
+  saveEditInventoryChanges,
 };

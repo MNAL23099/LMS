@@ -15,7 +15,7 @@ function Inventory_Dashboard(){
         navigation("/addInventory");
     }
     
-    function goToEditItem(){
+    function goToEditInventory(){
         navigation("/editInventory");
     }
 
@@ -90,7 +90,7 @@ function Inventory_Dashboard(){
             </div>
 
             {/* Edit inventory card */}
-            <div className="card" style={{width: "18rem"}}>
+            <div onClick={goToEditInventory} className="card" style={{width: "18rem"}}>
             <img src={editInventoryCard} class="card-img-top" alt="..."/>
             <div className="card-body">
                 <h5 className="card-title">Edit Lab Inventory</h5>

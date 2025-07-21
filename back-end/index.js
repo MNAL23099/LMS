@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-const {readFile, writeFile} = require("./filing.js");
 
 const createTables = require("./models/allTables.js");
 
@@ -25,7 +24,6 @@ app.listen(5000, async ()=>{
 
   //Create tables
   await createTables(); //Create users table
-  await writeFile();
 });
 
 

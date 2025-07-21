@@ -16,3 +16,9 @@
     border-radius: 10px;
     padding: 10px;
 }
+
+/* Edit Inventory */
+#editInventory-div_1{
+    justify-content: center;
+    align-content: center;
+}
