@@ -1,5 +1,3 @@
-Google classroom <-> Lab Management Portal
-
 Generic Words Of Stakeholder (Mr. Kashif):- 
 Students' labs should be merged together
 Sir Kashif will mark the marks on the spreadsheet and the marks will be put inside the PDFs
@@ -10,10 +8,12 @@ Sir Kashif does Lab Management of:-
 2. Inventory management
 3. Instrument management
 4. Course teaching
+-> There should be an option according to which the lab will be reserved for one course, then another course cannot be taken inside that lab at that time
 5. Working according to PEC requirements
 6. Pec guidelines are present in course outline, outline of every course offered, list of expirements, lab inventory, displaying lab staff, displaying time table (made according to courses offered)
 7. Structure of a course -> 13 Labs, 16 Week semester, 1 Mid lab, 1 Final lab, So like without Mid and Final there are 14 Weeks
 8. There are student manuals (PDFs) of each lab
+9. We should also make sure that the inventory is complete for the enrolled students in the lab
 
 Main Points of Lab Management Portal:
 1. Lab eng

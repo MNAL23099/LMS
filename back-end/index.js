@@ -14,6 +14,7 @@ app.use(express.json());
 app.use("/auth", require("./routes/auth"));
 app.use("/dashboard", require("./routes/dashboard"));
 app.use("/inventory", require("./routes/inventory"));
+app.use("/labStaff", require("./routes/labStaff"));
 
 app.get("/", (req, res) => {
   res.send("Backend is working!");

@@ -1,4 +1,4 @@
-    const { Client } = require("pg");
+const { Client } = require("pg");
 
 //indicator that tells if the lmsClient has already been made or not
 let lmsClient = null;

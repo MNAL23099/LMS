@@ -5,6 +5,7 @@ async function createTables(){
     await createTable_Assigned_labs();
     await createTable_current_session();
     await createTable_inventory();
+    await createTable_lab_staff();
     await insertDummyData(); //Insert dummy data that is supposed to be received from another database
 }
 
@@ -154,6 +155,31 @@ async function createTable_inventory(){ //This table stores the inventory item n
         }
         else {
             console.log("inventory table created!");
+        }
+    });
+}
+
+async function createTable_lab_staff(){ //This table stores the inventory item name and its quantity
+    //it also stores which lab has that inventory item
+
+    const client = await connectoToDB();
+    if (!client){ //If client was not returned then just return
+        return;
+    }
+    
+    const query_MakeTable_current_session = `CREATE TABLE IF NOT EXISTS lab_staff
+      (id SERIAL PRIMARY KEY,
+      name VARCHAR(100),
+      designation VARCHAR(100),
+      lab_name VARCHAR(100))`;
+
+    client.query(query_MakeTable_current_session, (err, data) => {
+        if (err) {
+            console.log("lab_staff table can not be created!");
+            console.log(err.message);
+        }
+        else {
+            console.log("lab_staff table created!");
         }
     });
 }

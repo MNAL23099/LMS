@@ -3,9 +3,11 @@ import Homepage from "./Homepage/Homepage.jsx";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import LabEngineerDashboard from "./Lab Engineer/LabEngineerDashboard.jsx";
 import SignIn from "./SignIn/SignIn.jsx";
-import Inventory_Dashboard from "./Inventory/Inventory_Dashboard/Inventory_Dashboard.jsx";
-import AddInventory from "./Inventory/Inventory_Dashboard/addInventory.jsx";
-import EditInventory from "./Inventory/Inventory_Dashboard/EditInventory.jsx";
+import Inventory_Dashboard from "./Lab Engineer/Inventory/Inventory_Dashboard.jsx";
+import AddInventory from "./Lab Engineer/Inventory/addInventory.jsx";
+import EditInventory from "./Lab Engineer/Inventory/EditInventory.jsx";
+import LabStaff_Dashboard from "./Lab Engineer/LabStaff/LabStaff_Dashboard.jsx";
+import AddStaff from "./Lab Engineer/LabStaff/AddStaff.jsx";
 
 function App() {
 
@@ -22,6 +24,8 @@ function App() {
     <Route path="/inventoryDashboard" element={<Inventory_Dashboard />} />
     <Route path="/addInventory" element={<AddInventory />}></Route>
     <Route path="/editInventory" element={<EditInventory />} />
+    <Route path="/labStaffDashboard" element={<LabStaff_Dashboard />} />
+    <Route path="/addStaff" element={<AddStaff />} />
 
     </Routes>
 
