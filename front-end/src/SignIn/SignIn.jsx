@@ -1,10 +1,45 @@
+import { useState } from "react";
 import Navbar from "../Nav/Navbar";
+import {  useNavigate } from "react-router-dom";
+
 
 function SignIn(){
-  
+
+    const navigate = useNavigate();
+    function gotoInventory(){
+    navigate("/labEngineerDashboard");
+    }
+
+
+    const [email, setEmail] = useState("");
+    const [password, setPasseword] = useState("");
+   
+    function submitform(e){
+        e.preventDefault();
+        fetch("http://localhost:5000/auth/signin", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({email:email, password:password})
+        })
+        .then((res)=>{return res.text()})
+        .then((res)=>{
+            if(res == "Entries are missing"){
+                window.alert("Fill all the fields"); 
+            }
+            else if(res == "lab_engineer"){
+                window.alert("You will be directed to your respective inventory");
+                gotoInventory();
+            }
+            else if(res == "credentials_mismatch"){
+                window.alert("Credentials mismatched try again");
+            }
+        }
+        )
+    }
     return (
         <>
             <Navbar pageType="Sign In" style={{background: '#bfa14a'}} />
+
             <div style={{
                 minHeight: "100vh",
                 background: "linear-gradient(135deg, #232526 0%, #b59637ff 100%)",
@@ -23,7 +58,7 @@ function SignIn(){
                     width: "100%",
                     border: "1px solid #bfa14a"
                 }}>
-                    <form id="form_1">
+                    <form onSubmit={submitform} id="form_1">
                         <h1 style={{
                             textAlign: "center",
                             marginBottom: "2rem",
@@ -35,22 +70,16 @@ function SignIn(){
 
                         <div className="mb-3">
                             <label htmlFor="signin-email" className="form-label" style={{ fontWeight: 500, color: ' #bfa14a' }}>Email address</label>
-                            <input type="email" className="form-control" id="signin-email" style={{ borderRadius: "8px", background: '#fff', color: '#222', border: '1px solid #ffd700' }} aria-describedby="emailHelp" />
+                            <input onChange={(e)=>{setEmail(e.target.value)}} type="email" className="form-control" id="signin-email" style={{ borderRadius: "8px", background: '#fff', color: '#222', border: '1px solid #ffd700' }} aria-describedby="emailHelp" />
                             <div id="emailHelp" className="form-text" style={{ color: ' #bfa14a' }}>We'll never share your email with anyone else.</div>
                         </div>
 
                         <div className="mb-3">
                             <label htmlFor="signin-password" className="form-label" style={{ fontWeight: 500, color: ' #bfa14a' }}>Password</label>
-                            <input type="password" className="form-control" id="signin-password" style={{ borderRadius: "8px", background: '#fff', color: '#222', border: '1px solid #ffd700' }} />
+                            <input onChange={(e)=>{setPasseword(e.target.value)}} type="password" className="form-control" id="signin-password" style={{ borderRadius: "8px", background: '#fff', color: '#222', border: '1px solid #ffd700' }} />
                         </div>
 
-                        <div className="mb-3">
-                            <label htmlFor="signin-accountType" className="form-label" style={{ fontWeight: 500, color: ' #bfa14a'}}>Account Type</label>
-                            <select className="form-select" id="signin-accountType" style={{ borderRadius: "8px", background: '#fff', color: '#222', border: '1px solid #ffd700' }} aria-label="Default select example">
-                                <option value="1">Lab Engineer</option>
-                                <option value="2">Student</option>
-                            </select>
-                        </div>
+                       
 
                         <button type="submit" className="btn w-100" style={{
                             borderRadius: "25px",

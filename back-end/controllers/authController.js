@@ -1,4 +1,6 @@
 const connectToDatabase = require("../models/setupDB"); //Import the lms client for our database
+const write_file = require ("fs").promises;
+
 
 // Sign Up logic, this function runs when /signup of backend is accessed
 async function signUpUser(req, res) {
@@ -58,20 +60,65 @@ async function userAlreadyExists(targetEmail){// This function returns true if t
 
   return false; //User email was not found in db, return false
 }
+ 
+async function signInUser(req,res){
+  
+  const {email, password} = req.body;
+  console.log(`${email}, ${password}`);
+  
+  if(await AllFilled(email , password) == false){
+    res.write("Entries are missing");
+    res.end();
+    return;
+  }
 
-// Sign In logic
-// const signInUser = (req, res) => {
-//   const { username, password } = req.body;
+  try{
+    const lmsdb = await connectToDatabase(); 
+    const query = `SELECT email, password FROM users
+    WHERE email = $1 AND password = $2 `;
+    const variable = await lmsdb.query(query, [email, password]);
 
-//   const user = users.find(
-//     (user) => user.username === username && user.password === password
-//   );
+    if (variable.rows.length > 0){
+   
+      const account_type =  await Accountype(email);
+      console.log(account_type);
+      if(account_type == "lab_engineer"){
+        // console.log("hihihi double");
+        res.write("lab_engineer");
+        res.end();
 
-//   if (user) {
-//     return res.status(401).json({ message: "Invalid credentials" });
-//   }
+        await write_file.writeFile("./userData/current_session.txt", email);
 
-//   res.json({ message: "Login successful", username });
-// };
+      }
+    }
+    else if (variable.rows.length == 0){
+      console.log("Hello_1");
+      res.write("credentials_mismatch");
+      res.end();
+    }
+  }
+  catch(error){
+    console.log(`error: authController.js -> signInUser()-> ${error.message}`)
+  }
+  
+}
 
- module.exports = signUpUser;
+async function AllFilled(email, password){
+  if(!email || !password){
+    return false;
+  }
+  return true;
+}
+async function Accountype(email){
+   const lmsdb = await connectToDatabase();
+   try{
+   const query_2 = `SELECT account_type FROM users WHERE email = $1`
+   const variable_2 = await lmsdb.query(query_2,[email]); 
+   return variable_2.rows[0].account_type;
+   }
+   catch(error){
+     console.log(`error: authController.js-> ACCOUNTYPE-> signInUser()-> ${error.message}`)
+   }
+   
+}
+module.exports = {signUpUser, signInUser};
