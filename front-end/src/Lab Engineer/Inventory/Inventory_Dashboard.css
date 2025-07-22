@@ -1,3 +1,44 @@
+/* Style Go buttons in inventory dashboard */
+/* body {
+    min-height: 100vh;
+    background:
+        linear-gradient(rgba(43,9,9,0.45), rgba(121, 69, 69, 0.45)),
+        url(../images/comp.avif);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+} */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    background:
+        linear-gradient(rgba(196, 176, 176, 0.45), rgba(134, 81, 81, 0.45)),
+        url(../images/comp.avif);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(6px) brightness(0.85) saturate(1.1);
+    opacity: 0.92;
+}
+
+.inventory-go-btn, .card .btn-primary {
+    background-color: rgb(84, 79, 79);
+    color: #222;
+    border: 2.5px solid #000;
+    font-weight: bold;
+    border-radius: 8px;
+
+}
+.inventory-go-btn:hover, .card .btn-primary:hover {
+    background: grey;
+    color: #fff;
+}
 /* Make card headings bold and card text normal */
 .card-title {
     font-weight: bold;
@@ -23,11 +64,9 @@
     
 }
 #inventory-div_1 .card {
-
     margin: 1rem;
-    border: 1.5px solid black;
-    color: white;
-
+    border: 1.5px solid rgb(155, 21, 21);
+    color: #fff;
 }
 
 #inventory-div_1 .card:hover {
@@ -38,6 +77,7 @@
 #inventory-div_1{
     display: flex;
     margin: 1rem;
+    
 }
 
 /* Add inventory page  */
@@ -48,7 +88,7 @@
 }
 
 #inventory-div_1-form_1{
-    border: 1px solid black;
+    border: 1px solid rgb(14, 11, 11);
     border-radius: 10px;
     padding: 10px;
 }
@@ -61,14 +101,18 @@
 
 /* Themed card body for gold and black look */
 .themed-card-body {
-    background: linear-gradient(135deg, #bfa14a 0%, black 100%);
-    color: #fffbe6;
+    background: linear-gradient(135deg, #352e2e 30%, rgb(184, 64, 64) 100%);
+    color: #fff;
     font-weight: bold;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    border-top: 1px solid #bfa14a;
+    box-shadow: 0 2px 8px rgba(180, 8, 8, 0.15);
+    border-top: 1px solid #a83232;
 }
 #labEngineer-dashboardCards .card{
-    
     margin: 1rem;
-    border: 1.5px solid black;
+    border: 1.5px solid rgb(155, 21, 21);
+    color: #fff;
 }
+#labEngineer-dashboardCards .card:hover{
+    box-shadow:0 8px 32px rgba(0,0,0,0.25);
+}
+/* ...existing code... */

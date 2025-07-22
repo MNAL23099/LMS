@@ -1,4 +1,4 @@
 body {
-    background: linear-gradient(135deg, #ffffff 0%, #c3a5a5 100%);
+    background: radial-gradient(ellipse at center, #fff 0%, #eab0c4 50%, #c62828 100%);
     min-height: 100vh;
 }

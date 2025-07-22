@@ -1,3 +1,13 @@
+/* #div_1 {
+    min-height: 100vh;
+    background:
+        linear-gradient(rgba(43,9,9,0.82), rgba(121, 69, 69, 0.82)),
+        url('../images/inventoryPicture.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 2rem 0;
+} */
 #labEngineer-dashboardCards{
     display: flex;
 }
