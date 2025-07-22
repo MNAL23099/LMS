@@ -20,7 +20,7 @@ function LabStaff_Dashboard(){
 
     return (
         <>
-            <Navbar pageType = "Inventory Dashboard"/>
+            <Navbar pageType = "Lab Staff Dashboard"/>
 
             <div id="inventory-div_1">
             {/* View inventory card */}
