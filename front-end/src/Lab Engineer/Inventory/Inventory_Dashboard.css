@@ -1,7 +1,24 @@
+/* Add margin between cards in the inventory dashboard */
+/* Ensure card images fill the top area uniformly */
+.card-img-top {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    flex-shrink: 0;
+}
+#inventory-div_1 .card {
+
+     margin: 1rem;
+     border: 1.5px solid black;
+   
+}
 
 /* Inventory dashboard */
 #inventory-div_1{
     display: flex;
+    margin: 1rem;
 }
 
 /* Add inventory page  */
@@ -21,4 +38,13 @@
 #editInventory-div_1{
     justify-content: center;
     align-content: center;
+}
+
+/* Themed card body for gold and black look */
+.themed-card-body {
+    background: linear-gradient(135deg, #bfa14a 0%, black 100%);
+    color: #fffbe6;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    border-top: 1px solid #bfa14a;
 }
