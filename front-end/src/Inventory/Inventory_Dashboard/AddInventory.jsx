@@ -28,6 +28,7 @@ function AddInventory(){
             else if (textResponse == "failure"){
                 window.alert("Unexpected error occured! Please contact the developers!");
             }
+            window.location.reload(); //Reload the window
         }
     );
     }

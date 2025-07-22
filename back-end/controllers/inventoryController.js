@@ -250,6 +250,7 @@ async function saveEditInventoryChanges(req, res){ //This function is called whe
   }
 }
 
+//Helper function for editInventory functionality
 async function entriesExist(itemName, itemQuantity, itemID){ //Check if all the entries exist
 
   if (!itemName || !itemQuantity || !itemID){
@@ -258,10 +259,33 @@ async function entriesExist(itemName, itemQuantity, itemID){ //Check if all the 
   else return true;
 }
 
+async function deleteInventoryItem(req, res){ //This is function for when the user wants to delete an inventory item from the editInventory page
+
+  const {itemID} = req.body;
+  if (!itemID){
+    res.write("missing_entries");
+    res.end();
+    return;
+  }
+
+  try{
+    const lsmClient = await connectToDB();
+    const query = `DELETE FROM inventory WHERE id = $1`;
+    await lsmClient.query(query, [itemID]);
+    res.write("success");
+    res.end();
+  }
+  catch (error){
+    console.log(`error: inventoryController.js -> deleteInventoryItem()-> ${error.message}`);
+  }
+   
+}
+
 module.exports = {
   getInventory,
   editInventory,
   generateInventoryReport,
   addInventoryItem,
   saveEditInventoryChanges,
+  deleteInventoryItem,
 };

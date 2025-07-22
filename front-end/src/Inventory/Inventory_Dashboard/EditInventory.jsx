@@ -34,8 +34,8 @@ function EditInventory(){
 
         </div>
 
-        <button onClick={()=>{submitEditedInventory(name, quantity, id)}} type="button" className="btn btn-success">Save Changes</button>
-        <button type="button" className="btn btn-danger">Delete This Item</button>
+        <button onClick={()=>{submitEditedInventory(name, quantity, id);}} type="button" className="btn btn-success">Save Changes</button>
+        <button onClick={()=>{deleteInventoryItem(id);}} type="button" className="btn btn-danger">Delete This Item</button>
 
         </div>
     
@@ -112,6 +112,26 @@ function submitEditedInventory(name, quantity, id){ //This function is called wh
         else if (textRes == "success"){
             window.alert("Inventory has been edited!");
         }
+        window.location.reload(); //Reload the window
+    })
+}
+
+function deleteInventoryItem(id){ //This function is called when the user clicks on delete button
+
+    fetch("http://localhost:5000/inventory/editInventoryDelete", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({itemID: id})
+    })
+    .then((res)=>{return res.text()})
+    .then((textRes)=>{
+        if (textRes == "missing_entries"){
+            window.alert("Please select an item to remove first!");
+        }
+        else if (textRes == "success"){
+            window.alert("Inventory item has been removed");
+        }
+        window.location.reload();
     })
 
 }
