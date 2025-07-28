@@ -242,6 +242,8 @@ async function deleteInventoryItem(req, res){ //This is function for when the us
    
 }
 
+//--------------------------------------------------------------------Edit inventory Item Ends Here--------------------------------------------------------------------//
+
 module.exports = {
   getInventory,
   editInventory,

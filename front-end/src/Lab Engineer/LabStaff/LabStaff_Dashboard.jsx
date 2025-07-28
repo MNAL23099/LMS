@@ -11,11 +11,17 @@ function LabStaff_Dashboard(){
     const navigation = useNavigate();
 
     function goToAddStaff(){
-        navigation("/addStaff");
+        navigation("/addLabStaff");
     }
     
     function goToEditStaff(){
         navigation("/editInventory");
+    }
+
+    function goToViewStaff(){
+        navigation("/viewLabStaff");
+        window.location.reload(); //Reload before going into the viewStaff page
+        //If we just navigate without reloading we don't activate the functions inside the webpage
     }
 
     return (
@@ -23,10 +29,10 @@ function LabStaff_Dashboard(){
             <Navbar pageType = "Lab Staff Dashboard"/>
 
             <div id="inventory-div_1">
-            {/* View inventory card */}
-            <div className="card" style={{width: "18rem"}}>
+            {/* View lab staff card */}
+            <div onClick={goToViewStaff} className="card" style={{width: "18rem"}}>
             <img src={viewStaffMembers} class="card-img-top" alt="..."/>
-            <div className="card-body">
+            <div className="card-body themed-card-body">
                 <h5 className="card-title">View Current Staff</h5>
                 <p className="card-text">View the current staff of lab.</p>
                 <a className="btn btn-primary">View</a>
@@ -36,7 +42,7 @@ function LabStaff_Dashboard(){
             {/* Add inventory card */}
             <div onClick={goToAddStaff} className="card" style={{width: "18rem"}}>
                 <img src={addNewStaff} class="card-img-top" alt="..."/>
-                <div className="card-body">
+                <div className="card-body themed-card-body">
                     <h5 className="card-title">Add new staff members</h5>
                     <p className="card-text">Add a new staff member.</p>
                     <a className="btn btn-primary">Add</a>
@@ -46,7 +52,7 @@ function LabStaff_Dashboard(){
             {/* Edit inventory card */}
             <div onClick={goToEditStaff} className="card" style={{width: "18rem"}}>
             <img src={editStaffMembers} class="card-img-top" alt="..."/>
-            <div className="card-body">
+            <div className="card-body themed-card-body">
                 <h5 className="card-title">Edit Lab Staff</h5>
                 <p className="card-text">Edit the current staff members of lab.</p>
                 <a className="btn btn-primary">Edit</a>
@@ -56,8 +62,8 @@ function LabStaff_Dashboard(){
             {/* Generate Physical Report Of Inventory Card */}
             <div className="card" style={{width: "18rem"}}>
             <img src={generateReportCard} class="card-img-top" alt="..."/>
-            <div className="card-body">
-                <h5 className="card-title">Generate Hardcopy Report</h5>
+            <div className="card-body themed-card-body">
+                <h5 className="card-title ">Generate Hardcopy Report</h5>
                 <p className="card-text">Generate & Download Staff Members Report</p>
                 <a className="btn btn-primary">Generate</a>
             </div>

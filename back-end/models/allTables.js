@@ -170,6 +170,7 @@ async function createTable_lab_staff(){ //This table stores the inventory item n
     const query_MakeTable_current_session = `CREATE TABLE IF NOT EXISTS lab_staff
       (id SERIAL PRIMARY KEY,
       name VARCHAR(100),
+      email VARCHAR(100),
       designation VARCHAR(100),
       lab_name VARCHAR(100))`;
 

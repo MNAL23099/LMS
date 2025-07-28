@@ -9,6 +9,7 @@ import EditInventory from "./Lab Engineer/Inventory/EditInventory.jsx";
 import LabStaff_Dashboard from "./Lab Engineer/LabStaff/LabStaff_Dashboard.jsx";
 import AddStaff from "./Lab Engineer/LabStaff/AddStaff.jsx";
 import Footer from "./Footer/Footer.jsx";
+import ViewStaff from "./Lab Engineer/LabStaff/viewStaff.jsx";
 
 function App() {
 
@@ -24,7 +25,8 @@ function App() {
         <Route path="/addInventory" element={<AddInventory />}></Route>
         <Route path="/editInventory" element={<EditInventory />} />
         <Route path="/labStaffDashboard" element={<LabStaff_Dashboard />} />
-        <Route path="/addStaff" element={<AddStaff />} />
+        <Route path="/addLabStaff" element={<AddStaff />} />
+        <Route path="/viewLabStaff" element={<ViewStaff />} />
       </Routes>
       <Footer />
     </BrowserRouter>
