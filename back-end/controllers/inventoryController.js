@@ -3,28 +3,6 @@ const connectToDB = require("../models/setupDB.js");
 const fs = require ("fs").promises;
 const {getLabName} = require("../sharedFunctions.js");
 
-// Dummy inventory data
-let inventory = [
-  { id: 1, name: "Beaker", quantity: 10 },
-  { id: 2, name: "Test Tube", quantity: 25 },
-  { id: 3, name: "Multimeter", quantity: 5 }
-];
-
-// View Inventory
-const getInventory = (req, res) => {
-  res.json({
-    message: "Inventory fetched successfully",
-    data: inventory
-  });
-};
-
-// Generate Report (returning same data for now)
-const generateInventoryReport = (req, res) => {
-  res.json({
-    message: "Inventory report generated",
-    report: inventory
-  });
-};
 
 //--------------------------------------------------------------------Add inventory Item Starts Here--------------------------------------------------------------------//
 async function addInventoryItem(req, res){
@@ -241,9 +219,14 @@ async function deleteInventoryItem(req, res){ //This is function for when the us
   }
    
 }
+//----------------------------------View inventory starts from here------------------------------------//
 
-//--------------------------------------------------------------------Edit inventory Item Ends Here--------------------------------------------------------------------//
+async function ViewInventory() {
+  
+  const query_view = `SELECT *FROM`
 
+  
+}
 module.exports = {
   getInventory,
   editInventory,
