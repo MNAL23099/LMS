@@ -221,16 +221,14 @@ async function deleteInventoryItem(req, res){ //This is function for when the us
 }
 //----------------------------------View inventory starts from here------------------------------------//
 
-async function ViewInventory() {
+// async function ViewInventory() {
   
-  const query_view = `SELECT *FROM`
+//   const query_view = `SELECT * FROM`
 
   
-}
+// }
 module.exports = {
-  getInventory,
   editInventory,
-  generateInventoryReport,
   addInventoryItem,
   saveEditInventoryChanges,
   deleteInventoryItem,
