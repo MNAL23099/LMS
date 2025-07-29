@@ -18,14 +18,18 @@ function Inventory_Dashboard(){
     function goToEditInventory(){
         navigation("/editInventory");
     }
-
+    
+    function goToViewInventory(){
+        navigation("/viewInventory");
+        window.location.reload();
+    }
     return (
         <>
             <Navbar pageType = "Inventory Dashboard"/>
 
             <div id="inventory-div_1">
             {/* View inventory card */}
-            <div className="card" style={{width: "18rem"}}>
+            <div  onClick= {goToViewInventory}className="card" style={{width: "18rem"}}>
             <img src={viewInventoryCard} class="card-img-top" alt="..."/>
             <div className="card-body themed-card-body">
                 <h5 className="card-title">View Current Inventory</h5>

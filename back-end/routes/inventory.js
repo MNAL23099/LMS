@@ -1,13 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const {
-  getInventory,
+
   editInventory,
-  generateInventoryReport,
   addInventoryItem,
   saveEditInventoryChanges,
   deleteInventoryItem,
-} = require("../controllers/inventoryController");
+  View,
+
+} = require("../controllers/inventoryController.js");
 
 // Route to edit inventory (dummy update)
 // router.put("/edit", editInventory);  // You can later use PUT or PATCH
@@ -28,4 +29,7 @@ router.post("/editInventoryDelete", async(request, response)=>{
   await deleteInventoryItem(request, response);
 });
 
+router.get("/fetchFromInventoryDB", async(req,res)=>{
+   await View(req,res);
+});
 module.exports = router;

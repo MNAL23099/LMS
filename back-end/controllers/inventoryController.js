@@ -221,15 +221,24 @@ async function deleteInventoryItem(req, res){ //This is function for when the us
 }
 //----------------------------------View inventory starts from here------------------------------------//
 
-// async function ViewInventory() {
-  
-//   const query_view = `SELECT * FROM`
+async function View(req,res) {
 
-  
-// }
+  try{
+  const query_view = `SELECT * FROM inventory WHERE lab_name = $1`;
+  const lsmClient = await connectToDB();
+  const data = await lsmClient.query(query_view,[await getLabName()]);
+
+  res.json(data.rows);
+  }
+  catch(error){
+    console.log(`error: inventoryController.js -> View()-> ${error.message}`);
+  }
+
+}
 module.exports = {
   editInventory,
   addInventoryItem,
   saveEditInventoryChanges,
   deleteInventoryItem,
+  View,
 };
