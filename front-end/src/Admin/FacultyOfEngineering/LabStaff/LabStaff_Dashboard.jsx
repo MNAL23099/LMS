@@ -1,8 +1,8 @@
-import Navbar from "../../Nav/Navbar";
-import viewStaffMembers from "../../assets/viewStaffMembers.webp";
-import generateReportCard from "../../assets/generateReportCard.png";
-import editStaffMembers from "../../assets/editStaffMembers.webp";
-import addNewStaff from "../../assets/addNewStaff.webp";
+import Navbar from "../../../Nav/Navbar";
+import viewStaffMembers from "../../../assets/viewStaffMembers.webp";
+import editStaffMembers from "../../../assets/editStaffMembers.webp";
+import addNewStaff from "../../../assets/addNewStaff.webp";
+import image_assignLabs from "../../../assets/assignLabs.jpg";
 import { useNavigate, useNavigation } from "react-router-dom";
 
 function LabStaff_Dashboard(){
@@ -20,6 +20,11 @@ function LabStaff_Dashboard(){
         navigation("/viewLabStaff");
         window.location.reload(); //Reload before going into the viewStaff page
         //If we just navigate without reloading we don't activate the functions inside the webpage
+    }
+
+    function goToAssignLabs(){
+        navigation("/assignLabs");
+        window.location.reload();
     }
 
     return (
@@ -58,15 +63,18 @@ function LabStaff_Dashboard(){
             </div>
 
             {/* Generate Physical Report Of Inventory Card */}
-            <div className="card" style={{width: "18rem"}}>
-            <img src={generateReportCard} class="card-img-top" alt="..."/>
+            <div onClick={goToAssignLabs} className="card" style={{width: "18rem"}}>
+            <img src={image_assignLabs} class="card-img-top" alt="..."/>
             <div className="card-body themed-card-body">
-                <h5 className="card-title ">Generate Hardcopy Report</h5>
-                <p className="card-text">Generate & Download Staff Members Report</p>
-                <a className="btn btn-primary">Generate</a>
+                <h5 className="card-title ">Assign Labs</h5>
+                <p className="card-text">Assign lab engineers, technicians and assistants to labs of engineering department.</p>
+                <a className="btn btn-primary">Assign</a>
             </div>
             </div>
             </div>
+
+            
+    
         
         </>
     );

@@ -1,8 +1,8 @@
-import Navbar from "../../Nav/Navbar";
-import viewInventoryCard from "../../assets/viewInventoryCard.jpg";
-import generateReportCard from "../../assets/generateReportCard.png";
-import editInventoryCard from "../../assets/editInventoryCard.png";
-import addInventoryCard from "../../assets/addInventory.png";
+import Navbar from "../../../Nav/Navbar";
+import viewInventoryCard from "../../../assets/viewInventoryCard.jpg";
+import generateReportCard from "../../../assets/generateReportCard.png";
+import editInventoryCard from "../../../assets/editInventoryCard.png";
+import addInventoryCard from "../../../assets/addInventory.png";
 import "./Inventory_Dashboard.css";
 import { useNavigate, useNavigation } from "react-router-dom";
 

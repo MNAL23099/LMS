@@ -19,7 +19,7 @@ body::before {
     z-index: -1;
     background:
         linear-gradient(rgba(196, 176, 176, 0.45), rgba(134, 81, 81, 0.45)),
-        url(../images/comp.avif);
+        url(../../images/comp.avif);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

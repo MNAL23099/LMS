@@ -1,4 +1,4 @@
-import Navbar from "../../Nav/Navbar";
+import Navbar from "../../../Nav/Navbar";
 
 function fetch_data(){
 

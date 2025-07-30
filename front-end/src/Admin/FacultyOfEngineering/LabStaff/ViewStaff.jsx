@@ -1,4 +1,4 @@
-import Navbar from "../../Nav/Navbar";
+import Navbar from "../../../Nav/Navbar";
 
 
 function fetchDataFromBackEnd(){ //This is the function which will fetch all the staff

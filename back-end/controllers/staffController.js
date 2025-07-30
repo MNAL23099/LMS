@@ -114,7 +114,37 @@ async function fetchLabStaffFromDB(){ //This function fetches all staff member d
   }
 }
 
+//------------------------------------------------------------------View Staff Ends Here------------------------------------------------------------------//
+
+//------------------------------------------------------------------Assign Labs Starts Here------------------------------------------------------------------//
+
+async function assignLabsHandler(req, res){
+  console.log("fetch called!");
+  const {staffType} = req.body;
+  const data = await returnLabStaffEmails(staffType);
+  res.json(data.rows);
+}
+
+async function returnLabStaffEmails(staffType){ //This function takes in lab staff type as paramter and returns all the avaiblae staff emails of that type from DB
+
+  const lmsClient = await connectToDB();
+
+  const query = "SELECT email FROM university_staff WHERE role = $1";
+
+  try {
+    const data = await lmsClient.query(query, [staffType]);
+    return data;
+  }
+  catch (error){
+    console.log(`staffController.js -> returnLabStaffEmails() -> ${error.message}`);
+  }
+
+}
+
+//------------------------------------------------------------------Assign Labs Ends Here------------------------------------------------------------------//
+
 module.exports = {
   addStaff,
   viewStaff,
+  assignLabsHandler,
 };
