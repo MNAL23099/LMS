@@ -4,6 +4,7 @@ import labStaffPicture from "../../assets/labStaff.jpeg";
 import { useNavigate } from "react-router-dom"; 
 import "./FOE_Dashboard.css";
 import "./Inventory/Inventory_Dashboard.css";
+import image_labManagement from "../../assets/FOEDashboard_LabManagement.jpg";
 
 function FOE_Dashboard(){
 
@@ -17,6 +18,10 @@ function FOE_Dashboard(){
     function goToStaffDashboard(e){
         e.preventDefault();
         navigation("/labStaffDashboard");
+    }
+
+    function goToLabManagement(){
+        navigation("/foe_labManagement");
     }
 
 
@@ -43,6 +48,16 @@ function FOE_Dashboard(){
                 <div className="card-body themed-card-body ">
                     <h5 className="card-title">Lab Staff</h5>
                     <p className="card-text">Add, edit and view lab staff members and print the report.</p>
+                    <a onClick={goToStaffDashboard} href="#" className="btn btn-primary">Go</a>
+                </div>
+                </div>
+
+                {/* Card for lab staff */}
+                <div className="card" style={{width: "18rem"}}>
+                <img src={image_labManagement} className="card-img-top" alt="..."/>
+                <div className="card-body themed-card-body ">
+                    <h5 className="card-title">Labs Management</h5>
+                    <p className="card-text">Add, edit and view labs of Faculty of Engineering.</p>
                     <a onClick={goToStaffDashboard} href="#" className="btn btn-primary">Go</a>
                 </div>
                 </div>
