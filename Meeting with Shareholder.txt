@@ -41,3 +41,26 @@ Sir Asif's Recommendation:
 1. Use moodle api for storing of student labs (He said something about drag and drop)
 2. Sir also said that there is another team working on notifications
 
+Courses:
+1. List of student absolutes
+2. List of courses
+3. Students will upload their labs
+4. Lab engineer will upload blank lab
+5. Spread sheet in each course to mark the student marks
+6. Marks from that spread sheet will be mailed to students
+7. Student marks will be stored inside database
+8. Database will store weekly student marks data -> like week 1, week 2, and the rank of each student inside each week
+9. Lab engineer will also be able to see overall report of all students enrolled in a course
+-> Week1 Week2 Week3 Week4
+S1
+S2
+S3
+S4
+
+Student Portal:
+-> Cards
+1. Your Courses -> Students will be able to submit their labs
+2. Your Grades -> Weekly grades
+3. Your Enrolled Courses List
+-> Side Display
+3. Current Week Going On

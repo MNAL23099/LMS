@@ -5,9 +5,7 @@ import editStaffMembers from "../../assets/editStaffMembers.webp";
 import addNewStaff from "../../assets/addNewStaff.webp";
 import { useNavigate, useNavigation } from "react-router-dom";
 
-
 function LabStaff_Dashboard(){
-
     const navigation = useNavigate();
 
     function goToAddStaff(){

@@ -2,10 +2,10 @@ import Navbar from "../Nav/Navbar";
 import inventoryPicture from "../assets/inventoryPicture.jpg";
 import labStaffPicture from "../assets/labStaff.jpeg";
 import { useNavigate } from "react-router-dom"; 
-import "./LabEngineerDashboard.css";
-import "./Inventory/Inventory_Dashboard.css"
+import "./AdminDashboard.css";
+import "./Inventory/Inventory_Dashboard.css";
 
-function LabEngineerDashboard(){
+function AdminDashboard(){
 
     const navigation = useNavigate();
 
@@ -23,7 +23,7 @@ function LabEngineerDashboard(){
     return(
 
         <div id="div_1">
-            <Navbar pageType="Dashboard"/>
+            <Navbar pageType="Admin Dashbord"/>
 
                 <div id="labEngineer-dashboardCards">
 
@@ -54,4 +54,4 @@ function LabEngineerDashboard(){
     );  
 }
 
-export default LabEngineerDashboard;
+export default AdminDashboard;

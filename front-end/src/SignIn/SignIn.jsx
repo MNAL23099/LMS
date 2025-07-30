@@ -7,9 +7,8 @@ function SignIn(){
 
     const navigate = useNavigate();
     function gotoInventory(){
-    navigate("/labEngineerDashboard");
+    navigate("/adminDashboard");
     }
-
 
     const [email, setEmail] = useState("");
     const [password, setPasseword] = useState("");
