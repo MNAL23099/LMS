@@ -21,7 +21,7 @@ function FOE_Dashboard(){
     }
 
     function goToLabManagement(){
-        navigation("/foe_labManagement");
+        navigation("/lab_manage_dashboard");
     }
 
 
@@ -58,7 +58,7 @@ function FOE_Dashboard(){
                 <div className="card-body themed-card-body ">
                     <h5 className="card-title">Labs Management</h5>
                     <p className="card-text">Add, edit and view labs of Faculty of Engineering.</p>
-                    <a onClick={goToStaffDashboard} href="#" className="btn btn-primary">Go</a>
+                    <a onClick={goToLabManagement} href="#" className="btn btn-primary">Go</a>
                 </div>
                 </div>
 

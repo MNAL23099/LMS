@@ -7,8 +7,31 @@ async function createTables(){
     await createTable_inventory();
     await createTable_lab_staff();
     await createTable_university_staff();
-    await insertDummyData(); //Insert dummy data that is supposed to be received from another database
+    await createTable_labs();
+    await insertDummyData(); 
+    
+}//Insert dummy data that is supposed to be received from another database
+// Standalone function to create labs table
+async function createTable_labs(){
+    // This table stores labs with id and lab_name
+    const client = await connectoToDB();
+    if (!client){
+        return;
+    }
+    const query_MakeTable_labs = `CREATE TABLE IF NOT EXISTS labs
+      (id SERIAL PRIMARY KEY,
+      lab_name VARCHAR(100))`;
+    client.query(query_MakeTable_labs, (err, data) => {
+        if (err) {
+            console.log("labs table can not be created!");
+            console.log(err.message);
+        }
+        else {
+            console.log("labs table created!");
+        }
+    });
 }
+
 
 async function createTable_Users(){
 

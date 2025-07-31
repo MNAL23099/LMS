@@ -12,6 +12,9 @@ import LabStaff_Dashboard from "./Admin/FacultyOfEngineering/LabStaff/LabStaff_D
 import AssignLabs from "./Admin/FacultyOfEngineering/LabStaff/AssignLabs.jsx";
 import FOE_Dashboard from "./Admin/FacultyOfEngineering/FOE_Dashboard.jsx";
 import AddStaff from "./Admin/FacultyOfEngineering/LabStaff/AddStaff.jsx";
+import { Lab_Dasboard } from "./Admin/FacultyOfEngineering/LabManagement/Lab_dasboard.jsx";
+import AddLab from "./Admin/FacultyOfEngineering/LabManagement/AddLabs.jsx";
+// import AdminDashboard from "./Admin/AdminDashboard.jsx";
 
 function App() {
 
@@ -31,6 +34,9 @@ function App() {
         <Route path="/viewInventory" element={<ViewInventory/>}/>
         <Route path="/assignLabs" element={<AssignLabs />} />
         <Route path="/foe_dashboard" element={<FOE_Dashboard />} />
+        <Route path="/lab_manage_dashboard" element= {<Lab_Dasboard/>}/>
+        {/* <Route path="/adminDashboard" element={<AdminDashboard />} /> */}
+        <Route path="/addlab" element = {<AddLab/>}/>
       </Routes>
       <Footer />
     </BrowserRouter>
