@@ -3,6 +3,7 @@ import viewStaffMembers from "../../../assets/viewStaffMembers.webp";
 import editStaffMembers from "../../../assets/editStaffMembers.webp";
 import addNewStaff from "../../../assets/addNewStaff.webp";
 import image_assignLabs from "../../../assets/assignLabs.jpg";
+import image_viewEditAssignedLabs from "../../../assets/viewEditAssignedLabs.jpg";
 import { useNavigate, useNavigation } from "react-router-dom";
 
 function LabStaff_Dashboard(){
@@ -24,6 +25,11 @@ function LabStaff_Dashboard(){
 
     function goToAssignLabs(){
         navigation("/assignLabs");
+        window.location.reload();
+    }
+
+    function goToViewEditAssignedLabs(){
+        navigation("/viewEditAssignedLabs");
         window.location.reload();
     }
 
@@ -58,6 +64,16 @@ function LabStaff_Dashboard(){
             <div className="card-body themed-card-body">
                 <h5 className="card-title">Edit Lab Staff</h5>
                 <p className="card-text">Edit the current staff members of lab.</p>
+                <a className="btn btn-primary">Edit</a>
+            </div>
+            </div>
+
+            {/* Edit inventory card */}
+            <div onClick={goToViewEditAssignedLabs} className="card" style={{width: "18rem"}}>
+            <img src={image_viewEditAssignedLabs} class="card-img-top" alt="..."/>
+            <div className="card-body themed-card-body">
+                <h5 className="card-title">View And Edit Assigned Labs</h5>
+                <p className="card-text">View & Edit the staff members assigned to labs.</p>
                 <a className="btn btn-primary">Edit</a>
             </div>
             </div>

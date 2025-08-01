@@ -255,10 +255,60 @@ async function itemsExist(staffType, labName, staffMember){
 
 //------------------------------------------------------------------Assign Labs Ends Here------------------------------------------------------------------//
 
+//------------------------------------------------------------------viewEditAssignedLabs Starts Here------------------------------------------------------------------//
+
+async function returnAssignedLabs(req, res){
+
+  const lmsClient = await connectToDB();
+
+  const query = `SELECT * FROM assigned_labs`;
+
+  const data = await lmsClient.query(query);
+
+  //Send the data in response if there are any rows
+  if (data.rowCount > 0){
+    res.json(data.rows);
+  }
+}
+
+//This function receives the staffType and the mail of the staff member to remove him from the lab, it also receives the name of the lab to 
+async function unAssignLab(req, res){
+
+  const lmsClient = await connectToDB();
+
+  const {targetEmail, targetLab, staffType} = req.body;
+
+  var query = null;
+
+  if (staffType == "lab_engineer"){
+    query = `UPDATE assigned_labs SET lab_eng_mail = NULL WHERE lab_eng_mail = $1 AND lab_name = $2`;
+  }
+  else if (staffType == "lab_technician"){
+    query = `UPDATE assigned_labs SET lab_tec_mail = NULL WHERE lab_tec_mail = $1 AND lab_name = $2`;
+  }
+  else if (staffType == "lab_assistant"){
+    query = `UPDATE assigned_labs SET lab_ass_mail = NULL WHERE lab_ass_mail = $1 AND lab_name = $2`;
+  }
+
+  try {
+    await lmsClient.query(query, [targetEmail, targetLab]);
+    res.write("success");
+    res.end();
+  }
+  catch (error){
+    console.log(`staffController.js -> unAssignLab() -> ${error.message}`);
+    res.write("error");
+  }
+}
+
+//------------------------------------------------------------------viewEditAssignedLabs Ends Here------------------------------------------------------------------//
+
 module.exports = {
   addStaff,
   viewStaff,
   assignLabsHandler,
   returnAvailableLabs,
   saveAssignedLab,
+  returnAssignedLabs,
+  unAssignLab,
 };
