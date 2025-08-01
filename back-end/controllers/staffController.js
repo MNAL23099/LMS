@@ -116,6 +116,13 @@ async function fetchLabStaffFromDB(){ //This function fetches all staff member d
 
 //------------------------------------------------------------------View Staff Ends Here------------------------------------------------------------------//
 
+
+
+
+
+
+
+
 //------------------------------------------------------------------Assign Labs Starts Here------------------------------------------------------------------//
 
 async function assignLabsHandler(req, res){
