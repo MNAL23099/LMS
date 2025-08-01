@@ -2,13 +2,36 @@ const connectoToDB = require("./setupDB.js");
 
 async function createTables(){
     await createTable_Users();
-    await createTable_Assigned_labs();
+    await createTable_assigned_labs();
     await createTable_current_session();
     await createTable_inventory();
     await createTable_lab_staff();
     await createTable_university_staff();
-    await insertDummyData(); //Insert dummy data that is supposed to be received from another database
+    await createTable_labs();
+    await insertDummyData(); 
+    
+}//Insert dummy data that is supposed to be received from another database
+// Standalone function to create labs table
+async function createTable_labs(){
+    // This table stores labs with id and lab_name
+    const client = await connectoToDB();
+    if (!client){
+        return;
+    }
+    const query_MakeTable_labs = `CREATE TABLE IF NOT EXISTS labs
+      (id SERIAL PRIMARY KEY,
+      lab_name VARCHAR(100))`;
+    client.query(query_MakeTable_labs, (err, data) => {
+        if (err) {
+            console.log("labs table can not be created!");
+            console.log(err.message);
+        }
+        else {
+            console.log("labs table created!");
+        }
+    });
 }
+
 
 async function createTable_Users(){
 
@@ -35,7 +58,7 @@ async function createTable_Users(){
     });
 }
 
-async function createTable_Assigned_labs(){ //This Table tells which lab engineer is assigned to
+async function createTable_assigned_labs(){ //This Table tells which lab engineer is assigned to
     //which lab
 
     const client = await connectoToDB();
@@ -46,7 +69,9 @@ async function createTable_Assigned_labs(){ //This Table tells which lab enginee
     const query_MakeTable_Users = `CREATE TABLE IF NOT EXISTS assigned_Labs
       (id SERIAL PRIMARY KEY, 
       lab_name VARCHAR(100), 
-      lab_eng_mail VARCHAR(100))`;
+      lab_eng_mail VARCHAR(100),
+      lab_ass_mail VARCHAR(100),
+      lab_tec_mail VARCHAR(100))`;
 
     client.query(query_MakeTable_Users, (err, data) => {
         if (err) {
