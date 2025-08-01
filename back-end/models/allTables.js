@@ -2,7 +2,7 @@ const connectoToDB = require("./setupDB.js");
 
 async function createTables(){
     await createTable_Users();
-    await createTable_Assigned_labs();
+    await createTable_assigned_labs();
     await createTable_current_session();
     await createTable_inventory();
     await createTable_lab_staff();
@@ -58,7 +58,7 @@ async function createTable_Users(){
     });
 }
 
-async function createTable_Assigned_labs(){ //This Table tells which lab engineer is assigned to
+async function createTable_assigned_labs(){ //This Table tells which lab engineer is assigned to
     //which lab
 
     const client = await connectoToDB();
@@ -69,7 +69,9 @@ async function createTable_Assigned_labs(){ //This Table tells which lab enginee
     const query_MakeTable_Users = `CREATE TABLE IF NOT EXISTS assigned_Labs
       (id SERIAL PRIMARY KEY, 
       lab_name VARCHAR(100), 
-      lab_eng_mail VARCHAR(100))`;
+      lab_eng_mail VARCHAR(100),
+      lab_ass_mail VARCHAR(100),
+      lab_tec_mail VARCHAR(100))`;
 
     client.query(query_MakeTable_Users, (err, data) => {
         if (err) {

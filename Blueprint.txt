@@ -1,8 +1,9 @@
 Lab Super Manager:
-=> Will maintain list of labs
-=> Will assign labs to lab engineers (from the above list of labs)
-=> Will set inventory that all labs can acquire
-=> Will set a list of courses (that sub managers will assign to their department labs)
+=> Will maintain list of labs -> Being Done by Manal (Add done, view and edit remaining)
+=> Will assign labs to lab engineers (from the above list of labs) -> Being Done by Umar (Add done, view & edit remaining)
+=> Will set inventory that all labs can acquire -> Needs editing
+=> Will set a list of courses (that sub managers will assign to their department labs) -> Being Done by Manal (Add remaining, view remaining, edit remaining)
+=> Will be able to add new staff members to univeristy_staff list inside DB -> Being Done by Tooba (Edit remaining) & Umar (Add done, view done)
 
 Lab Sub Manager (e.g. sub-manager of engineering department labs):
 => Will request inventory from super manager, when the super manager approves, the available inventory from super manager will be deducted and that much inventory will be given to that whole department labs
@@ -11,7 +12,7 @@ Lab Sub Manager (e.g. sub-manager of engineering department labs):
 	-> That course will be from the list that super manager has made
 	-> A course will only be given 1 lab
 	-> A course can only be given to the lab which already has a lab engineer assigned
-	-> When a course will be assigned, the name of the lab engineer who teaches it is also to be given because a course in one lab can be taught by lab engineer of another lab
+	-> When a course will be assigned, the name of the lab engineer who teaches it is also to be given because a course in one lab can be taught by lab engineer of 	another lab
 
 Lab Engineer:
 => Will be able to view the lab allocated to him
@@ -41,3 +42,11 @@ Website admin:
 => Will be able to view all the accounts present on LMS Portal
 => Can delete any account
 => etc
+
+Sign In page:
+=> Types of accounts
+	-> Student
+	-> Super Manager
+	-> Sub Manager
+	-> Website admin
+	-> Lab Engineer

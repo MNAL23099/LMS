@@ -119,26 +119,138 @@ async function fetchLabStaffFromDB(){ //This function fetches all staff member d
 //------------------------------------------------------------------Assign Labs Starts Here------------------------------------------------------------------//
 
 async function assignLabsHandler(req, res){
-  console.log("fetch called!");
   const {staffType} = req.body;
   const data = await returnLabStaffEmails(staffType);
-  res.json(data.rows);
+  if (data.rowCount > 0){
+    res.json(data.rows);
+  }
+  
 }
 
-async function returnLabStaffEmails(staffType){ //This function takes in lab staff type as paramter and returns all the avaiblae staff emails of that type from DB
+async function returnLabStaffEmails(staffType){ 
+  //This function takes in lab staff type as paramter and returns all the avaiblae staff emails of that type from DB
+  //It uses a nested query to check if that email is present inside assigned_labs, if that email is present inside assigned_labs then don't return it
+  //Otherwise do return it
 
   const lmsClient = await connectToDB();
 
-  const query = "SELECT email FROM university_staff WHERE role = $1";
+  var query = null; //Set the query based on the type of staff requested by the user
+
+  if (staffType == "lab_engineer"){
+    query = `SELECT email FROM university_staff u
+    WHERE role = $1 
+    AND NOT EXISTS (
+    SELECT 1 FROM assigned_labs a WHERE a.lab_eng_mail = u.email);`;
+  }
+  else if (staffType == "lab_technician"){
+    query = `SELECT email FROM university_staff u
+    WHERE role = $1 
+    AND NOT EXISTS (
+    SELECT 1 FROM assigned_labs a WHERE a.lab_tec_mail = u.email);`;
+  }
+  else if (staffType == "lab_assistant"){
+    query = `SELECT email FROM university_staff u
+    WHERE role = $1 
+    AND NOT EXISTS (
+    SELECT 1 FROM assigned_labs a WHERE a.lab_ass_mail = u.email);`;
+  }
 
   try {
-    const data = await lmsClient.query(query, [staffType]);
-    return data;
+      const data = await lmsClient.query(query, [staffType]);
+      return data;
+    }
+    catch (error){
+      console.log(error.message);
+    }
+
+}
+
+async function returnAvailableLabs(req, res){
+  //Fetch those labs that are not already assigned to any 
+
+  const {staffType} = req.body; //This is the staff type for which user is trying to find an available lab, if there is a lab which has vacancy for this staff type then we return it
+
+  const lmsClient = await connectToDB();
+  var query = null;
+
+  //Set the query according to staffType
+  if (staffType == "lab_engineer"){ //Return the labs in which lab_eng_mail is null
+    query = `SELECT labs.lab_name FROM labs
+             JOIN assigned_labs ON labs.lab_name = assigned_labs.lab_name
+             WHERE assigned_labs.lab_eng_mail IS NULL
+             `;
   }
-  catch (error){
-    console.log(`staffController.js -> returnLabStaffEmails() -> ${error.message}`);
+  else if (staffType == "lab_technician"){ //Return the labs in which lab_tec_mail is null
+     query = `SELECT labs.lab_name FROM labs
+             JOIN assigned_labs ON labs.lab_name = assigned_labs.lab_name
+             WHERE assigned_labs.lab_tec_mail IS NULL
+             `;
+  }
+  else if (staffType == "lab_assistant"){ //Return the labs in which lab_ass_mail is null
+    query = `SELECT labs.lab_name FROM labs
+             JOIN assigned_labs ON labs.lab_name = assigned_labs.lab_name
+             WHERE assigned_labs.lab_ass_mail IS NULL
+             `;
   }
 
+  try {
+    const data = await lmsClient.query(query);
+    res.json(data.rows);
+  }
+  catch (error){
+    console.log(`staffController.js -> returnAvailableLabs() -> ${error.message}`);
+  }
+
+}
+
+//This function gets called upon ultimate form submission when user selects a lab staff member and the name of the lab to assign that staff member to
+async function saveAssignedLab(req, res){
+
+  const {staffType, staffMember, labName} = req.body;
+  const lmsClient = await connectToDB();
+
+  //If anything from the form is missing, alert the user and do not proceed
+  if (await itemsExist(staffType, labName, staffMember) == false){
+    res.write("missing_entries");
+    res.end();
+    return;
+  }
+
+  //But if everything is fine then proceed
+
+  //Set the query according to staff member
+  //If the staff member is a lab engineer then we add lab engineer mail to DB and so on
+  var query = null;
+  if (staffType == "lab_engineer"){
+    query = `UPDATE assigned_labs SET lab_eng_mail = $1 WHERE lab_name = $2`;
+    await lmsClient.query(query, [staffMember, labName]);
+  }
+  else if (staffType == "lab_technician"){
+    query = `UPDATE assigned_labs SET lab_tec_mail = $1 WHERE lab_name = $2`;
+    await lmsClient.query(query, [staffMember, labName]);
+  }
+  else if (staffType == "lab_assistant"){
+    query = `UPDATE assigned_labs SET lab_ass_mail = $1 WHERE lab_name = $2`;
+    await lmsClient.query(query, [staffMember, labName]);
+  }
+  res.write("success");
+  res.end();
+}
+
+//Returns true if parameters exist, else false
+//Also check if the parameters are default selected values of nothing or not
+async function itemsExist(staffType, labName, staffMember){
+
+  console.log(staffType);
+  console.log(labName);
+  console.log(staffMember);
+
+  if (staffType && labName && staffMember && staffType != "nothing" && labName != "nothing" && staffMember != "nothing"){
+    return true;
+  }
+  else if (!staffType || !labName || !staffMember || staffType == "nothing" || labName == "nothing" || staffMember == "nothing"){
+    return false;
+  }
 }
 
 //------------------------------------------------------------------Assign Labs Ends Here------------------------------------------------------------------//
@@ -147,4 +259,6 @@ module.exports = {
   addStaff,
   viewStaff,
   assignLabsHandler,
+  returnAvailableLabs,
+  saveAssignedLab,
 };

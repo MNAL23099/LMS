@@ -19,6 +19,7 @@ async function addLabs_for_Management(req,res){
             res.end();
         } else {
             await addLabToLabsTable(itemName);
+            await addLabToassigned_labs(itemName);
             res.write("new_lab_added");
             res.end();
         }
@@ -53,6 +54,21 @@ async function addLabToLabsTable(labName) {
         console.log(`error: addLabToLabsTable()-> ${error.message}`);
         return;
     }
+}
+
+//Add that same lab to assigned_labs and set
+//lab_eng_mail = null, lab_ass_mail = null, lab_tec_mail = null
+//because the lab is new so it doesn't have any staff right now
+async function addLabToassigned_labs(labName){
+    const lsmClient = await connectToDB();
+    try {
+        const query = `INSERT INTO assigned_labs(lab_name) VALUES($1)`;
+        await lsmClient.query(query, [labName]);
+    } catch (error) {
+        console.log(`error: labManagementController.js -> addLabsToassigned_labs()-> ${error.message}`);
+        return;
+    }
+
 }
 
 module.exports = { addLabs_for_Management };
