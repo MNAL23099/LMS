@@ -116,13 +116,6 @@ async function fetchLabStaffFromDB(){ //This function fetches all staff member d
 
 //------------------------------------------------------------------View Staff Ends Here------------------------------------------------------------------//
 
-
-
-
-
-
-
-
 //------------------------------------------------------------------Assign Labs Starts Here------------------------------------------------------------------//
 
 async function assignLabsHandler(req, res){
@@ -186,7 +179,14 @@ async function returnAvailableLabs(req, res){
              JOIN assigned_labs ON labs.lab_name = assigned_labs.lab_name
              WHERE assigned_labs.lab_eng_mail IS NULL
              `;
-//   else if (staffType == "lab_assistant"){ //Return the labs in which lab_ass_mail is null
+  }
+  else if (staffType == "lab_technician"){ //Return the labs in which lab_tec_mail is null
+     query = `SELECT labs.lab_name FROM labs
+             JOIN assigned_labs ON labs.lab_name = assigned_labs.lab_name
+             WHERE assigned_labs.lab_tec_mail IS NULL
+             `;
+  }
+  else if (staffType == "lab_assistant"){ //Return the labs in which lab_ass_mail is null
     query = `SELECT labs.lab_name FROM labs
              JOIN assigned_labs ON labs.lab_name = assigned_labs.lab_name
              WHERE assigned_labs.lab_ass_mail IS NULL
@@ -201,64 +201,6 @@ async function returnAvailableLabs(req, res){
     console.log(`staffController.js -> returnAvailableLabs() -> ${error.message}`);
   }
 
-  try {
-    const data = await lmsClient.query(query);
-    res.json(data.rows);
-  }
-  catch (error){
-    console.log(`staffController.js -> returnAvailableLabs() -> ${error.message}`);
-  }
-
-}
-
-//This function gets called upon ultimate form submission when user selects a lab staff member and the name of the lab to assign that staff member to
-async function saveAssignedLab(req, res){
-
-  const {staffType, staffMember, labName} = req.body;
-  const lmsClient = await connectToDB();
-
-  //If anything from the form is missing, alert the user and do not proceed
-  if (await itemsExist(staffType, labName, staffMember) == false){
-    res.write("missing_entries");
-    res.end();
-    return;
-  }
-
-  //But if everything is fine then proceed
-
-  //Set the query according to staff member
-  //If the staff member is a lab engineer then we add lab engineer mail to DB and so on
-  var query = null;
-  if (staffType == "lab_engineer"){
-    query = `UPDATE assigned_labs SET lab_eng_mail = $1 WHERE lab_name = $2`;
-    await lmsClient.query(query, [staffMember, labName]);
-  }
-  else if (staffType == "lab_technician"){
-    query = `UPDATE assigned_labs SET lab_tec_mail = $1 WHERE lab_name = $2`;
-    await lmsClient.query(query, [staffMember, labName]);
-  }
-  else if (staffType == "lab_assistant"){
-    query = `UPDATE assigned_labs SET lab_ass_mail = $1 WHERE lab_name = $2`;
-    await lmsClient.query(query, [staffMember, labName]);
-  }
-  res.write("success");
-  res.end();
-}
-
-//Returns true if parameters exist, else false
-//Also check if the parameters are default selected values of nothing or not
-async function itemsExist(staffType, labName, staffMember){
-
-  console.log(staffType);
-  console.log(labName);
-  console.log(staffMember);
-
-  if (staffType && labName && staffMember && staffType != "nothing" && labName != "nothing" && staffMember != "nothing"){
-    return true;
-  }
-  else if (!staffType || !labName || !staffMember || staffType == "nothing" || labName == "nothing" || staffMember == "nothing"){
-    return false;
-  }
 }
 
 //This function gets called upon ultimate form submission when user selects a lab staff member and the name of the lab to assign that staff member to
