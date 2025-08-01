@@ -7,10 +7,10 @@ async function addStaff(req, res){
 
     //These are the name, email and designation of the staff member just added, we need email to make sure that
     //this staff member is not present in any other lab
-    const {name, email, designation} = req.body;
+    const {name, email, role} = req.body;
 
     //Return if either itemName or itemQuantity is null
-    if (await requestIsNotNull(name, email, designation) == false){
+    if (await requestIsNotNull(name, email, role) == false){
         console.log(`staffController.js -> addStaff(): requestIsNotNull() is returning false`);
         res.write("missing_entries");
         res.end();
@@ -21,31 +21,31 @@ async function addStaff(req, res){
     try {
         //If the staff member email is already inside, db, we won't add him, rather send a response that the staff member already exists
         if (await staffMemberAlreadyInDB(email) == true){
-            res.write("email_already_stored");
-            res.end();
-            return;
+          res.write("email_already_stored");
+          res.end();
+          return;
         }
         //But if the staff member email is not already present inside DB then create a new row for it
         else if(await staffMemberAlreadyInDB(email) == false) {
-            await addNewRow(name, await getLabName(), email, designation);
-            res.write("new_row_added");
-            res.end();
+          await addNewRow(name, email, role);
+          res.write("new_row_added");
+          res.end();
         }
         else { //In case none of the above conditions is running
-            console.log("error: addStaff()-> staffMemberAlreadyInDB returning null!");
-            res.write("error");
-            return;
+          console.log("error: addStaff()-> staffMemberAlreadyInDB returning null!");
+          res.write("error");
+          return;
         }
     }
     catch (error){
-        console.log(`error: staffController.js -> addStaff()-> ${error.message}`);
+      console.log(`error: staffController.js -> addStaff()-> ${error.message}`);
     }
 }
 
-async function requestIsNotNull(name, email, designation){ //This function returns true if the variables inside parameter 
+async function requestIsNotNull(name, email, role){ //This function returns true if the variables inside parameter 
   //are not null
 
-  if (name && email && designation){
+  if (name && email && role){
     return true;
   }
   else return false;
@@ -61,7 +61,7 @@ async function staffMemberAlreadyInDB(email) { //This function checks if itemNam
   const lsmClient = await connectToDB();
 
   try{
-    let query = "SELECT * FROM lab_staff WHERE email = $1";
+    let query = "SELECT * FROM university_staff WHERE email = $1";
     const data = await lsmClient.query(query, [email]);
 
     if (data.rowCount == 0){
@@ -76,14 +76,14 @@ async function staffMemberAlreadyInDB(email) { //This function checks if itemNam
   }
 }
 
-async function addNewRow(name, labName, email, designation){ //Add new row to the DB for this staff member name, his designation, email and its lab_name
+async function addNewRow(name, email, role){ //Add new row to the DB for this staff member name, his designation, email and its lab_name
 
   const lsmClient = await connectToDB();
 
   try{
-    const query = `INSERT INTO lab_staff(name, lab_name, email, designation)
-    VALUES($1, $2, $3, $4)`;
-    await lsmClient.query(query, [name, labName, email, designation]);
+    const query = `INSERT INTO university_staff(name, email, role)
+    VALUES($1, $2, $3)`;
+    await lsmClient.query(query, [name, email, role]);
   }
   catch (error){
     console.log(`error: staffController.js -> addNewRow()-> ${error.message}`);
@@ -186,18 +186,19 @@ async function returnAvailableLabs(req, res){
              JOIN assigned_labs ON labs.lab_name = assigned_labs.lab_name
              WHERE assigned_labs.lab_eng_mail IS NULL
              `;
-  }
-  else if (staffType == "lab_technician"){ //Return the labs in which lab_tec_mail is null
-     query = `SELECT labs.lab_name FROM labs
-             JOIN assigned_labs ON labs.lab_name = assigned_labs.lab_name
-             WHERE assigned_labs.lab_tec_mail IS NULL
-             `;
-  }
-  else if (staffType == "lab_assistant"){ //Return the labs in which lab_ass_mail is null
+//   else if (staffType == "lab_assistant"){ //Return the labs in which lab_ass_mail is null
     query = `SELECT labs.lab_name FROM labs
              JOIN assigned_labs ON labs.lab_name = assigned_labs.lab_name
              WHERE assigned_labs.lab_ass_mail IS NULL
              `;
+  }
+
+  try {
+    const data = await lmsClient.query(query);
+    res.json(data.rows);
+  }
+  catch (error){
+    console.log(`staffController.js -> returnAvailableLabs() -> ${error.message}`);
   }
 
   try {
@@ -260,7 +261,105 @@ async function itemsExist(staffType, labName, staffMember){
   }
 }
 
+//This function gets called upon ultimate form submission when user selects a lab staff member and the name of the lab to assign that staff member to
+async function saveAssignedLab(req, res){
+
+  const {staffType, staffMember, labName} = req.body;
+  const lmsClient = await connectToDB();
+
+  //If anything from the form is missing, alert the user and do not proceed
+  if (await itemsExist(staffType, labName, staffMember) == false){
+    res.write("missing_entries");
+    res.end();
+    return;
+  }
+
+  //But if everything is fine then proceed
+
+  //Set the query according to staff member
+  //If the staff member is a lab engineer then we add lab engineer mail to DB and so on
+  var query = null;
+  if (staffType == "lab_engineer"){
+    query = `UPDATE assigned_labs SET lab_eng_mail = $1 WHERE lab_name = $2`;
+    await lmsClient.query(query, [staffMember, labName]);
+  }
+  else if (staffType == "lab_technician"){
+    query = `UPDATE assigned_labs SET lab_tec_mail = $1 WHERE lab_name = $2`;
+    await lmsClient.query(query, [staffMember, labName]);
+  }
+  else if (staffType == "lab_assistant"){
+    query = `UPDATE assigned_labs SET lab_ass_mail = $1 WHERE lab_name = $2`;
+    await lmsClient.query(query, [staffMember, labName]);
+  }
+  res.write("success");
+  res.end();
+}
+
+//Returns true if parameters exist, else false
+//Also check if the parameters are default selected values of nothing or not
+async function itemsExist(staffType, labName, staffMember){
+
+  console.log(staffType);
+  console.log(labName);
+  console.log(staffMember);
+
+  if (staffType && labName && staffMember && staffType != "nothing" && labName != "nothing" && staffMember != "nothing"){
+    return true;
+  }
+  else if (!staffType || !labName || !staffMember || staffType == "nothing" || labName == "nothing" || staffMember == "nothing"){
+    return false;
+  }
+}
+
 //------------------------------------------------------------------Assign Labs Ends Here------------------------------------------------------------------//
+
+//------------------------------------------------------------------viewEditAssignedLabs Starts Here------------------------------------------------------------------//
+
+async function returnAssignedLabs(req, res){
+
+  const lmsClient = await connectToDB();
+
+  const query = `SELECT * FROM assigned_labs`;
+
+  const data = await lmsClient.query(query);
+
+  //Send the data in response if there are any rows
+  if (data.rowCount > 0){
+    res.json(data.rows);
+  }
+}
+
+//This function receives the staffType and the mail of the staff member to remove him from the lab, it also receives the name of the lab to 
+async function unAssignLab(req, res){
+
+  const lmsClient = await connectToDB();
+
+  const {targetEmail, targetLab, staffType} = req.body;
+
+  var query = null;
+
+  if (staffType == "lab_engineer"){
+    query = `UPDATE assigned_labs SET lab_eng_mail = NULL WHERE lab_eng_mail = $1 AND lab_name = $2`;
+  }
+  else if (staffType == "lab_technician"){
+    query = `UPDATE assigned_labs SET lab_tec_mail = NULL WHERE lab_tec_mail = $1 AND lab_name = $2`;
+  }
+  else if (staffType == "lab_assistant"){
+    query = `UPDATE assigned_labs SET lab_ass_mail = NULL WHERE lab_ass_mail = $1 AND lab_name = $2`;
+  }
+
+  try {
+    await lmsClient.query(query, [targetEmail, targetLab]);
+    res.write("success");
+    res.end();
+  }
+  catch (error){
+    console.log(`staffController.js -> unAssignLab() -> ${error.message}`);
+    res.write("error");
+  }
+}
+
+//------------------------------------------------------------------viewEditAssignedLabs Ends Here------------------------------------------------------------------//
 
 module.exports = {
   addStaff,
@@ -268,4 +367,6 @@ module.exports = {
   assignLabsHandler,
   returnAvailableLabs,
   saveAssignedLab,
+  returnAssignedLabs,
+  unAssignLab,
 };

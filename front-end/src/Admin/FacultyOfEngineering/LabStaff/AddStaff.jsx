@@ -5,7 +5,7 @@ function AddStaff(){
 
     //These are the 3 varaibles that the add staff form will store information inside
     const [staffMemberName, setStaffMemberName] = useState("");
-    const [staffMemberDesignation, setStaffMemberDesignation] = useState("");
+    const [staffMemberRole, setStaffMemberRole] = useState("");
     const [staffMemberEmail, setStaffMemberEmail] = useState("");
 
     function submitForm(e){
@@ -14,7 +14,7 @@ function AddStaff(){
         fetch("http://localhost:5000/labStaff/addStaff", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({name: staffMemberName, email: staffMemberEmail, designation: staffMemberDesignation}),
+            body: JSON.stringify({name: staffMemberName, email: staffMemberEmail, role: staffMemberRole}),
         })
         .then((response)=>{return response.text()})
         .then((textResponse)=>{
@@ -22,7 +22,7 @@ function AddStaff(){
                 window.alert("Please fill all entries!");
             }
             else if (textResponse == "email_already_stored"){
-                window.alert("This staff member already is related to a lab!");
+                window.alert("This staff member already exists!");
             }
             else if (textResponse == "new_row_added"){
                 window.alert("New staff member has been added!");
@@ -75,9 +75,13 @@ function AddStaff(){
             <div className="form-text" style={{color: '#fff'}}>University assigned email for this person.</div>
         </div>
         <div className="mb-3">
-            <label htmlFor="add-inventory-quantity" className="form-label" style={{fontWeight: 500, color: '#fff'}}>Designation</label>
-            <input onChange={(e)=>{setStaffMemberDesignation(e.target.value)}} type="text" className="form-control" id="add-inventory-quantity" style={{borderRadius: "8px", background: '#232526', color: '#fff', border: '1px solid #fff'}} />
-            <div id="emailHelp" className="form-text" style={{color: '#fff'}}>For example: Lab Engineer, Lab Technician, etc.</div>
+            <label htmlFor="add-inventory-quantity" className="form-label" style={{fontWeight: 500, color: '#fff'}}>Role</label>
+            <select onChange={(e)=>{setStaffMemberRole(e.target.value)}} class="form-select" aria-label="Default select example">
+                <option selected>Choose Role</option>
+                <option value="lab_engineer">Lab Engineer</option>
+                <option value="lab_technician">Lab Technician</option>
+                <option value="lab_assistant">Lab Assistant</option>
+            </select>
         </div>
         <button type="submit" className="inventory-go-btn w-100" style={{
             borderRadius: "25px",
