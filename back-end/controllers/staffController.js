@@ -93,61 +93,6 @@ async function addNewRow(name, email, role){ //Add new row to the DB for this st
 
 //------------------------------------------------------------------Add Staff Ends Here------------------------------------------------------------------//
 
-async function editStaff(req, res) {
-  try {
-    const client = await connectToDB();
-    const query = `SELECT * FROM university_staff WHERE department = $1`; // example filter
-    const data = await client.query(query, ["Lab"]); // or dynamically get department
-    res.json(data.rows);
-  } catch (error) {
-    console.log(`editStaff() error: ${error.message}`);
-  }
-}
-
-async function saveEditStaffChanges(req, res) {
-  const { staffID, staffName, staffRole } = req.body;
-
-  if (!staffID || !staffName || !staffRole) {
-    res.write("missing_entries");
-    res.end();
-    return;
-  }
-
-  try {
-    const client = await connectToDB();
-    const query = `UPDATE university_staff SET name = $1, role = $2 WHERE id = $3`;
-    await client.query(query, [staffName, staffRole, staffID]);
-    res.write("success");
-    res.end();
-  } catch (error) {
-    console.log(`saveEditStaffChanges() error: ${error.message}`);
-  }
-}
-
-async function deleteStaffMember(req, res) {
-  const { staffID } = req.body;
-
-  if (!staffID) {
-    res.write("missing_entries");
-    res.end();
-    return;
-  }
-
-  try {
-    const client = await connectToDB();
-    const query = `DELETE FROM university_staff WHERE id = $1`;
-    await client.query(query, [staffID]);
-    res.write("success");
-    res.end();
-  } catch (error) {
-    console.log(`deleteStaffMember() error: ${error.message}`);
-  }
-}
-
-module.exports = {
-  
-};
-
 
 //------------------------------------------------------------------View Staff Starts Here------------------------------------------------------------------//
 
@@ -160,9 +105,9 @@ async function viewStaff (req, res){ //This is the main function that is called 
 async function fetchLabStaffFromDB(){ //This function fetches all staff member data for the current session lab engineer from DB and returns them in json
   try{
     const lsmClient = await connectToDB();
-    const labName = await getLabName();
-    const query = `SELECT * FROM university_staff WHERE name = $1`;
-    const data = lsmClient.query(query, [labName]);
+   
+    const query = `SELECT * FROM university_staff`;
+    const data = lsmClient.query(query);
     return data; //Return all the data
   }
   catch(error){
@@ -171,43 +116,26 @@ async function fetchLabStaffFromDB(){ //This function fetches all staff member d
 }
 
 //------------------------------------------------------------------View Staff Ends Here------------------------------------------------------------------//
-// async function editStaff (req, res){
-  
-//   const data = await fetchStaffFromDB(); //Fetch from DB
-//   res.json(data.rows); //Send all the resulting rows in response
-// }
 
-// async function fetchStaffFromDB(){ //This function fetches all inventory items for the current session lab engineer from DB and returns them in json
-
-//   try{
-//     const lsmClient = await connectToDB();
-//     const query = `SELECT * FROM university_staff`;
-//     const data = await lsmClient.query(query);
-
-//     return data;
-//   }
-//   catch(error){
-//     console.log(`error: fetchInventory()-> ${error.message}`);
-//   }
-// }
 
 async function editStaff(req, res) {
-  try {
+  
     const data = await fetchStaffFromDB();
-    console.log("Staff fetched for edit:", data.rows);
+  //   console.log("Staff fetched for edit:", data.rows);
 
-    const formatted = data.rows.map(row => ({
-      id: row.staff_id,
-      name: row.staff_name,
-      email: row.staff_email,
-      role: row.staff_type
-    }));
+  //   const formatted = data.rows.map(row => ({
+  //     id: row.staff_id,
+  //     name: row.staff_name,
+  //     email: row.staff_email,
+  //     role: row.staff_type
+  //   }));
 
-    res.json(formatted);
-  } catch (err) {
-    console.error("Error in editStaff:", err.message);
-    res.status(500).send("Internal Server Error");
-  }
+  //   res.json(formatted);
+  // } catch (err) {
+  //   console.error("Error in editStaff:", err.message);
+  //   res.status(500).send("Internal Server Error");
+  // }
+  res.json(data.rows);// to send all teh rows in resonse
 }
 
 
@@ -215,7 +143,7 @@ async function fetchStaffFromDB() {
   try {
     const lsmClient = await connectToDB();  // This uses setupDB
     const query = `SELECT * FROM university_staff`;
-    const data = await lsmClient.query(query);  // ✅ FIXED typo here
+    const data = await lsmClient.query(query);  //  FIXED typo here
     return data;
   } catch (error) {
     console.log(`Error: fetchStaffFromDB -> ${error.message}`);
@@ -227,7 +155,7 @@ async function fetchStaffFromDB() {
 async function saveEditStaffChanges(req, res) {
   const { id, name, email, role } = req.body;
 
-  if (!name || !email || !id || !role) {
+  if ( await entriesExist(name,email, id,role)== false) {
     res.status(400).send("Missing entries");
     return;
   }
@@ -249,35 +177,34 @@ async function saveEditStaffChanges(req, res) {
 
 
 //Helper function for editInventory functionality
-async function entriesExist(itemName, itemQuantity, itemID){ //Check if all the entries exist
+async function entriesExist(itemName, email,id, role){ //Check if all the entries exist
 
-  if (!itemName || !itemQuantity || !itemID){
+  if (!itemName || !email|| !id || !role){
     return false;
   }
   else return true;
 }
 
-async function deleteInventoryItem(req, res){ //This is function for when the user wants to delete an inventory item from the editInventory page
+async function deleteStaffMember(req, res) {
+  const { id } = req.body;
 
-  const {itemID} = req.body;
-  if (!itemID){
+  if (!id) {
     res.write("missing_entries");
     res.end();
     return;
   }
 
-  try{
-    const lsmClient = await connectToDB();
-    const query = `DELETE FROM inventory WHERE id = $1`;
-    await lsmClient.query(query, [itemID]);
+  try {
+    const client = await connectToDB();
+    const query = `DELETE FROM university_staff WHERE id = $1`;
+    await client.query(query, [id]);
     res.write("success");
     res.end();
+  } catch (error) {
+    console.log(`deleteStaffMember() error: ${error.message}`);
   }
-  catch (error){
-    console.log(`error: inventoryController.js -> deleteInventoryItem()-> ${error.message}`);
-  }
-   
 }
+
 //------------------------------------------------------------------Assign Labs Starts Here------------------------------------------------------------------//
 
 async function assignLabsHandler(req, res){
