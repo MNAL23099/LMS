@@ -70,5 +70,18 @@ async function addLabToassigned_labs(labName){
     }
 
 }
+async function view_labs(req,res){
+     try{
+  const query_view = `SELECT * FROM labs`;
+  const lsmClient = await connectToDB();
+  const data = await lsmClient.query(query_view);
 
-module.exports = { addLabs_for_Management };
+  res.json(data.rows);
+  }
+  catch(error){
+    console.log(`error: labManagement -> View()-> ${error.message}`);
+  }
+
+}
+
+module.exports = { addLabs_for_Management, view_labs };

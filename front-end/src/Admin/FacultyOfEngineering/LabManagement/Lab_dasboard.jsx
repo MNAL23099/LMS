@@ -17,7 +17,7 @@ export function Lab_Dasboard(){
     // }
 
     function goToViewLabs(e){
-        navigation("/lab_manage_dashboard");
+        navigation("/viewlabss");
     }
 
     return (

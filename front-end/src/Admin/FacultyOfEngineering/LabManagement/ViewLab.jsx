@@ -16,7 +16,7 @@ function fetch_data(){
        
 
             tablehead.textContent = i+1;
-            tabledata.textContent = res[i].name;
+            tabledata.textContent = res[i].lab_name;
           
             
             tableBody.appendChild(tableRow);
@@ -26,7 +26,7 @@ function fetch_data(){
         }})
     
 }
-export function ViewInventory(){
+export function ViewLabs(){
     return(
     
         <>
