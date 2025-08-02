@@ -17,6 +17,8 @@ import { Lab_Dasboard } from "./Admin/FacultyOfEngineering/LabManagement/Lab_das
 import AddLab from "./Admin/FacultyOfEngineering/LabManagement/AddLabs.jsx";
 import ViewEditAssignedLabs from "./Admin/FacultyOfEngineering/LabStaff/ViewEditAssignedLabs.jsx";
 import { ViewLabs } from "./Admin/FacultyOfEngineering/LabManagement/ViewLab.jsx";
+import { Courses_Dashboard } from "./Admin/FacultyOfEngineering/Course/Courses_Dasboardd.jsx";
+import { Add_Courses } from "./Admin/FacultyOfEngineering/Course/Add_Course.jsx";
 // import AdminDashboard from "./Admin/AdminDashboard.jsx";
 import EditStaff from "./Admin/FacultyOfEngineering/LabStaff/EditStaff.jsx";
 
@@ -44,6 +46,8 @@ function App() {
         <Route path="/addlab" element = {<AddLab/>}/>
         <Route path="/viewlabss" element = {<ViewLabs/>}/>
         <Route path="/viewEditAssignedLabs" element = {<ViewEditAssignedLabs />} />
+        <Route path="/Courses_manage" element = {<Courses_Dashboard/>}/>
+        <Route path="//addCourse" element ={<Add_Courses/>}/>
       </Routes>
       <Footer />
     </BrowserRouter>

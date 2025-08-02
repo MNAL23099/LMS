@@ -9,9 +9,28 @@ async function createTables(){
     await createTable_university_staff();
     await createTable_labs();
     await insertDummyData(); 
+    await createTable_Courses();
     
 }//Insert dummy data that is supposed to be received from another database
 // Standalone function to create labs table
+async function createTable_Courses(){
+    const client = await connectoToDB();
+    if (!client) {
+        return;
+    }
+    const query = `CREATE TABLE IF NOT EXISTS Courses (
+        id SERIAL PRIMARY KEY,
+        course_name VARCHAR(100)
+    )`;
+    client.query(query, (err, data) => {
+        if (err) {
+            console.log("Courses table cannot be created!");
+            console.log(err.message);
+        } else {
+            console.log("Courses table created!");
+        }
+    });
+}
 async function createTable_labs(){
     // This table stores labs with id and lab_name
     const client = await connectoToDB();

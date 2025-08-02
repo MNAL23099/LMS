@@ -51,6 +51,7 @@ const AdminDashboard = () => {
               <p className="card-text">FOM</p>
               <button className="btn btn-primary" style={{ background: "linear-gradient(90deg, #ff9800 0%, #ffb74d 100%)", color: "#fff", borderRadius: "25px", fontWeight: 700, border: "none" }}>Go</button>
             </div>
+            
           </div>
         </div>
       </div>

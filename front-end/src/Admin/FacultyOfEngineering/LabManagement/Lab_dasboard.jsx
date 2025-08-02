@@ -18,6 +18,7 @@ export function Lab_Dasboard(){
 
     function goToViewLabs(e){
         navigation("/viewlabss");
+        window.location.reload();
     }
 
     return (
