@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const {addStaff, viewStaff, assignLabsHandler, returnAvailableLabs, saveAssignedLab, returnAssignedLabs, unAssignLab} = require("../controllers/staffController.js");
+const {addStaff, viewStaff,editStaff,saveEditStaffChanges,deleteStaffMember, assignLabsHandler, returnAvailableLabs, saveAssignedLab, returnAssignedLabs, unAssignLab} = require("../controllers/staffController.js");
 
 router.post("/addStaff", async(request, response)=>{
     await addStaff(request, response);
@@ -10,6 +10,22 @@ router.post("/addStaff", async(request, response)=>{
 router.get("/viewStaff", async(request, response)=>{
     await viewStaff(request, response);
 })
+
+// Get all staff to display on edit page
+router.get("/editStaff", async (req, res) => {
+  await editStaff(req, res);
+});
+
+// Submit edited staff changes
+router.post("/submitEditedStaff", async (req, res) => {
+  await saveEditStaffChanges(req, res);
+});
+
+// Delete staff member
+router.post("/deleteStaff", async (req, res) => {
+  await deleteStaffMember(req, res);
+});
+
 
 router.post("/assignLabs", async(request, response)=>{
     await assignLabsHandler(request, response);

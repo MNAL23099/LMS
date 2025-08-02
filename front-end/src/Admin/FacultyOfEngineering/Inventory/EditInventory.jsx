@@ -139,3 +139,4 @@ function deleteInventoryItem(id){ //This function is called when the user clicks
 }
 
 export default EditInventory;
+

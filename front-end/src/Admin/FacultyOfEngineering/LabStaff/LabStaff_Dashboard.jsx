@@ -14,7 +14,7 @@ function LabStaff_Dashboard(){
     }
     
     function goToEditStaff(){
-        navigation("/editInventory");
+        navigation("/editLabStaff");
     }
 
     function goToViewStaff(){

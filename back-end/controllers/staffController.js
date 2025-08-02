@@ -93,6 +93,62 @@ async function addNewRow(name, email, role){ //Add new row to the DB for this st
 
 //------------------------------------------------------------------Add Staff Ends Here------------------------------------------------------------------//
 
+async function editStaff(req, res) {
+  try {
+    const client = await connectToDB();
+    const query = `SELECT * FROM university_staff WHERE department = $1`; // example filter
+    const data = await client.query(query, ["Lab"]); // or dynamically get department
+    res.json(data.rows);
+  } catch (error) {
+    console.log(`editStaff() error: ${error.message}`);
+  }
+}
+
+async function saveEditStaffChanges(req, res) {
+  const { staffID, staffName, staffRole } = req.body;
+
+  if (!staffID || !staffName || !staffRole) {
+    res.write("missing_entries");
+    res.end();
+    return;
+  }
+
+  try {
+    const client = await connectToDB();
+    const query = `UPDATE university_staff SET name = $1, role = $2 WHERE id = $3`;
+    await client.query(query, [staffName, staffRole, staffID]);
+    res.write("success");
+    res.end();
+  } catch (error) {
+    console.log(`saveEditStaffChanges() error: ${error.message}`);
+  }
+}
+
+async function deleteStaffMember(req, res) {
+  const { staffID } = req.body;
+
+  if (!staffID) {
+    res.write("missing_entries");
+    res.end();
+    return;
+  }
+
+  try {
+    const client = await connectToDB();
+    const query = `DELETE FROM university_staff WHERE id = $1`;
+    await client.query(query, [staffID]);
+    res.write("success");
+    res.end();
+  } catch (error) {
+    console.log(`deleteStaffMember() error: ${error.message}`);
+  }
+}
+
+module.exports = {
+  
+};
+
+
 //------------------------------------------------------------------View Staff Starts Here------------------------------------------------------------------//
 
 async function viewStaff (req, res){ //This is the main function that is called when the viewStaff route is accessed, it takes all the staff members for the currently logged in lab and returns it
@@ -105,7 +161,7 @@ async function fetchLabStaffFromDB(){ //This function fetches all staff member d
   try{
     const lsmClient = await connectToDB();
     const labName = await getLabName();
-    const query = `SELECT * FROM lab_staff WHERE lab_name = $1`;
+    const query = `SELECT * FROM university_staff WHERE name = $1`;
     const data = lsmClient.query(query, [labName]);
     return data; //Return all the data
   }
@@ -115,7 +171,113 @@ async function fetchLabStaffFromDB(){ //This function fetches all staff member d
 }
 
 //------------------------------------------------------------------View Staff Ends Here------------------------------------------------------------------//
+// async function editStaff (req, res){
+  
+//   const data = await fetchStaffFromDB(); //Fetch from DB
+//   res.json(data.rows); //Send all the resulting rows in response
+// }
 
+// async function fetchStaffFromDB(){ //This function fetches all inventory items for the current session lab engineer from DB and returns them in json
+
+//   try{
+//     const lsmClient = await connectToDB();
+//     const query = `SELECT * FROM university_staff`;
+//     const data = await lsmClient.query(query);
+
+//     return data;
+//   }
+//   catch(error){
+//     console.log(`error: fetchInventory()-> ${error.message}`);
+//   }
+// }
+
+async function editStaff(req, res) {
+  try {
+    const data = await fetchStaffFromDB();
+    console.log("Staff fetched for edit:", data.rows);
+
+    const formatted = data.rows.map(row => ({
+      id: row.staff_id,
+      name: row.staff_name,
+      email: row.staff_email,
+      role: row.staff_type
+    }));
+
+    res.json(formatted);
+  } catch (err) {
+    console.error("Error in editStaff:", err.message);
+    res.status(500).send("Internal Server Error");
+  }
+}
+
+
+async function fetchStaffFromDB() {
+  try {
+    const lsmClient = await connectToDB();  // This uses setupDB
+    const query = `SELECT * FROM university_staff`;
+    const data = await lsmClient.query(query);  // ✅ FIXED typo here
+    return data;
+  } catch (error) {
+    console.log(`Error: fetchStaffFromDB -> ${error.message}`);
+    throw error;  // so the outer function can catch it
+  }
+}
+
+
+async function saveEditStaffChanges(req, res) {
+  const { id, name, email, role } = req.body;
+
+  if (!name || !email || !id || !role) {
+    res.status(400).send("Missing entries");
+    return;
+  }
+
+  try {
+    const lsmClient = await connectToDB();
+    const query = `
+      UPDATE university_staff 
+      SET staff_name = $1, staff_email = $2, staff_type = $3 
+      WHERE staff_id = $4
+    `;
+    await lsmClient.query(query, [name, email, role, id]);
+    res.send("success");
+  } catch (error) {
+    console.error(`Error in saveEditStaffChanges: ${error.message}`);
+    res.status(500).send("Internal Server Error");
+  }
+}
+
+
+//Helper function for editInventory functionality
+async function entriesExist(itemName, itemQuantity, itemID){ //Check if all the entries exist
+
+  if (!itemName || !itemQuantity || !itemID){
+    return false;
+  }
+  else return true;
+}
+
+async function deleteInventoryItem(req, res){ //This is function for when the user wants to delete an inventory item from the editInventory page
+
+  const {itemID} = req.body;
+  if (!itemID){
+    res.write("missing_entries");
+    res.end();
+    return;
+  }
+
+  try{
+    const lsmClient = await connectToDB();
+    const query = `DELETE FROM inventory WHERE id = $1`;
+    await lsmClient.query(query, [itemID]);
+    res.write("success");
+    res.end();
+  }
+  catch (error){
+    console.log(`error: inventoryController.js -> deleteInventoryItem()-> ${error.message}`);
+  }
+   
+}
 //------------------------------------------------------------------Assign Labs Starts Here------------------------------------------------------------------//
 
 async function assignLabsHandler(req, res){
@@ -306,6 +468,9 @@ async function unAssignLab(req, res){
 module.exports = {
   addStaff,
   viewStaff,
+  editStaff,
+  saveEditStaffChanges,
+  deleteStaffMember,
   assignLabsHandler,
   returnAvailableLabs,
   saveAssignedLab,
