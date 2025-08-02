@@ -39,52 +39,52 @@ function LabStaff_Dashboard(){
 
             <div id="inventory-div_1">
             {/* View lab staff card */}
-            <div onClick={goToViewStaff} className="card" style={{width: "18rem"}}>
-            <img src={viewStaffMembers} class="card-img-top" alt="..."/>
-            <div className="card-body themed-card-body">
-                <h5 className="card-title">View Current Staff</h5>
+            <div onClick={goToViewStaff} className="card" style={{width: "18rem", background: "linear-gradient(135deg, #ff9800 0%, #ffb74d 100%)", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(255, 152, 0, 0.15)", border: "1.5px solid #ff9800"}}>
+            <img src={viewStaffMembers} className="card-img-top" alt="..." style={{ borderTopLeftRadius: "1rem", borderTopRightRadius: "1rem", height: "140px", objectFit: "cover" }} />
+            <div className="card-body" style={{ background: "#fff3e0", color: "#e65100", borderRadius: "0 0 1rem 1rem" }}>
+                <h5 className="card-title" style={{ fontWeight: 700 }}>View Current Staff</h5>
                 <p className="card-text">View the current staff of lab.</p>
-                <a className="btn btn-primary">View</a>
+                <a className="btn btn-primary" style={{ background: "linear-gradient(90deg, #ff9800 0%, #ffb74d 100%)", color: "#fff", borderRadius: "25px", fontWeight: 700, border: "2px solid #e65100" }}>View</a>
             </div>
             </div>
 
             {/* Add inventory card */}
-            <div onClick={goToAddStaff} className="card" style={{width: "18rem"}}>
-                <img src={addNewStaff} class="card-img-top" alt="..."/>
-                <div className="card-body themed-card-body">
-                    <h5 className="card-title">Add new staff members</h5>
+            <div onClick={goToAddStaff} className="card" style={{width: "18rem", background: "linear-gradient(135deg, #ff9800 0%, #ffb74d 100%)", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(255, 152, 0, 0.15)", border: "1.5px solid #ff9800"}}>
+                <img src={addNewStaff} className="card-img-top" alt="..." style={{ borderTopLeftRadius: "1rem", borderTopRightRadius: "1rem", height: "140px", objectFit: "cover" }} />
+                <div className="card-body" style={{ background: "#fff3e0", color: "#e65100", borderRadius: "0 0 1rem 1rem" }}>
+                    <h5 className="card-title" style={{ fontWeight: 700 }}>Add new staff members</h5>
                     <p className="card-text">Add a new staff member.</p>
-                    <a className="btn btn-primary">Add</a>
+                    <a className="btn btn-primary" style={{ background: "linear-gradient(90deg, #ff9800 0%, #ffb74d 100%)", color: "#fff", borderRadius: "25px", fontWeight: 700, border: "2px solid #e65100" }}>Add</a>
                 </div>
             </div>
 
             {/* Edit inventory card */}
-            <div onClick={goToEditStaff} className="card" style={{width: "18rem"}}>
-            <img src={editStaffMembers} class="card-img-top" alt="..."/>
-            <div className="card-body themed-card-body">
-                <h5 className="card-title">Edit Lab Staff</h5>
+            <div onClick={goToEditStaff} className="card" style={{width: "18rem", background: "linear-gradient(135deg, #ff9800 0%, #ffb74d 100%)", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(255, 152, 0, 0.15)", border: "1.5px solid #ff9800"}}>
+            <img src={editStaffMembers} className="card-img-top" alt="..." style={{ borderTopLeftRadius: "1rem", borderTopRightRadius: "1rem", height: "140px", objectFit: "cover" }} />
+            <div className="card-body" style={{ background: "#fff3e0", color: "#e65100", borderRadius: "0 0 1rem 1rem" }}>
+                <h5 className="card-title" style={{ fontWeight: 700 }}>Edit Lab Staff</h5>
                 <p className="card-text">Edit the current staff members of lab.</p>
-                <a className="btn btn-primary">Edit</a>
+                <a className="btn btn-primary" style={{ background: "linear-gradient(90deg, #ff9800 0%, #ffb74d 100%)", color: "#fff", borderRadius: "25px", fontWeight: 700, border: "2px solid #e65100" }}>Edit</a>
             </div>
             </div>
 
             {/* Edit inventory card */}
-            <div onClick={goToViewEditAssignedLabs} className="card" style={{width: "18rem"}}>
-            <img src={image_viewEditAssignedLabs} class="card-img-top" alt="..."/>
-            <div className="card-body themed-card-body">
-                <h5 className="card-title">View And Edit Assigned Labs</h5>
+            <div onClick={goToViewEditAssignedLabs} className="card" style={{width: "18rem", background: "linear-gradient(135deg, #ff9800 0%, #ffb74d 100%)", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(255, 152, 0, 0.15)", border: "1.5px solid #ff9800"}}>
+            <img src={image_viewEditAssignedLabs} className="card-img-top" alt="..." style={{ borderTopLeftRadius: "1rem", borderTopRightRadius: "1rem", height: "140px", objectFit: "cover" }} />
+            <div className="card-body" style={{ background: "#fff3e0", color: "#e65100", borderRadius: "0 0 1rem 1rem" }}>
+                <h5 className="card-title" style={{ fontWeight: 700 }}>View And Edit Assigned Labs</h5>
                 <p className="card-text">View & Edit the staff members assigned to labs.</p>
-                <a className="btn btn-primary">Edit</a>
+                <a className="btn btn-primary" style={{ background: "linear-gradient(90deg, #ff9800 0%, #ffb74d 100%)", color: "#fff", borderRadius: "25px", fontWeight: 700, border: "2px solid #e65100" }}>Edit</a>
             </div>
             </div>
 
             {/* Generate Physical Report Of Inventory Card */}
-            <div onClick={goToAssignLabs} className="card" style={{width: "18rem"}}>
-            <img src={image_assignLabs} class="card-img-top" alt="..."/>
-            <div className="card-body themed-card-body">
-                <h5 className="card-title ">Assign Labs</h5>
+            <div onClick={goToAssignLabs} className="card" style={{width: "18rem", background: "linear-gradient(135deg, #ff9800 0%, #ffb74d 100%)", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(255, 152, 0, 0.15)", border: "1.5px solid #ff9800"}}>
+            <img src={image_assignLabs} className="card-img-top" alt="..." style={{ borderTopLeftRadius: "1rem", borderTopRightRadius: "1rem", height: "140px", objectFit: "cover" }} />
+            <div className="card-body" style={{ background: "#fff3e0", color: "#e65100", borderRadius: "0 0 1rem 1rem" }}>
+                <h5 className="card-title " style={{ fontWeight: 700 }}>Assign Labs</h5>
                 <p className="card-text">Assign lab engineers, technicians and assistants to labs of engineering department.</p>
-                <a className="btn btn-primary">Assign</a>
+                <a className="btn btn-primary" style={{ background: "linear-gradient(90deg, #ff9800 0%, #ffb74d 100%)", color: "#fff", borderRadius: "25px", fontWeight: 700, border: "2px solid #e65100" }}>Assign</a>
             </div>
             </div>
             </div>
