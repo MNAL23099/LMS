@@ -9,10 +9,10 @@ export function Lab_Dasboard(){
         navigation("/addlab");
     }
 
-    function goToEditLabs(e){
-        e.preventDefault();
-        navigation("/labStaffDashboard");
-    }
+    // function goToEditLabs(e){
+    //     e.preventDefault();
+    //     navigation("/labStaffDashboard");
+    // }
 
     function goToViewLabs(e){
         navigation("/lab_manage_dashboard");
@@ -32,14 +32,14 @@ export function Lab_Dasboard(){
                     </div>
                 </div>
                 {/* Card for editing labs*/}
-                <div className="card" style={{width: "18rem"}}>
-                    {/* <img src={labStaffPicture} className="card-img-top" alt="..."/> */}
+                {/* <div className="card" style={{width: "18rem"}}>
+                    <img src={labStaffPicture} className="card-img-top" alt="..."/>
                     <div className="card-body themed-card-body ">
                         <h5 className="card-title">Lab name edit</h5>
                         <p className="card-text">edit the name of lab you have from here, can also delete that name from list.</p>
                         <a onClick={goToEditLabs} href="#" className="btn btn-primary">Go</a>
                     </div>
-                </div>
+                </div> */}
                 {/* Card for viewing labs in the list */}
                 <div className="card" style={{width: "18rem"}}>
                     {/* <img src={image_labManagement} className="card-img-top" alt="..."/> */}

@@ -41,7 +41,7 @@ function SignIn(){
 
             <div style={{
                 minHeight: "100vh",
-                background: "radial-gradient(ellipse at center, #a83232 0%, #2b0909 60%, #000 100%)",
+                background: "linear-gradient(135deg, #fff3e0 0%)",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
@@ -49,14 +49,17 @@ function SignIn(){
             }}>
                 <div style={{
                     marginTop: "3rem",
-                    background: "linear-gradient(135deg, #231c1cff 30%, #cd0b0bff 70%)",
-                    borderRadius: "20px",
-                    boxShadow: "0 8px 32px 0 rgba(80,0,0,0.35), 0 2px 8px 0 rgba(128,0,0,0.25)",
+                    background: "linear-gradient(135deg, #ffe0b2 0%, #f19711ff 100%)",
+                    borderRadius: "1.5rem",
+                    boxShadow: "0 8px 32px rgba(255, 152, 0, 0.18), 0 2px 8px rgba(255, 87, 34, 0.10)",
                     padding: "2.5rem 2rem",
                     maxWidth: "420px",
                     width: "100%",
-                    border: "2px solid #800000",
-                    color: "#fff"
+                    border: "2.5px solid #e65100",
+                    color: "#bf360c",
+                    fontWeight: 700,
+                    backdropFilter: "blur(2px)",
+                    transition: "box-shadow 0.3s, border 0.3s"
                 }}>
                     <form onSubmit={submitform} id="form_1">
                         <h1 style={{
@@ -70,13 +73,13 @@ function SignIn(){
 
                         <div className="mb-3">
                             <label htmlFor="signin-email" className="form-label" style={{ fontWeight: 500, color: '#fff' }}>Email address</label>
-                            <input onChange={(e)=>{setEmail(e.target.value)}} type="email" className="form-control" id="signin-email" style={{ borderRadius: "8px", background: '#232526', color: '#fff', border: '1px solid #800000' }} aria-describedby="emailHelp" />
+                            <input onChange={(e)=>{setEmail(e.target.value)}} type="email" className="form-control" id="signin-email" style={{ borderRadius: "8px", backgroundColor: ' #eb8f06ff', color: '#fff', border: '1px solid #800000' }} aria-describedby="emailHelp" />
                             <div id="emailHelp" className="form-text" style={{ color: '#fff' }}>We'll never share your email with anyone else.</div>
                         </div>
 
                         <div className="mb-3">
                             <label htmlFor="signin-password" className="form-label" style={{ fontWeight: 500, color: '#fff' }}>Password</label>
-                            <input onChange={(e)=>{setPasseword(e.target.value)}} type="password" className="form-control" id="signin-password" style={{ borderRadius: "8px", background: '#232526', color: '#fff', border: '1px solid #800000' }} />
+                            <input onChange={(e)=>{setPasseword(e.target.value)}} type="password" className="form-control" id="signin-password" style={{ borderRadius: "8px", backgroundColor: '#eb8f06ff', color: '#fff', border: '1px solid #800000' }} />
                         </div>
 
                        
@@ -85,10 +88,10 @@ function SignIn(){
                             borderRadius: "25px",
                             fontWeight: 700,
                             fontSize: "1.1rem",
-                            background: "linear-gradient(90deg, #232526 100%)",
+                            backgroundColor: "#eb8f06ff",
                             color: "#fff",
-                            border: "none",
-                            boxShadow: "0 2px 8px 0 rgba(191, 161, 74, 0.10)"
+                            border: "2.5px solid #e65100",
+                            boxShadow: "0 2px 8px 0 rgba(255, 152, 0, 0.10)"
                         }}>Sign In</button>
                     </form>
                 </div>

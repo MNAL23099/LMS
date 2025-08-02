@@ -1,7 +1,7 @@
 .footer {
     width: 100%;
-    background: linear-gradient(90deg, #4b0000 60%, #141010 100%);
-    color: #fffbe6;
+    background: linear-gradient(90deg, #15004b 100%);
+    color: #fff;
     text-align: center;
     padding: 1rem 0;
     position: fixed;
@@ -10,6 +10,7 @@
     z-index: 100;
     font-weight: bold;
     letter-spacing: 1px;
+    box-shadow: 0 -2px 12px rgba(25, 118, 210, 0.15);
 }
 
 .footer-content {
