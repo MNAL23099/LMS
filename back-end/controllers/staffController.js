@@ -118,6 +118,8 @@ async function fetchLabStaffFromDB(){ //This function fetches all staff member d
 //------------------------------------------------------------------View Staff Ends Here------------------------------------------------------------------//
 
 
+//------------------------------------------------------------------Edit Staff Starts Here------------------------------------------------------------------//
+
 async function editStaff(req, res) {
   
     const data = await fetchStaffFromDB();
@@ -204,7 +206,7 @@ async function deleteStaffMember(req, res) {
     console.log(`deleteStaffMember() error: ${error.message}`);
   }
 }
-
+//------------------------------------------------------------------Edit Staff Ends Here------------------------------------------------------------------//
 //------------------------------------------------------------------Assign Labs Starts Here------------------------------------------------------------------//
 
 async function assignLabsHandler(req, res){

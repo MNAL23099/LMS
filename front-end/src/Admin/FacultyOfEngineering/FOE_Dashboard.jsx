@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./FOE_Dashboard.css";
 import "./Inventory/Inventory_Dashboard.css";
 import image_labManagement from "../../assets/lab.jpg";
+import course_management from "../../assets/courseManagement.jpg";
 
 function FOE_Dashboard(){
 
@@ -68,7 +69,7 @@ function FOE_Dashboard(){
                 </div>
                 {/* courses  */}
                  <div className="card" style={{width: "18rem", background: "linear-gradient(135deg, #ff9800 0%, #ffb74d 100%)", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(255, 152, 0, 0.15)", border: "1.5px solid #ff9800"}}>
-                <img src={image_labManagement} className="card-img-top" alt="..." style={{ borderTopLeftRadius: "1rem", borderTopRightRadius: "1rem", height: "140px", objectFit: "cover" }} />
+                <img src={course_management} className="card-img-top" alt="..." style={{ borderTopLeftRadius: "1rem", borderTopRightRadius: "1rem", height: "140px", objectFit: "cover" }} />
                 <div className="card-body" style={{ background: "#fff3e0", color: "#e65100", borderRadius: "0 0 1rem 1rem" }}>
                     <h5 className="card-title" style={{ fontWeight: 700 }}>Courses Management</h5>
                     <p className="card-text">Add, edit and view courses of Faculty of Engineering.</p>
