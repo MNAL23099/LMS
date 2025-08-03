@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./FOE_Dashboard.css";
 import "./Inventory/Inventory_Dashboard.css";
 import image_labManagement from "../../assets/lab.jpg";
-import course_management from "../../assets/courseManagement.jpg";
+import course_management from "../../assets/course management system.jpg";
 
 function FOE_Dashboard(){
 

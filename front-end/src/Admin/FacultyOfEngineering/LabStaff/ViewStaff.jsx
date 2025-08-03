@@ -30,7 +30,7 @@ function ViewStaff() {
                             <th scope="row">{index + 1}</th>
                             <td>{staff.name}</td>
                             <td>{staff.email}</td>
-                            <td>{staff.role}</td> // ✅ Correct field name from DB
+                            <td>{staff.role}</td> 
                         </tr>
                     ))}
                 </tbody>

@@ -82,14 +82,14 @@ async function signInUser(req,res){
    
       const account_type =  await Accountype(email);
       console.log(account_type);
+      // 
       if(account_type == "lab_engineer"){
-        // console.log("hihihi double");
-        res.write("lab_engineer");
-        res.end();
+      await write_file.writeFile("./userData/current_session.txt", email);
 
-        await write_file.writeFile("./userData/current_session.txt", email);
+      // Send JSON with role for frontend dropdown
+      res.json({ status: "success", role: "lab_engineer" });
+    }
 
-      }
     }
     else if (variable.rows.length == 0){
       console.log("Hello_1");

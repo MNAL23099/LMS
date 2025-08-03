@@ -10,31 +10,34 @@ function SignIn(){
     navigate("/adminDashboard");
     }
 
-    const [email, setEmail] = useState("");
+   const [email, setEmail] = useState("");
     const [password, setPasseword] = useState("");
-   
+    const [showRoleDropdown, setShowRoleDropdown] = useState(false);
+    const [role, setRole] = useState(""); 
+
     function submitform(e){
-        e.preventDefault();
-        fetch("http://localhost:5000/auth/signin", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({email:email, password:password})
-        })
-        .then((res)=>{return res.text()})
-        .then((res)=>{
-            if(res == "Entries are missing"){
-                window.alert("Fill all the fields"); 
-            }
-            else if(res == "lab_engineer"){
-                window.alert("You will be directed to your respective inventory");
-                gotoInventory();
-            }
-            else if(res == "credentials_mismatch"){
-                window.alert("Credentials mismatched try again");
-            }
+    e.preventDefault();
+    fetch("http://localhost:5000/auth/signin", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ email: email, password: password })
+    })
+    .then((res) => res.json())
+    .then((res) => {
+        if (res.status === "missing_fields") {
+            window.alert("Fill all the fields");
+        } else if (res.status === "credentials_mismatch") {
+            window.alert("Credentials mismatched, try again");
+        } else if (res.status === "success") {
+            setRole(res.role);
+            setShowRoleDropdown(true); // Show dropdown after login
+            window.alert(`Logged in as ${res.role}`);
+        } else {
+            window.alert("Unexpected response from server.");
         }
-        )
-    }
+    });
+}
+
     return (
         <>
             <Navbar pageType="Sign In" />
@@ -81,6 +84,32 @@ function SignIn(){
                             <label htmlFor="signin-password" className="form-label" style={{ fontWeight: 500, color: '#fff' }}>Password</label>
                             <input onChange={(e)=>{setPasseword(e.target.value)}} type="password" className="form-control" id="signin-password" style={{ borderRadius: "8px", backgroundColor: '#eb8f06ff', color: '#fff', border: '1px solid #800000' }} />
                         </div>
+                        
+                        {showRoleDropdown && (
+                        <div style={{ marginTop: "1rem" }}>
+                            <label htmlFor="role-select" style={{ color: '#fff', fontWeight: 500 }}>Select your destination:</label>
+                            <select
+                                id="role-select"
+                                className="form-select mt-2"
+                                style={{ borderRadius: "8px", backgroundColor: '#fff3e0', border: '1px solid #e65100' }}
+                                onChange={(e) => {
+                                    const selected = e.target.value;
+                                    if (selected === "admin") {
+                                        navigate("/adminDashboard");
+                                    } else if (selected === "sub_manager") {
+                                        navigate("/subManagerDashboard");
+                                    } else {
+                                        window.alert("No valid selection made.");
+                                    }
+                                    setShowRoleDropdown(false);
+                                }}
+                            >
+                                <option value="">-- Select Dashboard --</option>
+                                <option value="admin">Admin Dashboard</option>
+                                <option value="sub_manager">Sub Manager Dashboard</option>
+                            </select>
+                        </div>
+                    )}
 
                        
 
