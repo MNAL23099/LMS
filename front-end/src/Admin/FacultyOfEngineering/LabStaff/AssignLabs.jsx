@@ -139,7 +139,7 @@ function AssignLabs(){
             </div>
 
             {/* Button to submit the name of lab and staff member and the staff type of that staff member */}
-            <button onClick={()=>{submitForm();}} type="button" className="btn btn-success">Assign Lab</button>
+            <button style={{margin: "10px"}} onClick={()=>{submitForm();}} type="button" className="btn btn-success">Assign Lab</button>
         </>
     );
     
