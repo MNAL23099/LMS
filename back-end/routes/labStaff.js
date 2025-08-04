@@ -18,6 +18,7 @@ router.get("/editStaff", async (req, res) => {
 
 // Submit edited staff changes
 router.post("/submitEditedStaff", async (req, res) => {
+    console.log("route accessed!");
   await saveEditStaffChanges(req, res);
 });
 

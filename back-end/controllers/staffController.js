@@ -153,45 +153,101 @@ async function fetchStaffFromDB() {
   }
 }
 
+async function staffMemberIsAssignedToLab(email, currentStaffType){ //This function checks if the staff member is assigned to a lab or not
+  //If the staff member is assigned then return true otherwise return false
+
+  const lmsClient = await connectToDB();
+
+  let query = null;
+  let data = null;
+
+  if (currentStaffType == "lab_engineer"){
+    query = `SELECT * FROM assigned_labs WHERE lab_eng_mail = $1`;
+    data = await lmsClient.query(query, [email]);
+  }
+  else if (currentStaffType == "lab_technician"){
+    query = `SELECT * FROM assigned_labs WHERE lab_tec_mail = $1`;
+    data = await lmsClient.query(query, [email]);
+  }
+  else if (currentStaffType == "lab_assistant"){
+    query = `SELECT * FROM assigned_labs WHERE lab_ass_mail = $1`;
+    data = await lmsClient.query(query, [email]);
+  }
+
+  if (data.rowCount == 0){ //If this email is not present inside assigned_labs, it means this email is not assigned to any lab
+    return false;
+  }
+  else return true; //If the rowCount is not 0 then it means that the email is indeed assigned to some lab inside assigned_labs
+}
 
 async function saveEditStaffChanges(req, res) {
-  const { id, name, email, role } = req.body;
 
-  if ( await entriesExist(name,email, id,role)== false) {
-    res.status(400).send("Missing entries");
+  const {id, name, email, currentRole, changedRole} = req.body;
+
+  if ( await entriesExist(name, email, id)== false) {
+    res.write("missing_entries");
+    res.end();
     return;
   }
 
-  try {
-    const lsmClient = await connectToDB();
-    const query = `
+  //If that staff member is already assigned to a lab then we won't edit him because otherwise all his info in other places will have to be edited
+  if (await staffMemberIsAssignedToLab(email, currentRole) == true){
+    res.write("staff_member_assingned_to_lab");
+    res.end();
+    return;
+  }
+
+  const lsmClient = await connectToDB();
+  let query = null;
+
+  if (changedRole != "no_change") { //If the user selected the role to be changed then update the role too
+    try {
+      query = `
       UPDATE university_staff 
-      SET staff_name = $1, staff_email = $2, staff_type = $3 
-      WHERE staff_id = $4
-    `;
-    await lsmClient.query(query, [name, email, role, id]);
-    res.send("success");
-  } catch (error) {
-    console.error(`Error in saveEditStaffChanges: ${error.message}`);
-    res.status(500).send("Internal Server Error");
+      SET name = $1, email = $2, role = $3 
+      WHERE id = $4`;
+      await lsmClient.query(query, [name, email, changedRole, id]);
+      res.send("success");
+    } catch (error) {
+      console.error(`Error in saveEditStaffChanges: ${error.message}`);
+      res.status(500).send("Internal Server Error");
+    }
+  }
+  else { //If the user doesn't want to change the role
+    try {
+      query = `
+      UPDATE university_staff 
+      SET name = $1, email = $2
+      WHERE id = $3`;
+      await lsmClient.query(query, [name, email, id]);
+      res.send("success");
+    } catch (error) {
+      console.error(`Error in saveEditStaffChanges: ${error.message}`);
+      res.status(500).send("Internal Server Error");
+    }
   }
 }
 
-
 //Helper function for editInventory functionality
-async function entriesExist(itemName, email,id, role){ //Check if all the entries exist
+async function entriesExist(itemName, email, id){ //Check if all the entries exist
 
-  if (!itemName || !email|| !id || !role){
+  if (!itemName || !email|| !id){
     return false;
   }
   else return true;
 }
 
 async function deleteStaffMember(req, res) {
-  const { id } = req.body;
+  const { id, currentRole, email } = req.body;
 
-  if (!id) {
+  if (!id || !currentRole || !email) {
     res.write("missing_entries");
+    res.end();
+    return;
+  }
+
+  if (await staffMemberIsAssignedToLab(email, currentRole) == true){
+    res.write("staff_member_assingned_to_lab");
     res.end();
     return;
   }
@@ -207,6 +263,7 @@ async function deleteStaffMember(req, res) {
   }
 }
 //------------------------------------------------------------------Edit Staff Ends Here------------------------------------------------------------------//
+
 //------------------------------------------------------------------Assign Labs Starts Here------------------------------------------------------------------//
 
 async function assignLabsHandler(req, res){

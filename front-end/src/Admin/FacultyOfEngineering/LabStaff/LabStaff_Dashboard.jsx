@@ -74,7 +74,7 @@ function LabStaff_Dashboard(){
             <div className="card-body" style={{ background: "#fff3e0", color: "#e65100", borderRadius: "0 0 1rem 1rem" }}>
                 <h5 className="card-title" style={{ fontWeight: 700 }}>View And Edit Assigned Labs</h5>
                 <p className="card-text">View & Edit the staff members assigned to labs.</p>
-                <a className="btn btn-primary" style={{ background: "linear-gradient(90deg, #ff9800 0%, #ffb74d 100%)", color: "#fff", borderRadius: "25px", fontWeight: 700, border: "2px solid #e65100" }}>Edit</a>
+                <a className="btn btn-primary" style={{ background: "linear-gradient(90deg, #ff9800 0%, #ffb74d 100%)", color: "#fff", borderRadius: "25px", fontWeight: 700, border: "2px solid #e65100" }}>View</a>
             </div>
             </div>
 

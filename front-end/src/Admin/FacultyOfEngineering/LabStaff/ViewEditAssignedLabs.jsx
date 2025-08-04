@@ -11,8 +11,6 @@ function fetchLabsData(){
 
             const tableBody = document.getElementById("viewEditAssignedLabs-tbody");
 
-            console.log(data.length);
-
             //This is the row inside which everything goes
             const tableRow = document.createElement("tr");
 
@@ -117,9 +115,7 @@ function ViewEditAssignedLabs(){
 
 //This function runs when user clicks on un-assign button for a lab engineer
 function unAssignLabEng(labEngMail, targetLab, staffType){
-    console.log(staffType);
-
-    fetch("http://localhost:5000/labStaff/unAssignLab", {
+     fetch("http://localhost:5000/labStaff/unAssignLab", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({targetEmail: labEngMail, targetLab: targetLab, staffType: staffType})
