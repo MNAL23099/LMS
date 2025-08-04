@@ -10,6 +10,7 @@ async function createTables(){
     await createTable_labs();
     await insertDummyData(); 
     await createTable_Courses();
+    await createTable_free_inventory();
     
 }//Insert dummy data that is supposed to be received from another database
 // Standalone function to create labs table
@@ -73,6 +74,29 @@ async function createTable_Users(){
         }
         else {
             console.log("Users table created!");
+        }
+    });
+}
+
+async function createTable_free_inventory(){
+
+    const client = await connectoToDB();
+    if (!client){ //If client was not returned then just return
+        return;
+    }
+    
+    const query_MakeTable_Users = `CREATE TABLE IF NOT EXISTS free_inventory
+      (ID SERIAL PRIMARY KEY, 
+        item_name VARCHAR(100),
+        item_quantity INT)`;
+
+    client.query(query_MakeTable_Users, (err, data) => {
+        if (err) {
+            console.log("free_inventory table can not be created!");
+            console.log(err.message);
+        }
+        else {
+            console.log("free_inventory table created!");
         }
     });
 }

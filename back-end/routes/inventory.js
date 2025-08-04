@@ -1,13 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const {
-
   editInventory,
   addInventoryItem,
   saveEditInventoryChanges,
   deleteInventoryItem,
-  View,
-
+  viewInventory,
 } = require("../controllers/inventoryController.js");
 
 // Route to edit inventory (dummy update)
@@ -30,6 +28,6 @@ router.post("/editInventoryDelete", async(request, response)=>{
 });
 
 router.get("/fetchFromInventoryDB", async(req,res)=>{
-   await View(req,res);
+  await viewInventory(req,res);
 });
 module.exports = router;

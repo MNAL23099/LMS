@@ -21,15 +21,15 @@ async function addInventoryItem(req, res){
   try {
      
     //If the item alreay is inside DB, don't create a new row in DB, rather just update its quantity
-    if (await itemAlreadyInDB(itemName, await getLabName()) == true){
-      await updateItemQuantity(itemName, await getLabName(), itemQuantity);
+    if (await itemAlreadyInDB(itemName) == true){
+      await updateItemQuantity(itemName, itemQuantity);
 
       res.write("item_updated");
       res.end();
     }
     //But if the item is not already present inside DB then create a new row for it 
-    else if(await itemAlreadyInDB(itemName, await getLabName()) == false) {
-      await addNewRow(itemName, await getLabName(), itemQuantity);
+    else if(await itemAlreadyInDB(itemName) == false) {
+      await addNewRow(itemName, itemQuantity);
 
       res.write("new_item_added");
       res.end();
@@ -57,23 +57,18 @@ async function requestIsNotNull(itemName, itemQuantity){ //This function returns
 
 }
 
-async function itemAlreadyInDB(itemName, labName) { //This function checks if itemName is already inside the DB
+async function itemAlreadyInDB(itemName) { //This function checks if the item that the user is trying to add is already inside the DB
   //If it is then return true, otherwise return false
 
   if(!itemName){
     console.log("error:itemAlreadyInDB()-> itemName is null!");
     return;
   }
-  if(!labName){
-    console.log("error:itemAlreadyInDB()-> labName is null!");
-    return;
-  }
-
   const lsmClient = await connectToDB();
 
   try{
-    let query = "SELECT * FROM inventory WHERE name = $1 AND lab_name = $2";
-    const data = await lsmClient.query(query, [itemName, labName]);
+    let query = "SELECT * FROM free_inventory WHERE item_name = $1";
+    const data = await lsmClient.query(query, [itemName]);
 
     if (data.rowCount == 0){
       return false;
@@ -88,15 +83,11 @@ async function itemAlreadyInDB(itemName, labName) { //This function checks if it
 
 }
 
-async function updateItemQuantity(itemName, labName, itemQuantity){ //Update add the incoming itemQuantity to the already existing quantity of this item inside DB
+async function updateItemQuantity(itemName, itemQuantity){ //Update add the incoming itemQuantity to the already existing quantity of this item inside DB
 
   //Error handling
   if (!itemName){
     console.log("error: updateItemQuantity()-> itemName is null!");
-    return;
-  }
-  if (!labName){
-    console.log("error: updateItemQuantity()-> labName is null!");
     return;
   }
   if (!itemQuantity){
@@ -107,9 +98,9 @@ async function updateItemQuantity(itemName, labName, itemQuantity){ //Update add
   const lsmClient = await connectToDB();
 
   try{
-    const query = `SELECT quantity FROM inventory WHERE name = $1 AND lab_name = $2`;
-    const data = await lsmClient.query(query, [itemName, labName]);
-    let presentQuantity = data.rows[0].quantity;
+    const query = `SELECT item_quantity FROM free_inventory WHERE item_name = $1`;
+    const data = await lsmClient.query(query, [itemName]);
+    let presentQuantity = data.rows[0].item_quantity;
 
     //We need to convert itemQuantity to INT
     itemQuantity = parseInt(itemQuantity);
@@ -118,25 +109,24 @@ async function updateItemQuantity(itemName, labName, itemQuantity){ //Update add
     presentQuantity = parseInt(presentQuantity);
     const newQuantity = presentQuantity + itemQuantity;
 
-    const query_2 = `UPDATE inventory SET quantity = $1 WHERE name = $2 AND lab_name = $3`;
-    await lsmClient.query(query_2, [newQuantity, itemName, labName]);
+    const query_2 = `UPDATE free_inventory SET item_quantity = $1 WHERE item_name = $2`;
+    await lsmClient.query(query_2, [newQuantity, itemName]);
     console.log("Item quantity has been updated!");
   }
   catch (error){
     console.log(`error: updateItemQuantity() -> ${error.message}`);
     return;
   }
-
 }
 
-async function addNewRow(itemName, labName, itemQuantity){ //Add new row to the DB for this item name, its quantity and its lab_name
+async function addNewRow(itemName, itemQuantity){ //Add new row to the DB for this item name, its quantity and its lab_name
 
   const lsmClient = await connectToDB();
 
   try{
-    const query = `INSERT INTO inventory(name, quantity, lab_name)
-    VALUES($1, $2, $3)`;
-    await lsmClient.query(query, [itemName, itemQuantity, labName]);
+    const query = `INSERT INTO free_inventory(item_name, item_quantity)
+    VALUES($1, $2)`;
+    await lsmClient.query(query, [itemName, itemQuantity]);
   }
   catch (error){
     console.log(`error: addNewRow()-> ${error.message}`);
@@ -219,26 +209,34 @@ async function deleteInventoryItem(req, res){ //This is function for when the us
   }
    
 }
-//----------------------------------View inventory starts from here------------------------------------//
+//--------------------------------------------------------------------View inventory Item Starts Here--------------------------------------------------------------------//
 
-async function View(req,res) {
-
+async function viewInventory(req,res) {
   try{
-  const query_view = `SELECT * FROM inventory WHERE lab_name = $1`;
+  const query = `SELECT * FROM free_inventory`;
   const lsmClient = await connectToDB();
-  const data = await lsmClient.query(query_view,[await getLabName()]);
+  const data = await lsmClient.query(query);
 
-  res.json(data.rows);
+  if (data.rowCount > 0){
+    res.json(data.rows);
+  }
+  else { //Not being used in the front end right now
+    res.write("no_data");
+    res.end();
+  }
+
   }
   catch(error){
     console.log(`error: inventoryController.js -> View()-> ${error.message}`);
   }
 
 }
+
+//--------------------------------------------------------------------View inventory Item Ends Here--------------------------------------------------------------------//
 module.exports = {
   editInventory,
   addInventoryItem,
   saveEditInventoryChanges,
   deleteInventoryItem,
-  View,
+  viewInventory,
 };
