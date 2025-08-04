@@ -18,7 +18,7 @@ function fetch_data(){
             tablehead.textContent = i+1;
             tabledata.textContent = res[i].lab_name;
           
-            
+
             tableBody.appendChild(tableRow);
             tableRow.appendChild(tablehead);
             tableRow.appendChild(tabledata);

@@ -5,7 +5,7 @@ function fetch_data_inventory(){
     fetch("http://localhost:5000/inventory/fetchFromInventoryDB")
     .then((res)=>{return res.json()})
     .then((res)=>{
-      
+
         for(let i= 0; i<res.length; i++){
             const tableBody = document.getElementById("view_inventory_table_1");
 
@@ -16,8 +16,8 @@ function fetch_data_inventory(){
             const tabledata_2 = document.createElement("td");
 
             tablehead.textContent = i+1;
-            tabledata.textContent = res[i].name;
-            tabledata_2.textContent = res[i].quantity;
+            tabledata.textContent = res[i].item_name;
+            tabledata_2.textContent = res[i].item_quantity;
             
             tableRow.appendChild(tablehead);
             tableRow.appendChild(tabledata);
