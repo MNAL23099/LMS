@@ -139,7 +139,6 @@ async function addNewRow(itemName, itemQuantity){ //Add new row to the DB for th
 //--------------------------------------------------------------------Edit inventory Item Starts Here--------------------------------------------------------------------//
 
 async function editInventory (req, res){
-  
   const data = await fetchInventoryItemsFromDB(); //Fetch from DB
   res.json(data.rows); //Send all the resulting rows in response
 }
@@ -148,9 +147,8 @@ async function fetchInventoryItemsFromDB(){ //This function fetches all inventor
 
   try{
     const lsmClient = await connectToDB();
-    const labName = await getLabName();
-    const query = `SELECT * FROM inventory WHERE lab_name = $1`;
-    const data = lsmClient.query(query, [labName]);
+    const query = `SELECT * FROM free_inventory`;
+    const data = lsmClient.query(query);
     return data;
   }
   catch(error){
@@ -169,7 +167,7 @@ async function saveEditInventoryChanges(req, res){ //This function is called whe
 
   try{
     const lsmClient = await connectToDB();
-    const query = `UPDATE inventory SET name = $1, quantity = $2 WHERE id = $3`;
+    const query = `UPDATE free_inventory SET item_name = $1, item_quantity = $2 WHERE id = $3`;
     await lsmClient.query(query, [itemName, itemQuantity, itemID]);
     res.write("success");
     res.end();
@@ -199,7 +197,7 @@ async function deleteInventoryItem(req, res){ //This is function for when the us
 
   try{
     const lsmClient = await connectToDB();
-    const query = `DELETE FROM inventory WHERE id = $1`;
+    const query = `DELETE FROM free_inventory WHERE id = $1`;
     await lsmClient.query(query, [itemID]);
     res.write("success");
     res.end();

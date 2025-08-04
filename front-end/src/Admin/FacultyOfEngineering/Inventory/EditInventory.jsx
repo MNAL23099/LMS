@@ -49,8 +49,8 @@ function EditInventory(){
     var itemID = null;
 
     for(let i=0; i<inventoryItems.length; i++){ //Search for the item quantity for this itemName
-        if (itemName == inventoryItems[i].name){
-            itemQuantity = inventoryItems[i].quantity;
+        if (itemName == inventoryItems[i].item_name){
+            itemQuantity = inventoryItems[i].item_quantity;
             itemID = inventoryItems[i].id;
         } 
     }
@@ -85,7 +85,7 @@ function fetchAndDisplayData(){ //This function fetches the current inventory it
             const a = document.createElement("a");
             a.href = "#";
             a.className = "dropdown-item";
-            a.textContent = jsonData[i].name;
+            a.textContent = jsonData[i].item_name;
 
             a.onclick = ()=>{
                 displayAllDetails(a.textContent, jsonData);
@@ -133,9 +133,7 @@ function deleteInventoryItem(id){ //This function is called when the user clicks
         }
         window.location.reload();
     })
-
 }
-
 }
 
 export default EditInventory;
