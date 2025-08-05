@@ -28,7 +28,7 @@ export function Add_Courses(){
 
         return(
         <>
-          <Navbar pageType="Add Lab"/>
+          <Navbar pageType="Add Course"/>
 
         <div id="addInventory-div_1" style={{
             minHeight: "100vh",

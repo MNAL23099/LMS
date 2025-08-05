@@ -67,6 +67,8 @@ function Deletion(courseId){
       }
       else if(res==="success"){
         window.alert("Successfully deleted");
+        
+           window.location.reload();
      
       }
       else {
