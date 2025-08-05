@@ -19,10 +19,9 @@ import ViewEditAssignedLabs from "./Admin/FacultyOfEngineering/LabStaff/ViewEdit
 import { ViewLabs } from "./Admin/FacultyOfEngineering/LabManagement/ViewLab.jsx";
 import { Courses_Dashboard } from "./Admin/FacultyOfEngineering/Course/Courses_Dasboardd.jsx";
 import { Add_Courses } from "./Admin/FacultyOfEngineering/Course/Add_Course.jsx";
-// import AdminDashboard from "./Admin/AdminDashboard.jsx";
 import EditStaff from "./Admin/FacultyOfEngineering/LabStaff/EditStaff.jsx";
 import SubManager from "./Lab Sub Manager/LabSubDashboard.jsx";
-
+import { View_Course } from "./Admin/FacultyOfEngineering/Course/View_Courses.jsx";
 function App() {
 
   return(
@@ -48,7 +47,8 @@ function App() {
         <Route path="/viewlabss" element = {<ViewLabs/>}/>
         <Route path="/viewEditAssignedLabs" element = {<ViewEditAssignedLabs />} />
         <Route path="/Courses_manage" element = {<Courses_Dashboard/>}/>
-        <Route path="//addCourse" element ={<Add_Courses/>}/>
+        <Route path="/addCourse" element ={<Add_Courses/>}/>
+        <Route path ="/viewCourse" element ={<View_Course/>}/>
         <Route path="/subManagerDashboard" element ={<SubManager/>} />
       </Routes>
       <Footer />

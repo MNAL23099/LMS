@@ -54,15 +54,35 @@ async function addCourseToCoursesTable(courseName) {
 }
 
 // View all courses
-// async function view_courses(req, res) {
-//     try {
-//         const query_view = `SELECT * FROM courses`;
-//         const lsmClient = await connectToDB();
-//         const data = await lsmClient.query(query_view);
-//         res.json(data.rows);
-//     } catch (error) {
-//         console.log(`error: courses -> View()-> ${error.message}`);
-//     }
-// }
+async function view_courses(req, res) {
+    try { 
+      
+        const query_view = `SELECT * FROM courses`;
+        const lsmClient = await connectToDB();
+        const data = await lsmClient.query(query_view);
+        res.json(data.rows);
+    } catch (error) {
+        console.log(`error: courses -> View()-> ${error.message}`);
+    }
+}
 
-module.exports = { Add_courses };
+async function Delete_Courses(req,res){
+ const {id} = req.body;
+  if (!id){
+    res.write("missing_entries");
+    res.end();
+    return;
+  }
+
+  try{
+    const lsmClient = await connectToDB();
+    const query = `DELETE FROM courses WHERE id = $1`;
+    await lsmClient.query(query, [id]);
+    res.write("success");
+    res.end();
+  }
+  catch (error){
+    console.log(`error: inventoryController.js -> deleteInventoryItem()-> ${error.message}`);
+  }
+}
+module.exports = { Add_courses, view_courses, Delete_Courses };

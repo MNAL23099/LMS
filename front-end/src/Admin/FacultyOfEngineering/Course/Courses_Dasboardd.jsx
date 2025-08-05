@@ -11,7 +11,9 @@ export function Courses_Dashboard (){
     } 
     function gotoViewCourses(e){
            e.preventDefault();
-               navigation("/viewCourse");
+           navigation("/viewCourse");
+           window.location.reload();
+        
     } 
     return(
      <>
