@@ -1,6 +1,7 @@
 import Navbar from "../Nav/Navbar";
 import { useNavigate } from "react-router-dom";
 import inventoryPicture from "../assets/FOE.jpg";
+import CoursesSubDashboard from "./Course_submanager_dashboard";
 
 const LabSubDashboard = () => {
   const navigate = useNavigate();
@@ -16,7 +17,9 @@ const LabSubDashboard = () => {
 
 //   fetchData();
 // }, []);
-
+  function goToCourseDasboard(){
+    navigate("/Coursessubdash");
+  }
 
   
 
@@ -40,7 +43,7 @@ const LabSubDashboard = () => {
             <div className="card-body" style={{ background: "#fff3e0", color: "#e65100", borderRadius: "0 0 1rem 1rem" }}>
               <h5 className="card-title" style={{ fontWeight: 700 }}>Course Assignment</h5>
               <p className="card-text"> Assign the courses to labs </p>
-              <button className="btn btn-primary" style={{ background: "linear-gradient(90deg, #ff9800 0%, #ffb74d 100%)", color: "#fff", borderRadius: "25px", fontWeight: 700, border: "none" }}>Go</button>
+              <button onClick={goToCourseDasboard} className="btn btn-primary" style={{ background: "linear-gradient(90deg, #ff9800 0%, #ffb74d 100%)", color: "#fff", borderRadius: "25px", fontWeight: 700, border: "none" }}>Go</button>
             </div>
           </div>
           {/* FOB Card
