@@ -55,7 +55,7 @@ export function View_Course(){
 }
 
 function Deletion(courseId){
-  fetch("http://localhost:5000/Course//delete_course", {
+  fetch("http://localhost:5000/Course/delete_course", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ id: courseId })
