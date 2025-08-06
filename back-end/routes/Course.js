@@ -11,6 +11,9 @@ router.get("/view_course", async(req, res)=>{
 router.post("/delete_course", async(req,res)=>{
     await Delete_Courses(req,res);
 })
+
+
+   
 module.exports = router;
 
 

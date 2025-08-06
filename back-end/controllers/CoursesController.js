@@ -85,4 +85,9 @@ async function Delete_Courses(req,res){
     console.log(`error: inventoryController.js -> deleteInventoryItem()-> ${error.message}`);
   }
 }
+
+
+//--------------------------Sub Manager Functionality Starts Here-------------------------------------------------//
+
+
 module.exports = { Add_courses, view_courses, Delete_Courses };

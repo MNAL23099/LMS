@@ -20,9 +20,10 @@ import { ViewLabs } from "./Admin/FacultyOfEngineering/LabManagement/ViewLab.jsx
 import { Courses_Dashboard } from "./Admin/FacultyOfEngineering/Course/Courses_Dasboardd.jsx";
 import { Add_Courses } from "./Admin/FacultyOfEngineering/Course/Add_Course.jsx";
 import EditStaff from "./Admin/FacultyOfEngineering/LabStaff/EditStaff.jsx";
-import SubManager from "./Lab Sub Manager/LabSubDashboard.jsx";
 import { View_Course } from "./Admin/FacultyOfEngineering/Course/View_Courses.jsx";
-import CoursesSubDashboard from "./Lab Sub Manager/Course_submanager_dashboard.jsx";
+import LabSubDashboard from "./Lab Sub Manager/LabSubDashboard.jsx";
+import Courses_Dashboard_Sub_Manager from "./Lab Sub Manager/COURSES/Courses_Dashboard.jsx";
+import AssignCourses from "./Lab Sub Manager/COURSES/AssignCourses.jsx";
 import AssignInventoryToLab from "./Lab Sub Manager/assignInventoryToLab.jsx";
 function App() {
 
@@ -51,10 +52,10 @@ function App() {
         <Route path="/Courses_manage" element = {<Courses_Dashboard/>}/>
         <Route path="/addCourse" element ={<Add_Courses/>}/>
         <Route path ="/viewCourse" element ={<View_Course/>}/>
-        <Route path="/subManagerDashboard" element ={<SubManager/>} />
-        <Route path="/Coursessubdash" element={<CoursesSubDashboard/>}/>
+        <Route path="/subManagerDashboard" element ={<LabSubDashboard/>} />
+        <Route path="/Coursessubdash" element={<Courses_Dashboard_Sub_Manager/>}/>
+        <Route path= "/assignCourses" element = {<AssignCourses/>}/>
         <Route path="/AssignInventoryToLab" element={<AssignInventoryToLab/>} />
-        
       </Routes>
       <Footer />
     </BrowserRouter>

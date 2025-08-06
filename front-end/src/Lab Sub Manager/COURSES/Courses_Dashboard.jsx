@@ -1,8 +1,8 @@
-import Navbar from "../Nav/Navbar";
+import Navbar from "../../Nav/Navbar";
 import { useNavigate } from "react-router-dom";
 
 
-function CoursesSubDashboard(){
+function Courses_Dashboard_Sub_Manager(){
   const navigate = useNavigate();
   
   function goToassigncourses(){
@@ -44,4 +44,4 @@ function CoursesSubDashboard(){
   );
 };
 
-export default CoursesSubDashboard;
+export default Courses_Dashboard_Sub_Manager;

@@ -2,7 +2,7 @@ import Navbar from "../Nav/Navbar";
 import { useNavigate } from "react-router-dom";
 import inventoryPicture from "../assets/inventoryAssign.png";
 import courseAssignPicture from "../assets/course_assignment.png";
-import CoursesSubDashboard from "./Course_submanager_dashboard";
+
 // import AssignInventory from "./assignInventoryToLab";
 const LabSubDashboard = () => {
   const navigate = useNavigate();
@@ -18,6 +18,7 @@ const LabSubDashboard = () => {
 
 //   fetchData();
 // }, []);
+
   function goToCourseDasboard(){
     navigate("/Coursessubdash");
   }
