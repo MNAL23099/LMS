@@ -6,6 +6,9 @@ const {
   saveEditInventoryChanges,
   deleteInventoryItem,
   viewInventory,
+  assignInventoryItem,
+  getFreeItems,
+  getLabs
 } = require("../controllers/inventoryController.js");
 
 // Route to edit inventory (dummy update)
@@ -30,4 +33,9 @@ router.post("/editInventoryDelete", async(request, response)=>{
 router.get("/fetchFromInventoryDB", async(req,res)=>{
   await viewInventory(req,res);
 });
+
+router.post("/assignInventoryItem", assignInventoryItem);
 module.exports = router;
+
+router.get("/freeItems", getFreeItems);
+router.get("/labs", getLabs);

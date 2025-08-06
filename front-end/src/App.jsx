@@ -23,6 +23,7 @@ import EditStaff from "./Admin/FacultyOfEngineering/LabStaff/EditStaff.jsx";
 import SubManager from "./Lab Sub Manager/LabSubDashboard.jsx";
 import { View_Course } from "./Admin/FacultyOfEngineering/Course/View_Courses.jsx";
 import CoursesSubDashboard from "./Lab Sub Manager/Course_submanager_dashboard.jsx";
+import AssignInventoryToLab from "./Lab Sub Manager/assignInventoryToLab.jsx";
 function App() {
 
   return(
@@ -52,6 +53,7 @@ function App() {
         <Route path ="/viewCourse" element ={<View_Course/>}/>
         <Route path="/subManagerDashboard" element ={<SubManager/>} />
         <Route path="/Coursessubdash" element={<CoursesSubDashboard/>}/>
+        <Route path="/AssignInventoryToLab" element={<AssignInventoryToLab/>} />
         
       </Routes>
       <Footer />

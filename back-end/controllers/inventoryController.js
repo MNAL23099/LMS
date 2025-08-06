@@ -231,10 +231,95 @@ async function viewInventory(req,res) {
 }
 
 //--------------------------------------------------------------------View inventory Item Ends Here--------------------------------------------------------------------//
+
+
+//-------------------------------------------------------------------Assign inventory starts here----------------------------------------------------------------------//
+
+const assignInventoryItem = async (req, res) => {
+  const { item_name, lab_name, assign_quantity } = req.body;
+
+  const client = await connectToDB();
+
+  try {
+    // 1. Get current quantity of item from free_inventory
+    const freeQuery = await client.query(
+      `SELECT item_quantity FROM free_inventory WHERE item_name = $1`,
+      [item_name]
+    );
+
+    if (freeQuery.rows.length === 0) {
+      return res.status(404).json({ message: "Item not found in free inventory" });
+    }
+
+    const available_quantity = freeQuery.rows[0].item_quantity;
+
+    if (available_quantity < assign_quantity) {
+      return res.status(400).json({ message: "Not enough quantity in free inventory" });
+    }
+
+    // 2. Subtract from free_inventory
+    await client.query(
+      `UPDATE free_inventory SET item_quantity = item_quantity - $1 WHERE item_name = $2`,
+      [assign_quantity, item_name]
+    );
+
+    // 3. Check if item already exists in inventory for the given lab
+    const inventoryQuery = await client.query(
+      `SELECT * FROM inventory WHERE name = $1 AND lab_name = $2`,
+      [item_name, lab_name]
+    );
+
+    if (inventoryQuery.rows.length > 0) {
+      // Item exists for this lab – update quantity
+      await client.query(
+        `UPDATE inventory SET quantity = quantity + $1 WHERE name = $2 AND lab_name = $3`,
+        [assign_quantity, item_name, lab_name]
+      );
+    } else {
+      // Item not in inventory for this lab – insert new row
+      await client.query(
+        `INSERT INTO inventory (name, quantity, lab_name) VALUES ($2, $1, $3)`,
+        [assign_quantity, item_name, lab_name]
+      );
+    }
+
+    res.status(200).json({ message: "Inventory assigned successfully" });
+
+  } catch (error) {
+    console.error("Error assigning inventory:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const getFreeItems = async (req, res) => {
+  const client = await connectToDB();
+  try {
+    const result = await client.query("SELECT item_name, id FROM free_inventory");
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Error fetching free items:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+const getLabs = async (req, res) => {
+  const client = await connectToDB();
+  try {
+    const result = await client.query("SELECT DISTINCT lab_name, id FROM labs");
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Error fetching labs:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 module.exports = {
   editInventory,
   addInventoryItem,
   saveEditInventoryChanges,
   deleteInventoryItem,
   viewInventory,
+  assignInventoryItem,
+  getFreeItems,
+  getLabs
 };
