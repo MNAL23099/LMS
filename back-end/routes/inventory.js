@@ -8,7 +8,10 @@ const {
   viewInventory,
   assignInventoryItem,
   getFreeItems,
-  getLabs
+  getLabs,
+  getInventoryItems,
+  sendInventoryRequest,
+  getRequests
 } = require("../controllers/inventoryController.js");
 
 // Route to edit inventory (dummy update)
@@ -35,7 +38,14 @@ router.get("/fetchFromInventoryDB", async(req,res)=>{
 });
 
 router.post("/assignInventoryItem", assignInventoryItem);
-module.exports = router;
-
 router.get("/freeItems", getFreeItems);
 router.get("/labs", getLabs);
+router.get("/getInventoryItems", getInventoryItems);
+router.post("/sendRequest", sendInventoryRequest);
+router.get("/getRequests", getRequests);
+
+
+module.exports = router;
+
+
+

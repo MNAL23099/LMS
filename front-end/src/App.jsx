@@ -24,7 +24,9 @@ import { View_Course } from "./Admin/FacultyOfEngineering/Course/View_Courses.js
 import LabSubDashboard from "./Lab Sub Manager/LabSubDashboard.jsx";
 import Courses_Dashboard_Sub_Manager from "./Lab Sub Manager/COURSES/Courses_Dashboard.jsx";
 import AssignCourses from "./Lab Sub Manager/COURSES/AssignCourses.jsx";
-import AssignInventoryToLab from "./Lab Sub Manager/assignInventoryToLab.jsx";
+import AssignInventoryToLab from "./Lab Sub Manager/Inventory Allocation/assignInventoryToLab.jsx";
+import RequestInventoryForLab from "./Lab Sub Manager/Inventory Allocation/requestInventory.jsx";
+import InventoryAllocation from "./Lab Sub Manager/Inventory Allocation/inventoryAllocation.jsx"
 function App() {
 
   return(
@@ -56,6 +58,8 @@ function App() {
         <Route path="/Coursessubdash" element={<Courses_Dashboard_Sub_Manager/>}/>
         <Route path= "/assignCourses" element = {<AssignCourses/>}/>
         <Route path="/AssignInventoryToLab" element={<AssignInventoryToLab/>} />
+        <Route path="/RequestInventoryForLab" element={<RequestInventoryForLab/>} /> 
+        <Route path="/InventoryAllocation" element={<InventoryAllocation/>} />
       </Routes>
       <Footer />
     </BrowserRouter>

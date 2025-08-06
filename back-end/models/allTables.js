@@ -11,6 +11,7 @@ async function createTables(){
     await insertDummyData(); 
     await createTable_Courses();
     await createTable_free_inventory();
+    await createTable_inventory_requests(); 
     
 }//Insert dummy data that is supposed to be received from another database
 // Standalone function to create labs table
@@ -337,7 +338,36 @@ async function createTable_university_staff(){ //This table is filled by the uni
             console.log("university_staff table created!");
         }
     });
+
+
 }
+
+async function createTable_inventory_requests() {
+    const client = await connectoToDB();
+    if (!client) {
+        return;
+    }
+
+    const query_MakeTable_inventory_requests = `
+        CREATE TABLE IF NOT EXISTS inventory_requests (
+            id SERIAL PRIMARY KEY,
+            item_name TEXT NOT NULL,
+            quantity INTEGER NOT NULL,
+            status TEXT DEFAULT 'Pending',
+            requested_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    `;
+
+    client.query(query_MakeTable_inventory_requests, (err, data) => {
+        if (err) {
+            console.log("inventory_requests table cannot be created!");
+            console.log(err.message);
+        } else {
+            console.log("inventory_requests table created!");
+        }
+    });
+}
+
 
 
 module.exports = createTables;

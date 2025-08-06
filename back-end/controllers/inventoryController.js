@@ -313,6 +313,39 @@ const getLabs = async (req, res) => {
   }
 };
 
+const getInventoryItems = async (req, res) => {
+  const client = await connectToDB();
+  try {
+    const result = await client.query("SELECT id, item_name FROM free_inventory");
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).send("Error fetching inventory items");
+  }
+};
+
+const sendInventoryRequest = async (req, res) => {
+  const client = await connectToDB();
+  const { item, quantity } = req.body;
+  try {
+    const query = "INSERT INTO inventory_requests (item_name, quantity, status) VALUES ($1, $2, $3)";
+    await client.query(query, [item, quantity, "Pending"]);
+    res.status(200).send("Request submitted");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error submitting request");
+  } 
+};
+
+const getRequests = async (req, res) => {
+  const client = await connectToDB();
+  try {
+    const result = await client.query("SELECT item_name, quantity, status FROM inventory_requests ORDER BY id DESC");
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).send("Error fetching requests");
+  }
+};
+
 module.exports = {
   editInventory,
   addInventoryItem,
@@ -321,5 +354,8 @@ module.exports = {
   viewInventory,
   assignInventoryItem,
   getFreeItems,
-  getLabs
+  getLabs,
+  getInventoryItems,
+  sendInventoryRequest,
+  getRequests
 };

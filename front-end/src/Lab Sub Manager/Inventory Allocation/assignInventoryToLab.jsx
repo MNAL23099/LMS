@@ -196,8 +196,12 @@
 
 
 
+// 
+
+
+
 import { useState, useEffect } from "react";
-import Navbar from "../Nav/Navbar";
+import Navbar from "../../Nav/Navbar";
 
 function AssignInventoryForm() {
   const [items, setItems] = useState([]);
@@ -259,60 +263,77 @@ function AssignInventoryForm() {
     <>
       <Navbar pageType="Assign Inventory" />
 
-      <div className="container mt-4">
-        <div className="mb-3">
-          <label htmlFor="itemSelect" className="form-label">Select Inventory Item</label>
-          <select
-            id="itemSelect"
-            className="form-select"
-            value={selectedItem}
-            onChange={(e) => setSelectedItem(e.target.value)}
-            required
-          >
-            <option value="">Select Item</option>
-            {items.map((item) => (
-              <option key={item.id} value={item.item_name}>
-                {item.item_name}
-              </option>
-            ))}
-          </select>
-        </div>
+      <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "80vh" }}>
+        <div
+          className="card shadow"
+          style={{
+            width: "350px",
+            borderRadius: "1rem",
+            background: "linear-gradient(135deg, #fffbe6 0%, #ffe0b2 100%)",
+            border: "1.5px solid #ff9800",
+          }}
+        >
+          <div className="card-body">
+            <h3 className="card-title text-center mb-4" style={{ color: "#e65100", fontWeight: 700 }}>
+              Assign Inventory to Lab
+            </h3>
+            <form onSubmit={handleSubmit}>
+              <div className="form-floating mb-3">
+                <select
+                  id="itemSelect"
+                  className="form-select"
+                  value={selectedItem}
+                  onChange={(e) => setSelectedItem(e.target.value)}
+                  required
+                >
+                  <option value="">Select Item</option>
+                  {items.map((item) => (
+                    <option key={item.id} value={item.item_name}>
+                      {item.item_name}
+                    </option>
+                  ))}
+                </select>
+                <label htmlFor="itemSelect">Choose Inventory Item</label>
+              </div>
 
-        <div className="mb-3">
-          <label htmlFor="labSelect" className="form-label">Select Lab</label>
-          <select
-            id="labSelect"
-            className="form-select"
-            value={selectedLab}
-            onChange={(e) => setSelectedLab(e.target.value)}
-            required
-          >
-            <option value="">Select Lab</option>
-            {labs.map((lab) => (
-              <option key={lab.id} value={lab.lab_name}>
-                {lab.lab_name}
-              </option>
-            ))}
-          </select>
-        </div>
+              <div className="form-floating mb-3">
+                <select
+                  id="labSelect"
+                  className="form-select"
+                  value={selectedLab}
+                  onChange={(e) => setSelectedLab(e.target.value)}
+                  required
+                >
+                  <option value="">Select Lab</option>
+                  {labs.map((lab) => (
+                    <option key={lab.id} value={lab.lab_name}>
+                      {lab.lab_name}
+                    </option>
+                  ))}
+                </select>
+                <label htmlFor="labSelect">Choose Lab</label>
+              </div>
 
-        <div className="mb-3">
-          <label htmlFor="quantityInput" className="form-label">Quantity</label>
-          <input
-            id="quantityInput"
-            type="number"
-            className="form-control"
-            placeholder="Enter Quantity"
-            value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
-            required
-            min={1}
-          />
-        </div>
+              <div className="form-floating mb-4">
+                <input
+                  id="quantityInput"
+                  type="number"
+                  className="form-control"
+                  placeholder="Enter Quantity"
+                  value={quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
+                  required
+                  min={1}
+                />
+                <label htmlFor="quantityInput">Quantity</label>
+              </div>
 
-        <button onClick={handleSubmit} className="btn btn-primary">
-          Assign Inventory
-        </button>
+              <button type="submit" className="btn btn-warning w-100 fw-bold" style={{ borderRadius: "25px" }}>
+                Assign
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
     </>
   );
