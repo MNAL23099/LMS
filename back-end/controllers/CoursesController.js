@@ -91,15 +91,15 @@ async function Delete_Courses(req,res){
 
 async function Add_a_Row_to_AssignedCourses(req,res){
     console.log("hi");
-    const {course_name, lab, labengineer} = req.body;
-    if (!course_name || !lab || !labengineer) {
-        console.log("Missing entries:", course_name, lab, labengineer);
+    const {courses, labs, labengineer} = req.body;
+    if (!courses|| !labs || !labengineer) {
+        console.log("Missing entries:", courses, labs, labengineer);
         res.write("missing_entries");
         res.end();
         return;
     }
     try{
-        console.log("Insert params:", course_name, lab, labengineer);
+        console.log("Insert params:", courses, labs, labengineer);
         const lsmClient = await connectToDB();
         if (!lsmClient) {
             console.log("DB connection failed");
@@ -108,7 +108,7 @@ async function Add_a_Row_to_AssignedCourses(req,res){
             return;
         }
         const query_yyy = `INSERT INTO AssignedCourses(course_name, lab, labengineer) VALUES($1, $2, $3)`;
-        await lsmClient.query(query_yyy, [course_name, lab, labengineer]);
+        await lsmClient.query(query_yyy, [courses, labs, labengineer]);
         res.write("success");
         res.end();
     }
