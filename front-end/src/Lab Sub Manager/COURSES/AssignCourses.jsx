@@ -27,6 +27,9 @@ function AssignCourses() {
         else if (res === "success") {
           window.alert("Successfully added");
         }
+        else if("missing_entries"){
+          window.alert("Add the entries again");
+        }
         //Backend is sending "missing_entries" response but that is not added here
       })
   }
