@@ -107,7 +107,7 @@ async function Add_a_Row_to_AssignedCourses(req,res){
             res.end();
             return;
         }
-        const query_yyy = `INSERT INTO AssignedCourses(course_name, lab, labengineer) VALUES($1, $2, $3)`;
+        const query_yyy = `INSERT INTO assignedcourses(course_name, lab, labengineer) VALUES($1, $2, $3)`;
         await lsmClient.query(query_yyy, [courses, labs, labengineer]);
         res.write("success");
         res.end();

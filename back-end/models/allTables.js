@@ -21,7 +21,7 @@ async function createTable_Assigned_Courses(){
     if (!client) {
         return;
     }
-    const query = `CREATE TABLE IF NOT EXISTS AssignedCourses (
+    const query = `CREATE TABLE IF NOT EXISTS assignedcourses (
         id SERIAL PRIMARY KEY,
         course_name VARCHAR(100),
         lab VARCHAR(100),
