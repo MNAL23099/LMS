@@ -82,12 +82,45 @@ async function Delete_Courses(req,res){
     res.end();
   }
   catch (error){
-    console.log(`error: inventoryController.js -> deleteInventoryItem()-> ${error.message}`);
+    console.log(`error: CoursesController.js -> deleteCourses()-> ${error.message}`);
   }
 }
 
 
 //--------------------------Sub Manager Functionality Starts Here-------------------------------------------------//
 
+async function Add_a_Row_to_AssignedCourses(req,res){
+    console.log("hi");
+    const {course_name, lab, labengineer} = req.body;
+    if (!course_name || !lab || !labengineer) {
+        console.log("Missing entries:", course_name, lab, labengineer);
+        res.write("missing_entries");
+        res.end();
+        return;
+    }
+    try{
+        console.log("Insert params:", course_name, lab, labengineer);
+        const lsmClient = await connectToDB();
+        if (!lsmClient) {
+            console.log("DB connection failed");
+            res.write("db_error");
+            res.end();
+            return;
+        }
+        const query_yyy = `INSERT INTO AssignedCourses(course_name, lab, labengineer) VALUES($1, $2, $3)`;
+        await lsmClient.query(query_yyy, [course_name, lab, labengineer]);
+        res.write("success");
+        res.end();
+    }
+    catch(error){
+        console.log(`error: CoursesController.js -> AssignedCourses()-> ${error.message}`);
+        res.write("Not added");
+        res.end();
+    }
+}
 
-module.exports = { Add_courses, view_courses, Delete_Courses };
+   
+
+
+
+module.exports = { Add_courses, view_courses, Delete_Courses, Add_a_Row_to_AssignedCourses};

@@ -8,54 +8,26 @@ function AssignCourses() {
   const {labs, setLabs}= useState("");
   const {labEngineer, setLabEngineer} = useState("");
 
-   function fetch_data(){
-     
-    fetch("http://localhost:5000/Course/view_course")
-    .then((res)=>{return res.json();})
-    .then((res)=>{
-       const course = document.getElementById("assigncourses");
+  
+     function fetch_again(){
+  fetch("http://localhost:5000/Course/assign_course",{
+                method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({Courses:courses, lab:labs, labeng: labEngineer}),
+})
+.then((res)=>{return res.json();})
+.then((res)=>{
+  if(res === "Not added"){
+    window.alert("Cant be added");
+  }
+  else if (res === "success"){
+    window.alert("Successfully added");
+  }
+})
+  }
 
-       for(let i =0; i < res.length; i++){
-        const option = document.createElement("option");
-        option.textContent = res[i].course_name;
-        option.value = res[i].course_name;
-
-        course.appendChild(option);
-
-       }
-    })
-     fetch("http://localhost:5000/labManagement/viewlabs")
-     .then((res)=>{return res.json();})
-     .then((res)=>{
-      const labs = document.getElementById("assignLab");
-
-       for(let i =0; i < res.length; i++){
-        const option = document.createElement("option");
-        option.textContent = res[i].lab_name;
-        option.value = res[i].lab_name;
-
-        labs.appendChild(option);
-
-       }
-     })
-     fetch("http://localhost:5000/labStaff/viewStaff")
-     .then((res)=>{return res.json();})
-     .then((res)=>{
-      const labEngineer = document.getElementById("assignLabEngineer");
-
-       for(let i =0; i < res.length; i++){
-        const option = document.createElement("option");
-        option.textContent = res[i].email;
-        option.value = res[i].email;
-
-        labEngineer.appendChild(option);
-
-       }
-     })
-     
-   }
-
-   fetch_data();
+ 
+   fetch_again();
   
   return (
     <>
@@ -94,5 +66,52 @@ function AssignCourses() {
     </>
   );
 }
+ function fetch_data(){
+     
+    fetch("http://localhost:5000/Course/view_course")
+    .then((res)=>{return res.json();})
+    .then((res)=>{
+       const course = document.getElementById("assigncourses");
+
+       for(let i =0; i < res.length; i++){
+        const option = document.createElement("option");
+        option.textContent = res[i].course_name;
+        option.value = res[i].course_name;
+
+        course.appendChild(option);
+
+       }
+    })
+     fetch("http://localhost:5000/labManagement/viewlabs")
+     .then((res)=>{return res.json();})
+     .then((res)=>{
+      const labs = document.getElementById("assignLab");
+
+       for(let i =0; i < res.length; i++){
+        const option = document.createElement("option");
+        option.textContent = res[i].lab_name;
+        option.value = res[i].lab_name;
+
+        labs.appendChild(option);
+
+       }
+     })
+     fetch("http://localhost:5000/labStaff/viewHiredEngineerForCourses")
+     .then((res)=>{return res.json();})
+     .then((res)=>{
+      const labEngineer = document.getElementById("assignLabEngineer");
+
+       for(let i =0; i < res.length; i++){
+        const option = document.createElement("option");
+        option.textContent = res[i].email;
+        option.value = res[i].email;
+
+        labEngineer.appendChild(option);
+
+       }
+     })
+     
+   }
+     fetch_data();
 
 export default AssignCourses;

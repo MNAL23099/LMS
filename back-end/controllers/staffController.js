@@ -450,7 +450,27 @@ async function unAssignLab(req, res){
 }
 
 //------------------------------------------------------------------viewEditAssignedLabs Ends Here------------------------------------------------------------------//
+//----------------------------------------------The Assigned Course starts here----------------------------------------------//
 
+
+async function returnAssignedlabEngineers(request, response) {
+   
+  const lmsClient = await connectToDB();
+
+  try {
+    const query_yy = `
+      SELECT u.email 
+      FROM university_staff u 
+      JOIN assigned_labs a ON u.email = a.lab_eng_mail 
+      WHERE u.role = 'lab_engineer' AND a.lab_eng_mail IS NOT NULL
+    `;
+    const data = await lmsClient.query(query_yy);
+    response.json(data.rows);
+  } catch (error) {
+    console.log(`staffController->returnAssignedlabEngineers()-> ${error.message}`);
+   
+  }
+}
 module.exports = {
   addStaff,
   viewStaff,
@@ -462,4 +482,5 @@ module.exports = {
   saveAssignedLab,
   returnAssignedLabs,
   unAssignLab,
+  returnAssignedlabEngineers,
 };

@@ -12,9 +12,30 @@ async function createTables(){
     await createTable_Courses();
     await createTable_free_inventory();
     await createTable_inventory_requests(); 
+    await createTable_Assigned_Courses()
     
 }//Insert dummy data that is supposed to be received from another database
 // Standalone function to create labs table
+async function createTable_Assigned_Courses(){
+    const client = await connectoToDB();
+    if (!client) {
+        return;
+    }
+    const query = `CREATE TABLE IF NOT EXISTS AssignedCourses (
+        id SERIAL PRIMARY KEY,
+        course_name VARCHAR(100),
+        lab VARCHAR(100),
+        labEngineer VARCHAR(100)
+    )`;
+    client.query(query, (err, data) => {
+        if (err) {
+            console.log("AssignedCourses table cannot be created!");
+            console.log(err.message);
+        } else {
+            console.log("AssignedCourses table created!");
+        }
+    });
+}
 async function createTable_Courses(){
     const client = await connectoToDB();
     if (!client) {

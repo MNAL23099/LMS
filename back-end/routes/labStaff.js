@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const {addStaff, viewStaff,editStaff,saveEditStaffChanges,deleteStaffMember, assignLabsHandler, returnAvailableLabs, saveAssignedLab, returnAssignedLabs, unAssignLab} = require("../controllers/staffController.js");
+const {addStaff, viewStaff,editStaff,saveEditStaffChanges,deleteStaffMember, assignLabsHandler, returnAvailableLabs, saveAssignedLab, returnAssignedLabs, unAssignLab,returnAssignedlabEngineers} = require("../controllers/staffController.js");
 
 router.post("/addStaff", async(request, response)=>{
     await addStaff(request, response);
@@ -47,5 +47,10 @@ router.get("/viewEditAssignedLabs", async(request, response)=>{
 router.post("/unAssignLab", async(request, response)=>{
     await unAssignLab(request, response);
 })
+
+router.get("/viewHiredEngineerForCourses", async(request, response)=>{ //this is for assigned courses
+    await returnAssignedlabEngineers(request, response);
+})
+
 
 module.exports = router;
