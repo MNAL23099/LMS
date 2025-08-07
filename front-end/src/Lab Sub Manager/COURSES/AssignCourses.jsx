@@ -4,30 +4,36 @@ import { useState } from "react";
 
 function AssignCourses() {
   
-  const {courses, setCourses} = useState("");
-  const {labs, setLabs}= useState("");
-  const {labEngineer, setLabEngineer} = useState("");
+  //Corrected, replaced {} with []
+  const [courses, setCourses] = useState("");
+  const [labs, setLabs] = useState("");
+  const [labEngineer, setLabEngineer] = useState("");
 
   
-     function fetch_again(){
-  fetch("http://localhost:5000/Course/assign_course",{
-                method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({Courses:courses, lab:labs, labeng: labEngineer}),
-})
-.then((res)=>{return res.json();})
-.then((res)=>{
-  if(res === "Not added"){
-    window.alert("Cant be added");
-  }
-  else if (res === "success"){
-    window.alert("Successfully added");
-  }
-})
+  function fetch_again() {
+    console.log(courses);
+    console.log(labs);
+    console.log(labEngineer);
+    fetch("http://localhost:5000/Course/assign_course", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ Courses: courses, lab: labs, labeng: labEngineer }),
+    })
+      .then((res) => { return res.text(); }) //Corrected from res.json() to res.text()
+      .then((res) => {
+        if (res === "Not added") {
+          window.alert("Cant be added");
+        }
+        else if (res === "success") {
+          window.alert("Successfully added");
+        }
+        //Backend is sending "missing_entries" response but that is not added here
+      })
   }
 
- 
-   fetch_again();
+  // fetch_again(); if we call this function as soon as the webpage loads, it's going to send the useState variables to backend
+  //We don't want that, we want that we send those variables to the backend when user presses the Assign button but calling this 
+  //..function will send those automatically as soon as the webpage loads
   
   return (
     <>
@@ -58,7 +64,8 @@ function AssignCourses() {
                 </select>
                 <label htmlFor="floatingSelect">Choose engineer</label>
               </div>
-              <button type="submit" className="btn btn-warning w-100 fw-bold" style={{ borderRadius: "25px" }}>Assign</button>
+              {/* The fetch_again function will get called when user clicks on Assign */}
+              <button onClick={()=> {fetch_again()}} type="submit" className="btn btn-warning w-100 fw-bold" style={{ borderRadius: "25px" }}>Assign</button>
             </form>
           </div>
         </div>
@@ -112,6 +119,7 @@ function AssignCourses() {
      })
      
    }
-     fetch_data();
+
+  fetch_data();
 
 export default AssignCourses;

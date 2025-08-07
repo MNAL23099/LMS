@@ -13,6 +13,7 @@ router.post("/delete_course", async(req,res)=>{
 })
 
 router.post("/assign_course", async(req,res)=>{
+    console.log("Route accessed!");
     await Add_a_Row_to_AssignedCourses(req,res);
 })
 
