@@ -1,6 +1,7 @@
 import Navbar from "../../Nav/Navbar";
 import { useNavigate } from "react-router-dom";
-import inventoryPicture from "../../assets/inventoryAssign.png";
+import inventoryPicture from "../../assets/assignInventory.png";
+import requestInventory from "../../assets/requestInventory.png"
 // import courseAssignPicture from "../assets/course_assignment.png";
 
 
@@ -55,7 +56,7 @@ const LabSubDashboard = () => {
           
           {/* Request Inventory Card */}
           <div className="card" style={{ width: "15rem", background: "linear-gradient(135deg, #ff9800 0%, #ffb74d 100%)", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(255, 152, 0, 0.15)", border: "1.5px solid #ff9800" }}>
-            <img src={inventoryPicture} className="card-img-top" alt="Inventory" style={{ borderTopLeftRadius: "1rem", borderTopRightRadius: "1rem", height: "140px", objectFit: "cover" }} />
+            <img src={requestInventory} className="card-img-top" alt="Inventory" style={{ borderTopLeftRadius: "1rem", borderTopRightRadius: "1rem", height: "140px", objectFit: "cover" }} />
             <div className="card-body" style={{ background: "#fff3e0", color: "#e65100", borderRadius: "0 0 1rem 1rem" }}>
               <h5 className="card-title" style={{ fontWeight: 700 }}>Request Inventory</h5>
               <p className="card-text">Request the lab inventory from super lab </p>

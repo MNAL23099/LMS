@@ -32,7 +32,7 @@ async function Add_courses(req, res) {
 async function courseAlreadyExists(courseName) {
     const lsmClient = await connectToDB();
     try {
-        const query = `SELECT * FROM Courses WHERE course_name = $1`;
+        const query = `SELECT * FROM courses WHERE course_name = $1`;
         const data = await lsmClient.query(query, [courseName]);
         return data.rowCount > 0;
     } catch (error) {
@@ -45,7 +45,7 @@ async function courseAlreadyExists(courseName) {
 async function addCourseToCoursesTable(courseName) {
     const lsmClient = await connectToDB();
     try {
-        const query = `INSERT INTO Courses(course_name) VALUES($1)`;
+        const query = `INSERT INTO courses(course_name) VALUES($1)`;
         await lsmClient.query(query, [courseName]);
     } catch (error) {
         console.log(`error: addCourseToCoursesTable()-> ${error.message}`);

@@ -2,7 +2,7 @@ import Navbar from "../Nav/Navbar";
 import { useNavigate } from "react-router-dom";
 import inventoryPicture from "../assets/inventoryAssign.png";
 import courseAssignPicture from "../assets/course_assignment.png";
-
+import allocateInventory from "../assets/allocateInventory.png";
 // import AssignInventory from "./assignInventoryToLab";
 const LabSubDashboard = () => {
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ const LabSubDashboard = () => {
         <div className="d-flex flex-wrap justify-content-center gap-4">
           {/* Inventory Allocation Card */}
           <div className="card" style={{ width: "15rem", background: "linear-gradient(135deg, #ff9800 0%, #ffb74d 100%)", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(255, 152, 0, 0.15)", border: "1.5px solid #ff9800" }}>
-            <img src={inventoryPicture} className="card-img-top" alt="Inventory" style={{ borderTopLeftRadius: "1rem", borderTopRightRadius: "1rem", height: "140px", objectFit: "cover" }} />
+            <img src={allocateInventory} className="card-img-top" alt="Inventory" style={{ borderTopLeftRadius: "1rem", borderTopRightRadius: "1rem", height: "140px", objectFit: "cover" }} />
             <div className="card-body" style={{ background: "#fff3e0", color: "#e65100", borderRadius: "0 0 1rem 1rem" }}>
               <h5 className="card-title" style={{ fontWeight: 700 }}>Inventory Allocation</h5>
               <p className="card-text">Request and Assign inventory</p>

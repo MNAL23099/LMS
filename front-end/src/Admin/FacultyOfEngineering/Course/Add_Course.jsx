@@ -9,7 +9,7 @@ export function Add_Courses(){
         fetch("http://localhost:5000/Course/addcourse", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name:courseName}),
+            body: JSON.stringify({ courseName}),
         })
             .then((response) => response.text())
             .then((textResponse) => {
