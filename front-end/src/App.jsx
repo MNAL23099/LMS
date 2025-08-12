@@ -26,7 +26,6 @@ import Courses_Dashboard_Sub_Manager from "./Lab Sub Manager/COURSES/Courses_Das
 import AssignCourses from "./Lab Sub Manager/COURSES/AssignCourses.jsx";
 import AssignInventoryToLab from "./Lab Sub Manager/Inventory Allocation/assignInventoryToLab.jsx";
 import RequestInventoryForLab from "./Lab Sub Manager/Inventory Allocation/requestInventory.jsx";
-import InventoryAllocation from "./Lab Sub Manager/Inventory Allocation/inventoryAllocation.jsx";
 import Handle_Pending_Requests from "./Admin/FacultyOfEngineering/Inventory/InventoryRequests/Handle_Pending_Requests.jsx";
 import Inventory_Requests_Dashboard from "./Admin/FacultyOfEngineering/Inventory/InventoryRequests/Inventory_Requests_Dashboard.jsx";
 import InventoryAllocation from "./Lab Sub Manager/Inventory Allocation/inventoryAllocation.jsx"
