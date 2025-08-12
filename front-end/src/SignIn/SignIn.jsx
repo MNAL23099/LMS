@@ -52,14 +52,14 @@ function SignIn(){
             }}>
                 <div style={{
                     marginTop: "3rem",
-                    background: "linear-gradient(135deg, #ffe0b2 0%, #f19711ff 100%)",
+                    backgroundColor: "white",
                     borderRadius: "1.5rem",
                     boxShadow: "0 8px 32px rgba(255, 152, 0, 0.18), 0 2px 8px rgba(255, 87, 34, 0.10)",
                     padding: "2.5rem 2rem",
                     maxWidth: "420px",
                     width: "100%",
-                    border: "2.5px solid #e65100",
-                    color: "#bf360c",
+                    border: "2.5px solid #05105cff",
+                    color: "#0d0651ff",
                     fontWeight: 700,
                     backdropFilter: "blur(2px)",
                     transition: "box-shadow 0.3s, border 0.3s"
@@ -68,30 +68,30 @@ function SignIn(){
                         <h1 style={{
                             textAlign: "center",
                             marginBottom: "2rem",
-                            color:"#fff",
+                            color:"#05105cff",
                             fontWeight: 800,
                             letterSpacing: "1px",
                             fontFamily: "'Segoe UI', 'Roboto', 'Arial', sans-serif"
                         }}>Sign In</h1>
 
                         <div className="mb-3">
-                            <label htmlFor="signin-email" className="form-label" style={{ fontWeight: 500, color: '#fff' }}>Email address</label>
+                            <label htmlFor="signin-email" className="form-label" style={{ fontWeight: 500, color: '#05105cff' }}>Email address</label>
                             <input onChange={(e)=>{setEmail(e.target.value)}} type="email" className="form-control" id="signin-email" style={{ borderRadius: "8px", backgroundColor: ' #eb8f06ff', color: '#fff', border: '1px solid #800000' }} aria-describedby="emailHelp" />
-                            <div id="emailHelp" className="form-text" style={{ color: '#fff' }}>We'll never share your email with anyone else.</div>
+                            <div id="emailHelp" className="form-text" style={{ color: '#05105cff' }}>We'll never share your email with anyone else.</div>
                         </div>
 
                         <div className="mb-3">
-                            <label htmlFor="signin-password" className="form-label" style={{ fontWeight: 500, color: '#fff' }}>Password</label>
+                            <label htmlFor="signin-password" className="form-label" style={{ fontWeight: 500, color: '#05105cff' }}>Password</label>
                             <input onChange={(e)=>{setPasseword(e.target.value)}} type="password" className="form-control" id="signin-password" style={{ borderRadius: "8px", backgroundColor: '#eb8f06ff', color: '#fff', border: '1px solid #800000' }} />
                         </div>
                         
                         {showRoleDropdown && (
                         <div style={{ marginTop: "1rem" }}>
-                            <label htmlFor="role-select" style={{ color: '#fff', fontWeight: 500 }}>Select your destination:</label>
+                            <label htmlFor="role-select" style={{ color: '#05105cff', fontWeight: 500 }}>Select your destination:</label>
                             <select
                                 id="role-select"
                                 className="form-select mt-2"
-                                style={{ borderRadius: "8px", backgroundColor: '#fff3e0', border: '1px solid #e65100' }}
+                                style={{ borderRadius: "8px", backgroundColor: ' #d7cfc4ff', border: '1px solid #e65100' }}
                                 onChange={(e) => {
                                     const selected = e.target.value;
                                     if (selected === "admin") {
@@ -122,9 +122,9 @@ function SignIn(){
                             borderRadius: "25px",
                             fontWeight: 700,
                             fontSize: "1.1rem",
-                            backgroundColor: "#eb8f06ff",
-                            color: "#fff",
-                            border: "2.5px solid #e65100",
+                            backgroundColor: " #eb8f06ff",
+                            color: "#05105cff",
+                            border: "2.5px solid #b25625ff",
                             boxShadow: "0 2px 8px 0 rgba(255, 152, 0, 0.10)"
                         }}>Sign In</button>
                     </form>

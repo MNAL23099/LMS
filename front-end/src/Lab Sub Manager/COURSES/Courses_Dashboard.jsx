@@ -16,28 +16,29 @@ function Courses_Dashboard_Sub_Manager(){
 
   return (
     <>
-      <Navbar pageType="Lab Sub Manager Dashboard"/>
-      <div>
+      <Navbar pageType="Course Assing By Sub-Manager"/>
+      <div style={{ minHeight: '100vh', background: '#fff', paddingTop: '2rem' }}>
         <div className="d-flex flex-wrap justify-content-center gap-4">
-          {/* Request Inventory Card */}
-          <div className="card" style={{ width: "15rem", background: "linear-gradient(135deg, #ff9800 0%, #ffb74d 100%)", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(255, 152, 0, 0.15)", border: "1.5px solid #ff9800" }}>
-         
-            <div className="card-body" style={{ background: "#fff3e0", color: "#e65100", borderRadius: "0 0 1rem 1rem" }}>
-              <h5 className="card-title" style={{ fontWeight: 700 }}>Assign Courses</h5>
-              <p className="card-text">Request for the courses from teh admin and then assign them to labs of faculty of engineering </p>
-              <button onClick={goToassigncourses} className="btn btn-primary" style={{ background: "linear-gradient(90deg, #ff9800 0%, #ffb74d 100%)", color: "#fff", borderRadius: "25px", fontWeight: 700, border: "none" }}>Go</button>
+          {/* Assign Courses Card */}
+          <div className="card" style={{ width: "17rem", background: "#fff", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(0,33,71,0.10)", border: "1.5px solid #002147", fontFamily: 'Segoe UI, Arial, sans-serif', minHeight: '340px' }}>
+            <div className="card-body d-flex flex-column justify-content-between" style={{ background: "#fff", color: "#002147", borderRadius: "0 0 1rem 1rem", flex: 1 }}>
+              <div className="text-center">
+                <h5 className="card-title" style={{ fontWeight: 700, color: '#002147', fontSize: '1.15rem', marginBottom: '0.5rem' }}>Assign Courses</h5>
+                <p className="card-text" style={{ color: '#002147', fontSize: '1rem', marginBottom: '0.5rem' }}>Request for the courses from the admin and then assign them to labs of faculty of engineering</p>
+              </div>
+              <button onClick={goToassigncourses} className="btn w-100 mt-auto" style={{ background: "linear-gradient(90deg, #ffd700 0%, #ffb400 100%)", color: "#002147", borderRadius: "25px", fontWeight: 700, border: "none" }}>Go</button>
             </div>
           </div>
-          {/* Course Assignment  Card */}
-          <div className="card" style={{ width: "15rem", background: "linear-gradient(135deg, #ff9800 0%, #ffb74d 100%)", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(255, 152, 0, 0.15)", border: "1.5px solid #ff9800" }}>
-          
-            <div className="card-body" style={{ background: "#fff3e0", color: "#e65100", borderRadius: "0 0 1rem 1rem" }}>
-              <h5 className="card-title" style={{ fontWeight: 700 }}>View Assign Courses</h5>
-              <p className="card-text"> View the assigned courses </p>
-              <button  onClick={goToViewassigncourses} className="btn btn-primary" style={{ background: "linear-gradient(90deg, #ff9800 0%, #ffb74d 100%)", color: "#fff", borderRadius: "25px", fontWeight: 700, border: "none" }}>Go</button>
+          {/* View Assign Courses Card */}
+          <div className="card" style={{ width: "17rem", background: "#fff", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(0,33,71,0.10)", border: "1.5px solid #002147", fontFamily: 'Segoe UI, Arial, sans-serif', minHeight: '340px' }}>
+            <div className="card-body d-flex flex-column justify-content-between" style={{ background: "#fff", color: "#002147", borderRadius: "0 0 1rem 1rem", flex: 1 }}>
+              <div className="text-center">
+                <h5 className="card-title" style={{ fontWeight: 700, color: '#002147', fontSize: '1.15rem', marginBottom: '0.5rem' }}>View Assign Courses</h5>
+                <p className="card-text" style={{ color: '#002147', fontSize: '1rem', marginBottom: '0.5rem' }}>View the assigned courses</p>
+              </div>
+              <button onClick={goToViewassigncourses} className="btn w-100 mt-auto" style={{ background: "linear-gradient(90deg, #ffd700 0%, #ffb400 100%)", color: "#002147", borderRadius: "25px", fontWeight: 700, border: "none" }}>Go</button>
             </div>
           </div>
-        
         </div>
       </div>
     </>

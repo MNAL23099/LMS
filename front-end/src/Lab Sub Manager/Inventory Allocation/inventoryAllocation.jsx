@@ -41,29 +41,31 @@ const LabSubDashboard = () => {
 
   return (
     <>
-      <Navbar pageType="Lab Sub Manager Dashboard"/>
-      <div>
+      <Navbar pageType="Inventory Allocation By Sub-Manager"/>
+      <div style={{ minHeight: '100vh', background: '#fff', paddingTop: '2rem' }}>
         <div className="d-flex flex-wrap justify-content-center gap-4">
-          {/* Request Inventory Card */}
-          <div className="card" style={{ width: "15rem", background: "linear-gradient(135deg, #ff9800 0%, #ffb74d 100%)", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(255, 152, 0, 0.15)", border: "1.5px solid #ff9800" }}>
+          {/* Assign Inventory Card */}
+          <div className="card" style={{ width: "17rem", background: "#fff", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(0,33,71,0.10)", border: "1.5px solid #002147", fontFamily: 'Segoe UI, Arial, sans-serif', minHeight: '340px' }}>
             <img src={inventoryPicture} className="card-img-top" alt="Inventory" style={{ borderTopLeftRadius: "1rem", borderTopRightRadius: "1rem", height: "140px", objectFit: "cover" }} />
-            <div className="card-body" style={{ background: "#fff3e0", color: "#e65100", borderRadius: "0 0 1rem 1rem" }}>
-              <h5 className="card-title" style={{ fontWeight: 700 }}>Assign Inventory</h5>
-              <p className="card-text">assign the given inventory to available labs </p>
-              <button onClick={goToAssignInventory} className="btn btn-primary" style={{ background: "linear-gradient(90deg, #ff9800 0%, #ffb74d 100%)", color: "#fff", borderRadius: "25px", fontWeight: 700, border: "none", objectFit: "contain", padding: "10px" }}>Go</button>
+            <div className="card-body d-flex flex-column justify-content-between" style={{ background: "#fff", color: "#002147", borderRadius: "0 0 1rem 1rem", flex: 1 }}>
+              <div className="text-center">
+                <h5 className="card-title" style={{ fontWeight: 700, color: '#002147', fontSize: '1.15rem', marginBottom: '0.5rem' }}>Assign Inventory</h5>
+                <p className="card-text" style={{ color: '#002147', fontSize: '1rem', marginBottom: '0.5rem' }}>Assign the given inventory to available labs</p>
+              </div>
+              <button onClick={goToAssignInventory} className="btn w-100 mt-auto" style={{ background: "linear-gradient(90deg, #ffd700 0%, #ffb400 100%)", color: "#002147", borderRadius: "25px", fontWeight: 700, border: "none" }}>Go</button>
             </div>
           </div>
-          
           {/* Request Inventory Card */}
-          <div className="card" style={{ width: "15rem", background: "linear-gradient(135deg, #ff9800 0%, #ffb74d 100%)", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(255, 152, 0, 0.15)", border: "1.5px solid #ff9800" }}>
+          <div className="card" style={{ width: "17rem", background: "#fff", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(0,33,71,0.10)", border: "1.5px solid #002147", fontFamily: 'Segoe UI, Arial, sans-serif', minHeight: '340px' }}>
             <img src={requestInventory} className="card-img-top" alt="Inventory" style={{ borderTopLeftRadius: "1rem", borderTopRightRadius: "1rem", height: "140px", objectFit: "cover" }} />
-            <div className="card-body" style={{ background: "#fff3e0", color: "#e65100", borderRadius: "0 0 1rem 1rem" }}>
-              <h5 className="card-title" style={{ fontWeight: 700 }}>Request Inventory</h5>
-              <p className="card-text">Request the lab inventory from super lab </p>
-              <button onClick={goToRequestInventory} className="btn btn-primary" style={{ background: "linear-gradient(90deg, #ff9800 0%, #ffb74d 100%)", color: "#fff", borderRadius: "25px", fontWeight: 700, border: "none", objectFit: "contain", padding: "10px" }}>Go</button>
+            <div className="card-body d-flex flex-column justify-content-between" style={{ background: "#fff", color: "#002147", borderRadius: "0 0 1rem 1rem", flex: 1 }}>
+              <div className="text-center">
+                <h5 className="card-title" style={{ fontWeight: 700, color: '#002147', fontSize: '1.15rem', marginBottom: '0.5rem' }}>Request Inventory</h5>
+                <p className="card-text" style={{ color: '#002147', fontSize: '1rem', marginBottom: '0.5rem' }}>Request the lab inventory from super lab</p>
+              </div>
+              <button onClick={goToRequestInventory} className="btn w-100 mt-auto" style={{ background: "linear-gradient(90deg, #ffd700 0%, #ffb400 100%)", color: "#002147", borderRadius: "25px", fontWeight: 700, border: "none" }}>Go</button>
             </div>
           </div>
-          
         </div>
       </div>
     </>

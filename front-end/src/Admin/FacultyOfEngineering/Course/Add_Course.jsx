@@ -32,44 +32,43 @@ export function Add_Courses(){
 
         <div id="addInventory-div_1" style={{
             minHeight: "100vh",
-            background: "radial-gradient(ellipse at center, #a83232 0%, #2b0909 60%, #000 100%)",
+            background: "#fff",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center"
         }}>
         <form onSubmit={submitForm} id="inventory-div_1-form_1" style={{
-            background: "linear-gradient(135deg, #141010 30%, #cd0b0bff 70%)",
+            background: "#fff",
             borderRadius: "18px",
-            boxShadow: "0 8px 32px 0 rgba(80,0,0,0.35), 0 2px 8px 0 rgba(128,0,0,0.25)",
+            boxShadow: "0 8px 32px 0 rgba(0,33,71,0.10), 0 2px 8px 0 rgba(255,212,0,0.10)",
             padding: "2rem 2.2rem",
             maxWidth: "370px",
             width: "100%",
-            border: "2px solid #800000",
-            color: "#fff"
+            border: "2px solid #002147",
+            color: "#002147"
         }}>
         <h2 style={{
             textAlign: "center",
             marginBottom: "1.5rem",
-            color: "#fff",
+            color: "#002147",
             fontWeight: 800,
             letterSpacing: "1px",
             fontFamily: "'Segoe UI', 'Roboto', 'Arial', sans-serif"
         }}>Add Courses</h2>
         <div className="mb-3">
-            <label htmlFor="add-course-name" className="form-label" style={{fontWeight: 500, color: '#fff'}}>Course Name</label>
-            <input onChange={(e)=>{setCourseName(e.target.value)}} type="text" className="form-control" id="add-course-name" style={{borderRadius: "8px", background: '#232526', color: '#fff', border: '1px solid #fff'}} aria-describedby="emailHelp" />
-            <div id="emailHelp" className="form-text" style={{color: '#fff'}}>For example: Linear Algebra, Thermodynamics etc.</div>
+            <label htmlFor="add-course-name" className="form-label" style={{fontWeight: 600, color: '#002147'}}>Course Name</label>
+            <input onChange={(e)=>{setCourseName(e.target.value)}} type="text" className="form-control" id="add-course-name" style={{borderRadius: "8px", background: '#fff', color: '#002147', border: '1.5px solid #002147', fontWeight: 500}} aria-describedby="emailHelp" />
+            <div id="emailHelp" className="form-text" style={{color: '#002147'}}>For example: Linear Algebra, Thermodynamics etc.</div>
         </div>
-        {/* Quantity removed, only lab name needed */}
         <button type="submit" className="inventory-go-btn w-100" style={{
             borderRadius: "25px",
             fontWeight: 700,
             fontSize: "1.1rem",
-            background: '#232526',
-            color: "white",
-            border: "2.5px solid #000",
-            boxShadow: "0 2px 8px 0 rgba(191, 161, 74, 0.10)",
+            background: 'linear-gradient(90deg, #ffd700 0%, #ffb400 100%)',
+            color: "#002147",
+            border: "2.5px solid #ffd700",
+            boxShadow: "0 2px 8px 0 rgba(0,33,71,0.10)",
             marginTop: "1rem"
         }}>Submit</button>
         </form>

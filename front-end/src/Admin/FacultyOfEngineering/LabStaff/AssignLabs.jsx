@@ -107,39 +107,56 @@ function AssignLabs(){
     return(
         <>
             <Navbar pageType="Assign Labs Dashboard"/>
-
-            {/* This select bar is to choose lab staff type */}
-            <div className="form-floating">
-            <select onChange={(e)=>{setStaffType(e.target.value)}} className="form-select" aria-label="Floating label select example">
-                <option defaultValue="nothing">Staff Type</option>
-                <option value="lab_engineer">Lab Engineer</option>
-                <option value="lab_technician">Lab Technician</option>
-                <option value="lab_assistant">Lab Assistant</option>
-            </select>
-            <label htmlFor="floatingSelect">Choose Staff Type</label>
+            <div style={{
+                minHeight: "100vh",
+                background: "#f5f6fa",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center"
+            }}>
+                <form style={{
+                    background: "#fff",
+                    borderRadius: "18px",
+                    boxShadow: "0 8px 32px 0 rgba(0,33,71,0.10), 0 2px 8px 0 rgba(0,33,71,0.08)",
+                    padding: "2rem 2.2rem",
+                    maxWidth: "370px",
+                    width: "100%",
+                    border: "2px solid #002147",
+                    color: "#002147"
+                }}>
+                    <h2 style={{
+                        textAlign: "center",
+                        marginBottom: "1.5rem",
+                        color: "#002147",
+                        fontWeight: 800,
+                        letterSpacing: "1px",
+                        fontFamily: "'Segoe UI', 'Roboto', 'Arial', sans-serif"
+                    }}>Assign Lab</h2>
+                    <div className="mb-3">
+                        <label htmlFor="assignLabs-select_staffType" className="form-label" style={{fontWeight: 500, color: '#002147'}}>Staff Type</label>
+                        <select id="assignLabs-select_staffType" onChange={(e)=>{setStaffType(e.target.value)}} className="form-select" style={{borderRadius: "8px", background: '#fff', color: '#002147', border: '1px solid #0056b3'}}>
+                            <option defaultValue="nothing">Staff Type</option>
+                            <option value="lab_engineer">Lab Engineer</option>
+                            <option value="lab_technician">Lab Technician</option>
+                            <option value="lab_assistant">Lab Assistant</option>
+                        </select>
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="assignLabs-select_availableStaff" className="form-label" style={{fontWeight: 500, color: '#002147'}}>Free Staff Members</label>
+                        <select onChange={(e)=>{setAssignedStaffMember(e.target.value)}} id="assignLabs-select_availableStaff" className="form-select" style={{borderRadius: "8px", background: '#fff', color: '#002147', border: '1px solid #0056b3'}}>
+                            <option defaultValue="nothing">Select Staff Member</option>
+                        </select>
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="assignLabs-select_lab" className="form-label" style={{fontWeight: 500, color: '#002147'}}>Available Labs For This Staff Type</label>
+                        <select onChange={(e)=>{setChosenLab(e.target.value)}} id="assignLabs-select_lab" className="form-select" style={{borderRadius: "8px", background: '#fff', color: '#002147', border: '1px solid #0056b3'}}>
+                            <option defaultValue="nothing">Select Lab</option>
+                        </select>
+                    </div>
+                    <button style={{borderRadius: "25px", fontWeight: 700, fontSize: "1.1rem", background: 'linear-gradient(90deg, #ffd700 0%, #ffb400 100%)', color: '#002147', border: 'none', marginTop: '1rem'}} onClick={(e)=>{e.preventDefault(); submitForm();}} type="button" className="btn w-100">Assign Lab</button>
+                </form>
             </div>
-
-            {/* Button to set staffType, it will be pressed automatically, the user does not see this button */}
-            <button id="assignLabs-button_setStaffType" style={{display: "none"}} onClick={()=>{fetchStaff(); fetchLabs();}} type="button" className="btn btn-warning">Set Staff Type</button>
-
-            {/* This select bar is to choose from the fetched lab staff */}
-            <div className="form-floating">
-            <select onChange={(e)=>{setAssignedStaffMember(e.target.value)}} id="assignLabs-select_availableStaff" className="form-select" aria-label="Floating label select example">
-                <option defaultValue="nothing">Select Staff Member</option>
-            </select>
-            <label htmlFor="floatingSelect">Free Staff Members</label>
-            </div>
-
-            {/* This select bar is to choose an available lab to assign the staff to it */}
-            <div className="form-floating">
-            <select onChange={(e)=>{setChosenLab(e.target.value)}} id="assignLabs-select_lab" className="form-select" aria-label="Floating label select example">
-                <option defaultValue="nothing">Select Lab</option>
-            </select>
-            <label htmlFor="floatingSelect">Available Labs For This Staff Type</label>
-            </div>
-
-            {/* Button to submit the name of lab and staff member and the staff type of that staff member */}
-            <button style={{margin: "10px"}} onClick={()=>{submitForm();}} type="button" className="btn btn-success">Assign Lab</button>
         </>
     );
     

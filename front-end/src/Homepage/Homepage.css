@@ -1,19 +1,20 @@
 /* Homepage custom button style to match SignIn page */
+
 .homepage-btn {
     width: 100%;
     border-radius: 25px;
     font-weight: 700;
     font-size: 1.1rem;
-    background: linear-gradient(90deg, #a83232 0%, #cd0b0b 100%);
-    color: #fff;
+    background: linear-gradient(90deg, #ffd700 0%, #ffb400 100%);
+    color: #002147;
     border: none;
-    box-shadow: 0 2px 8px 0 rgba(191, 161, 74, 0.10);
+    box-shadow: 0 2px 8px 0 rgba(0,33,71,0.10);
     padding: 0.7rem 0;
     margin-top: 0.5rem;
-    /* transition: background 0.2s, transform 0.2s; */
 }
 .homepage-btn:hover {
-    background: linear-gradient(90deg, #cd0b0b 0%, #a83232 100%);
+    background: linear-gradient(90deg, #ffb400 0%, #ffd700 100%);
+    color: #002147;
     transform: translateY(-2px) scale(1.03);
 }
 
@@ -49,11 +50,13 @@
     margin-top: 1.5rem;
 }
 
+    
 .homepage-card {
-    background: rgba(30, 30, 30, 0.92);
-    color: #fff;
+    background: #fff;
+    color: #002147;
     border-radius: 1rem;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    box-shadow: 0 4px 24px rgba(0,33,71,0.10);
+    border: 1.5px solid #0056b3;
     padding: 2rem 2.5rem 1.5rem 2.5rem;
     min-width: 220px;
     max-width: 300px;

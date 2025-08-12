@@ -24,24 +24,28 @@ export function Lab_Dasboard(){
     return (
         <>
             <Navbar pageType="Lab Management"/>
-            <div id="labEngineer-dashboardCards">
+            <div id="labEngineer-dashboardCards" style={{marginTop: '3rem'}}>
                 {/* Card for adding labs  */}
-                <div className="card" style={{width: "18rem", background: "linear-gradient(135deg, #ff9800 0%, #ffb74d 100%)", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(255, 152, 0, 0.15)", border: "1.5px solid #ff9800"}}>
-                    <img src={inventoryPicture} className="card-img-top" alt="..."/>
-                    <div className="card-body" style={{ background: "#fff3e0", color: "#e65100", borderRadius: "0 0 1rem 1rem" }}>
-                        <h5 className="card-title" style={{ fontWeight: 700 }}>Add labs </h5>
-                        <p className="card-text">Add Labs in the list of labs that will be assigned to different faculties.</p>
-                        <a onClick={goToAddLabs} href="/addlabs" className="btn btn-primary" style={{ background: "linear-gradient(90deg, #ff9800 0%, #ffb74d 100%)", color: "#fff", borderRadius: "25px", fontWeight: 700, border: "2px solid #e65100" }}>Go</a>
+                <div className="card d-flex flex-column justify-content-between" style={{width: "18rem", background: "#fff", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(0,33,71,0.10)", border: "1.5px solid #002147", fontFamily: 'Segoe UI, Arial, sans-serif', minHeight: '340px', marginTop: '1rem'}}>
+                    <img src={inventoryPicture} className="card-img-top" alt="..." style={{ borderTopLeftRadius: "0.5rem", borderTopRightRadius: "0.5rem", height: "140px", objectFit: "cover" }} />
+                    <div className="card-body d-flex flex-column justify-content-between" style={{ background: "#fff", color: "#002147", borderRadius: "0 0 1rem 1rem", flex: 1 }}>
+                        <div className="text-center">
+                            <h5 className="card-title" style={{ fontWeight: 700, color: '#002147', fontSize: '1.15rem', marginBottom: '0.5rem' }}>Add labs</h5>
+                            <p className="card-text" style={{ color: '#002147', fontSize: '1rem', marginBottom: '0.5rem' }}>Add Labs in the list of labs that will be assigned to different faculties.</p>
+                        </div>
+                        <a onClick={goToAddLabs} href="/addlabs" className="btn w-100 mt-auto" style={{ background: "linear-gradient(90deg, #ffd700 0%, #ffb400 100%)", color: "#002147", borderRadius: "25px", fontWeight: 700, border: "none" }}>Go</a>
                     </div>
                 </div>
             
                 {/* Card for viewing labs in the list */}
-                <div className="card" style={{width: "18rem", background: "linear-gradient(135deg, #ff9800 0%, #ffb74d 100%)", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(255, 152, 0, 0.15)", border: "1.5px solid #ff9800"}}>
-                    <img src={image_labManagement} className="card-img-top" alt="..."/>
-                    <div className="card-body" style={{ background: "#fff3e0", color: "#e65100", borderRadius: "0 0 1rem 1rem" }}>
-                        <h5 className="card-title" style={{ fontWeight: 700 }}>View Labs</h5>
-                        <p className="card-text"> View added labs of Faculty of Engineering.</p>
-                        <a onClick={goToViewLabs} href="#" className="btn btn-primary" style={{ background: "linear-gradient(90deg, #ff9800 0%, #ffb74d 100%)", color: "#fff", borderRadius: "25px", fontWeight: 700, border: "2px solid #e65100" }}>Go</a>
+                <div className="card d-flex flex-column justify-content-between" style={{width: "18rem", background: "#fff", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(0,33,71,0.10)", border: "1.5px solid #002147", fontFamily: 'Segoe UI, Arial, sans-serif', minHeight: '340px', marginTop: '1rem'}}>
+                    <img src={image_labManagement} className="card-img-top" alt="..." style={{ borderTopLeftRadius: "0.5rem", borderTopRightRadius: "0.5rem", height: "140px", objectFit: "cover" }} />
+                    <div className="card-body d-flex flex-column justify-content-between" style={{ background: "#fff", color: "#002147", borderRadius: "0 0 1rem 1rem", flex: 1 }}>
+                        <div className="text-center">
+                            <h5 className="card-title" style={{ fontWeight: 700, color: '#002147', fontSize: '1.15rem', marginBottom: '0.5rem' }}>View Labs</h5>
+                            <p className="card-text" style={{ color: '#002147', fontSize: '1rem', marginBottom: '0.5rem' }}>View added labs of Faculty of Engineering.</p>
+                        </div>
+                        <a onClick={goToViewLabs} href="#" className="btn w-100 mt-auto" style={{ background: "linear-gradient(90deg, #ffd700 0%, #ffb400 100%)", color: "#002147", borderRadius: "25px", fontWeight: 700, border: "none" }}>Go</a>
                     </div>
                 </div>
             </div>

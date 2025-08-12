@@ -12,31 +12,44 @@ function EditInventory(){
     <>
         <Navbar pageType="Edit Inventory"/>
 
-        <div id="editInventory-div_1">
-
-        <div className="dropdown">
-            <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Current Inventory
-            </button>
-            <ul id="editInventory-dropDown" className="dropdown-menu">
-            </ul>
+        <div id="editInventory-div_1" style={{
+            minHeight: "100vh",
+            background: "#f5f6fa",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center"
+        }}>
+        <div style={{
+            background: "#fff",
+            borderRadius: "18px",
+            boxShadow: "0 8px 32px 0 rgba(0,33,71,0.10), 0 2px 8px 0 rgba(0,33,71,0.08)",
+            padding: "2rem 2.2rem",
+            maxWidth: "370px",
+            width: "100%",
+            border: "2px solid #002147",
+            color: "#002147"
+        }}>
+            <div className="dropdown mb-4">
+                <button className="btn btn-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{background: 'linear-gradient(90deg, #ffd700 0%, #ffb400 100%)', color: '#002147', fontWeight: 700, border: 'none', borderRadius: '12px'}}>
+                    Current Inventory
+                </button>
+                <ul id="editInventory-dropDown" className="dropdown-menu w-100">
+                </ul>
+            </div>
+            <div className="mb-3">
+                <label htmlFor="editInventory-input_itemName" className="form-label" style={{fontWeight: 500, color: '#002147'}}>Item Name</label>
+                <input onChange={(e)=>{setName(e.target.value)}} id="editInventory-input_itemName" type="text" className="form-control" placeholder="Item Name" style={{borderRadius: "8px", background: '#fff', color: '#002147', border: '1px solid #0056b3'}} />
+            </div>
+            <div className="mb-3">
+                <label htmlFor="editInventory-input_quantity" className="form-label" style={{fontWeight: 500, color: '#002147'}}>Quantity</label>
+                <input onChange={(e)=>{setQuantity(e.target.value)}} id="editInventory-input_quantity" type="text" className="form-control" placeholder="Quantity" style={{borderRadius: "8px", background: '#fff', color: '#002147', border: '1px solid #0056b3'}} />
+                {/* Store the item ID but hide it from the user */}
+                <input onChange={(e)=>{setID(e.target.value)}} id="editInventory-itemID" type="hidden" />
+            </div>
+            <button onClick={()=>{submitEditedInventory(name, quantity, id);}} type="button" className="btn w-100" style={{borderRadius: "25px", fontWeight: 700, fontSize: "1.1rem", background: 'linear-gradient(90deg, #ffd700 0%, #ffb400 100%)', color: '#002147', border: 'none', marginBottom: '0.5rem'}}>Save Changes</button>
+            <button onClick={()=>{deleteInventoryItem(id);}} type="button" className="btn w-100" style={{borderRadius: "25px", fontWeight: 700, fontSize: "1.1rem", background: '#fff', color: '#002147', border: '2px solid #002147'}}>Delete This Item</button>
         </div>
-
-        <div className="input-group mb-3">
-            <span className="input-group-text" id="basic-addon1">Item Name</span>
-            <input onChange={(e)=>{setName(e.target.value)}} id="editInventory-input_itemName" type="text" className="form-control" placeholder="Item Name" aria-label="Username" aria-describedby="basic-addon1" />
-
-            <span className="input-group-text" id="basic-addon1">Quantity</span>
-            <input onChange={(e)=>{setQuantity(e.target.value)}} id="editInventory-input_quantity" type="text" className="form-control" placeholder="Quantity" aria-label="Username" aria-describedby="basic-addon1" />
-
-            {/* Store the item ID but hide it from the user */}
-            <input onChange={(e)=>{setID(e.target.value)}} id="editInventory-itemID" type="hidden" />
-
-        </div>
-
-        <button onClick={()=>{submitEditedInventory(name, quantity, id);}} type="button" className="btn btn-success">Save Changes</button>
-        <button onClick={()=>{deleteInventoryItem(id);}} type="button" className="btn btn-danger">Delete This Item</button>
-
         </div>
     
     </>

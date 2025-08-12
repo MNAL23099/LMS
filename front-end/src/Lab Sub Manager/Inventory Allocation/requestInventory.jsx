@@ -164,18 +164,20 @@ function RequestInventoryExternal() {
   return (
     <>
       <Navbar pageType = "Request Inventory" />
-      <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "80vh" }}>
+      <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "80vh", background: "#fff" }}>
         <div
           className="card shadow"
           style={{
-            width: "400px",
+            width: "370px",
             borderRadius: "1rem",
-            background: "linear-gradient(135deg, #fffbe6 0%, #ffe0b2 100%)",
-            border: "1.5px solid #ff9800",
+            background: "#fff",
+            border: "2px solid #002147",
+            boxShadow: "0 8px 32px 0 rgba(0,33,71,0.10), 0 2px 8px 0 rgba(255,212,0,0.10)",
+            fontFamily: "'Segoe UI', 'Roboto', 'Arial', sans-serif"
           }}
         >
           <div className="card-body">
-            <h3 className="card-title text-center mb-4" style={{ color: "#e65100", fontWeight: 700 }}>
+            <h3 className="card-title text-center mb-4" style={{ color: "#002147", fontWeight: 800, letterSpacing: "1px" }}>
               Request Inventory For Lab
             </h3>
             <form onSubmit={handleSubmit}>
@@ -186,6 +188,7 @@ function RequestInventoryExternal() {
                   onChange={(e) => setSelectedItem(e.target.value)}
                   id="floatingItem"
                   required
+                  style={{ border: "1.5px solid #002147", borderRadius: "8px", color: "#002147", fontWeight: 500 }}
                 >
                   <option value="">Select Item</option>
                   {items.map((item) => (
@@ -194,7 +197,7 @@ function RequestInventoryExternal() {
                     </option>
                   ))}
                 </select>
-                <label htmlFor="floatingItem">Inventory Item</label>
+                <label htmlFor="floatingItem" style={{ color: "#002147", fontWeight: 600 }}>Inventory Item</label>
               </div>
 
               <div className="form-floating mb-4">
@@ -206,14 +209,15 @@ function RequestInventoryExternal() {
                   value={quantity}
                   onChange={(e) => setQuantity(parseInt(e.target.value))}
                   required
+                  style={{ border: "1.5px solid #002147", borderRadius: "8px", color: "#002147", fontWeight: 500 }}
                 />
-                <label htmlFor="floatingQuantity">Quantity</label>
+                <label htmlFor="floatingQuantity" style={{ color: "#002147", fontWeight: 600 }}>Quantity</label>
               </div>
 
               <button
                 type="submit"
-                className="btn btn-warning w-100 fw-bold"
-                style={{ borderRadius: "25px" }}
+                className="btn w-100 fw-bold"
+                style={{ borderRadius: "25px", background: "linear-gradient(90deg, #ffd700 0%, #ffb400 100%)", color: "#002147", fontWeight: 700, border: "2.5px solid #ffd700" }}
               >
                 Submit Request
               </button>
