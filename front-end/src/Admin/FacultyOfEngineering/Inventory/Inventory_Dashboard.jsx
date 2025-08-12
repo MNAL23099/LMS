@@ -23,6 +23,11 @@ function Inventory_Dashboard(){
         navigation("/viewInventory");
         window.location.reload();
     }
+
+    function goToHandleInventoryRequests(){
+        navigation("/superManager/handlePendingInventoryRequests");
+    }
+
     return (
         <>
             <Navbar pageType = "Inventory Dashboard"/>
@@ -58,13 +63,13 @@ function Inventory_Dashboard(){
             </div>
             </div>
 
-            {/* Generate Physical Report Of Inventory Card */}
-            <div className="card" style={{width: "18rem", background: "linear-gradient(135deg, #ff9800 0%, #ffb74d 100%)", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(255, 152, 0, 0.15)", border: "1.5px solid #ff9800"}}>
+            {/* Handle inventory requests from sub manager Card */}
+            <div onClick={goToHandleInventoryRequests} className="card" style={{width: "18rem", background: "linear-gradient(135deg, #ff9800 0%, #ffb74d 100%)", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(255, 152, 0, 0.15)", border: "1.5px solid #ff9800"}}>
             <img src={generateReportCard} className="card-img-top" alt="..." style={{ borderTopLeftRadius: "1rem", borderTopRightRadius: "1rem", height: "140px", objectFit: "cover" }} />
             <div className="card-body" style={{ background: "#fff3e0", color: "#e65100", borderRadius: "0 0 1rem 1rem" }}>
-                <h5 className="card-title" style={{ fontWeight: 700 }}>Generate Hardcopy Report</h5>
-                <p className="card-text">Generate & Download Inventory Report</p>
-                <a className="btn btn-primary" style={{ background: "linear-gradient(90deg, #ff9800 0%, #ffb74d 100%)", color: "#fff", borderRadius: "25px", fontWeight: 700, border: "2px solid #e65100" }}>Generate</a>
+                <h5 className="card-title" style={{ fontWeight: 700 }}>Inventory Requests</h5>
+                <p className="card-text">Accept or reject inventory related requests from sub managers. View requests record.</p>
+                <a className="btn btn-primary" style={{ background: "linear-gradient(90deg, #ff9800 0%, #ffb74d 100%)", color: "#fff", borderRadius: "25px", fontWeight: 700, border: "2px solid #e65100" }}>View</a>
             </div>
             </div>
             </div>

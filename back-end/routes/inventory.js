@@ -11,11 +11,10 @@ const {
   getLabs,
   getInventoryItems,
   sendInventoryRequest,
-  getRequests
+  getRequests,
+  returnPendingInventoryRequests,
+  markPendingRequest,
 } = require("../controllers/inventoryController.js");
-
-// Route to edit inventory (dummy update)
-// router.put("/edit", editInventory);  // You can later use PUT or PATCH
 
 router.post("/addInventoryItem", async(request, response)=>{
   await addInventoryItem(request, response);
@@ -37,6 +36,14 @@ router.get("/fetchFromInventoryDB", async(req,res)=>{
   await viewInventory(req,res);
 });
 
+router.get("/pendingInventoryRequests", async(req,res)=>{
+  await returnPendingInventoryRequests(req,res);
+});
+
+router.post("/markPendingRequest", async(req,res)=>{
+  await markPendingRequest(req,res);
+});
+
 router.post("/assignInventoryItem", assignInventoryItem);
 router.get("/freeItems", getFreeItems);
 router.get("/labs", getLabs);
@@ -44,8 +51,4 @@ router.get("/getInventoryItems", getInventoryItems);
 router.post("/sendRequest", sendInventoryRequest);
 router.get("/getRequests", getRequests);
 
-
 module.exports = router;
-
-
-

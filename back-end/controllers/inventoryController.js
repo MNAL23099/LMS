@@ -19,7 +19,6 @@ async function addInventoryItem(req, res){
 
   //Continue if itemName and itemQuantity is not NULL
   try {
-     
     //If the item alreay is inside DB, don't create a new row in DB, rather just update its quantity
     if (await itemAlreadyInDB(itemName) == true){
       await updateItemQuantity(itemName, itemQuantity);
@@ -346,6 +345,50 @@ const getRequests = async (req, res) => {
   }
 };
 
+//-------------------------------------------------------------------Assign inventory Ends here----------------------------------------------------------------------//
+
+//-------------------------------------------------------------------Super Manager handling inventory requests from Sub Manager starts here----------------------------------------------------------------------//
+
+async function returnPendingInventoryRequests(req, res){ //This function returns the pending inventory requests from DB
+  const lsmClient = await connectToDB();
+  try{
+    const query = `SELECT * FROM inventory_requests WHERE status = $1`;
+    const data = await lsmClient.query(query, ["Pending"]);
+
+    if (data.rowCount > 0){
+      res.json(data.rows);
+    }
+  }
+  catch (error){
+    console.log(`inventoryController.js -> returnPendingInventory() -> ${error.message}`);
+  }
+  
+}
+
+async function markPendingRequest(req, res){ //Sets the statsus of row of pending request as either accepted or rejected
+
+  const {mark, id} = req.body;
+
+  const lsmClient = await connectToDB();
+
+  const query = `UPDATE inventory_requests SET status = $1 WHERE id = $2`;
+  try {
+    lsmClient.query(query, [mark, id]); //Set the received status on the desired row where this id matches
+    res.write("success");
+    res.end();
+  }
+  catch(error) {
+    console.log(`inventoryController.js -> markPendingRequest() -> ${error.message}`);
+    res.write("failure");
+    res.end();
+  }
+
+}
+
+//-------------------------------------------------------------------Super Manager handling inventory requests from Sub Manager Ends here----------------------------------------------------------------------//
+
+
+
 module.exports = {
   editInventory,
   addInventoryItem,
@@ -357,5 +400,7 @@ module.exports = {
   getLabs,
   getInventoryItems,
   sendInventoryRequest,
-  getRequests
+  getRequests,
+  returnPendingInventoryRequests,
+  markPendingRequest,
 };
