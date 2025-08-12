@@ -119,4 +119,18 @@ async function Add_a_Row_to_AssignedCourses(req,res){
     }
 }
 
-module.exports = { Add_courses, view_courses, Delete_Courses, Add_a_Row_to_AssignedCourses};
+async function View_Assigned_Courses(req,res){
+
+        try { 
+      
+        const query_view = `SELECT * FROM ssignedcourses`;
+        const lsmClient = await connectToDB();
+        const data = await lsmClient.query(query_view);
+        res.json(data.rows);
+    } catch (error) {
+        console.log(`error: assignedcourses -> View()-> ${error.message}`);
+    }
+
+}
+
+module.exports = { Add_courses, view_courses, Delete_Courses, Add_a_Row_to_AssignedCourses,View_Assigned_Courses};
