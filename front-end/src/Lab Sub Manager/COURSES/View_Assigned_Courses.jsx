@@ -1,6 +1,6 @@
 import Navbar from "../../Nav/Navbar";
 
-function fetch_data(){
+function fetch_courses(){
 
     fetch("http://localhost:5000/Course/view_assigned_courses")
     .then((res)=>{return res.json()})
@@ -26,13 +26,14 @@ function fetch_data(){
             tableBody.appendChild(tableRow);
             tableRow.appendChild(tablehead);
             tableRow.appendChild(tabledata);
-             tableRow.appendChild(tabledata1);
-              tableRow.appendChild(tabledata2);
+            tableRow.appendChild(tabledata1);
+            tableRow.appendChild(tabledata2);
          
         }})
     
 }
 export function ViewAssignedCourse() {
+    fetch_courses();
   return (
 
     <>
@@ -56,4 +57,4 @@ export function ViewAssignedCourse() {
   );
 }
 
-fetch_data();
+
