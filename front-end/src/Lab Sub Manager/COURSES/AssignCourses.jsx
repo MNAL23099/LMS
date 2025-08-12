@@ -36,39 +36,36 @@ function AssignCourses() {
 
   // fetch_again(); if we call this function as soon as the webpage loads, it's going to send the useState variables to backend
   //We don't want that, we want that we send those variables to the backend when user presses the Assign button but calling this 
-  //..function will send those automatically as soon as the webpage loads
+  //..function here\ will send those automatically as soon as the webpage loads
   
   return (
     <>
       <Navbar pageType="Assign Course" />
-      <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "80vh" }}>
-        <div className="card shadow" style={{ width: "350px", borderRadius: "1rem", background: "linear-gradient(135deg, #fffbe6 0%, #ffe0b2 100%)", border: "1.5px solid #ff9800" }}>
+      <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "80vh", background: "#fff" }}>
+        <div className="card shadow" style={{ width: "370px", borderRadius: "1rem", background: "#fff", border: "2px solid #002147", boxShadow: "0 8px 32px 0 rgba(0,33,71,0.10), 0 2px 8px 0 rgba(255,212,0,0.10)", fontFamily: "'Segoe UI', 'Roboto', 'Arial', sans-serif" }}>
           <div className="card-body">
-            <h3 className="card-title text-center mb-4" style={{ color: "#e65100", fontWeight: 700 }}>Assign Course to Lab</h3>
+            <h3 className="card-title text-center mb-4" style={{ color: "#002147", fontWeight: 800, letterSpacing: "1px" }}>Assign Course to Lab</h3>
             <form>
               <div className="form-floating mb-3">
-                <select onChange={(e)=>{setCourses(e.target.value);}} className="form-select" id="assigncourses" aria-label="Floating label select example">
+                <select onChange={(e)=>{setCourses(e.target.value);}} className="form-select" id="assigncourses" aria-label="Floating label select example" style={{ border: "1.5px solid #002147", borderRadius: "8px", color: "#002147", fontWeight: 500 }}>
                   <option value="">Select Course</option>
-                 
                 </select>
-                <label htmlFor="floatingSelect">Choose Course</label>
+                <label htmlFor="floatingSelect" style={{ color: "#002147", fontWeight: 600 }}>Choose Course</label>
               </div>
               <div className="form-floating mb-3">
-                <select onChange={(e)=>{setLabs(e.target.value);}} className="form-select" id="assignLab" aria-label="Floating label select example">
+                <select onChange={(e)=>{setLabs(e.target.value);}} className="form-select" id="assignLab" aria-label="Floating label select example" style={{ border: "1.5px solid #002147", borderRadius: "8px", color: "#002147", fontWeight: 500 }}>
                   <option value="">Select lab</option>
-                 
                 </select>
-                <label htmlFor="floatingSelect">Choose lab</label>
+                <label htmlFor="floatingSelect" style={{ color: "#002147", fontWeight: 600 }}>Choose lab</label>
               </div>
-                  <div className="form-floating mb-3">
-                <select onChange={(e)=>{setLabEngineer(e.target.value);}} className="form-select" id="assignLabEngineer" aria-label="Floating label select example">
+              <div className="form-floating mb-3">
+                <select onChange={(e)=>{setLabEngineer(e.target.value);}} className="form-select" id="assignLabEngineer" aria-label="Floating label select example" style={{ border: "1.5px solid #002147", borderRadius: "8px", color: "#002147", fontWeight: 500 }}>
                   <option value="">Select lab engineer</option>
-             
                 </select>
-                <label htmlFor="floatingSelect">Choose engineer</label>
+                <label htmlFor="floatingSelect" style={{ color: "#002147", fontWeight: 600 }}>Choose engineer</label>
               </div>
               {/* The fetch_again function will get called when user clicks on Assign */}
-              <button onClick={()=> {fetch_again()}} type="submit" className="btn btn-warning w-100 fw-bold" style={{ borderRadius: "25px" }}>Assign</button>
+              <button onClick={()=> {fetch_again()}} type="submit" className="btn w-100 fw-bold" style={{ borderRadius: "25px", background: "linear-gradient(90deg, #ffd700 0%, #ffb400 100%)", color: "#002147", fontWeight: 700, border: "2.5px solid #ffd700" }}>Assign</button>
             </form>
           </div>
         </div>
