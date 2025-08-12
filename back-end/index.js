@@ -17,7 +17,9 @@ app.use("/inventory", require("./routes/inventory"));
 app.use("/labStaff", require("./routes/labStaff"));
 app.use("/labManagement", require ("./routes/labManagement"));
 app.use("/Course", require("./routes/Course"));
-// app.use("/LabSub" , require("./routes/LabSub"));
+app.use("/LabSub" , require("./routes/LabSub"));
+app.use("/labEngineer", require("./routes/labEngineer"));
+
 app.get("/", (req, res) => {
   res.send("Backend is working!");
 });

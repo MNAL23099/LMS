@@ -29,7 +29,8 @@ import RequestInventoryForLab from "./Lab Sub Manager/Inventory Allocation/reque
 import InventoryAllocation from "./Lab Sub Manager/Inventory Allocation/inventoryAllocation.jsx";
 import Handle_Pending_Requests from "./Admin/FacultyOfEngineering/Inventory/InventoryRequests/Handle_Pending_Requests.jsx";
 import Inventory_Requests_Dashboard from "./Admin/FacultyOfEngineering/Inventory/InventoryRequests/Inventory_Requests_Dashboard.jsx";
-
+import InventoryAllocation from "./Lab Sub Manager/Inventory Allocation/inventoryAllocation.jsx"
+import LabEngineerDashboard from "./Lab Engineer/LabEngineerDashboard.jsx";
 function App() {
 
   return(
@@ -65,6 +66,7 @@ function App() {
         <Route path="/InventoryAllocation" element={<InventoryAllocation/>} />
         <Route path="/superManager/handleInventoryRequests" element={<Handle_Pending_Requests />} />
         <Route path="/superManager/IRDashboard" element={<Inventory_Requests_Dashboard />} />
+        <Route path="/LabEngineerDashboard" element={<LabEngineerDashboard/>} />
       </Routes>
       <Footer />
     </BrowserRouter>

@@ -98,7 +98,11 @@ function SignIn(){
                                         navigate("/adminDashboard");
                                     } else if (selected === "sub_manager") {
                                         navigate("/subManagerDashboard");
-                                    } else {
+                                    } else if ( selected === "lab_engineer")
+                                    {
+                                        navigate("/LabEngineerDashboard");
+                                    }
+                                    else {
                                         window.alert("No valid selection made.");
                                     }
                                     setShowRoleDropdown(false);
@@ -107,6 +111,7 @@ function SignIn(){
                                 <option value="">-- Select Dashboard --</option>
                                 <option value="admin">Admin Dashboard</option>
                                 <option value="sub_manager">Sub Manager Dashboard</option>
+                                <option value="lab_engineer">Lab Engineer Dashboard</option>
                             </select>
                         </div>
                     )}

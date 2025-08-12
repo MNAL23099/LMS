@@ -1,8 +1,9 @@
-const db = require("../db/connect"); // or wherever your DB connection is
+// controllers/SubManagerController.js
+const connectToDB = require("../models/setupDB.js");
 
 const getAssignedLabs = async (req, res) => {
   try {
-    const userEmail = req.query.email; // if you pass email via query param
+   const userEmail = req.query.email;
     const result = await db.query(
       "SELECT * FROM assigned_labs WHERE lab_sub_mail = $1",
       [userEmail]
