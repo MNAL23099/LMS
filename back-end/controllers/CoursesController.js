@@ -120,10 +120,9 @@ async function Add_a_Row_to_AssignedCourses(req,res){
 }
 
 async function View_Assigned_Courses(req,res){
-
-        try { 
+    try { 
         console.log("fhjdhjf");
-        const query_view_1 = `SELECT * FROM ssignedcourses`;
+        const query_view_1 = `SELECT * FROM assignedcourses`;
         const lsmClient = await connectToDB();
         const data = await lsmClient.query(query_view_1);
         res.json(data.rows);

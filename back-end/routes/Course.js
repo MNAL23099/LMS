@@ -19,7 +19,9 @@ router.post("/assign_course", async(req,res)=>{
     console.log("Route accessed!");
     await Add_a_Row_to_AssignedCourses(req,res);
 })
-router.get("view_assigned_courses",async(req,res)=>{
+
+router.get("/view_assigned_courses",async(req,res)=>{ // "/" was missing at the starting of the route url
+    console.log("Route accessed!");
     await View_Assigned_Courses(req,res);
 })
    

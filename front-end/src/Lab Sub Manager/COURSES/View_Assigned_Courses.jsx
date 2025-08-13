@@ -1,9 +1,8 @@
 import Navbar from "../../Nav/Navbar";
 
 function fetch_courses(){
-
-    fetch("http://localhost:5000/Course/view_assigned_courses",{
-      method :"GET",
+    fetch("http://localhost:5000/Course/view_assigned_courses", {
+      method: "GET",
     })
     .then((res)=>{return res.json()})
     .then((res)=>{
@@ -35,9 +34,9 @@ function fetch_courses(){
     
 }
 export function ViewAssignedCourse() {
-    fetch_courses();
+  fetch_courses();
   return (
-
+    
     <>
       <Navbar pageType="View Assigned Courses" />
       <div>
