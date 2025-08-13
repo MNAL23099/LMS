@@ -78,7 +78,11 @@ function AssignCourses() {
 }
  function fetch_data(){
      
-    fetch("http://localhost:5000/Course/view_course")
+    fetch("http://localhost:5000/Course/view_course",{
+      method: "GET",
+    }
+      
+    )
     .then((res)=>{return res.json();})
     .then((res)=>{
        const course = document.getElementById("assigncourses");
@@ -92,7 +96,11 @@ function AssignCourses() {
 
        }
     })
-     fetch("http://localhost:5000/labManagement/viewlabs")
+     fetch("http://localhost:5000/labManagement/viewlabs",{
+      method: "GET",
+    }
+      
+    )
      .then((res)=>{return res.json();})
      .then((res)=>{
       const labs = document.getElementById("assignLab");
@@ -106,7 +114,11 @@ function AssignCourses() {
 
        }
      })
-     fetch("http://localhost:5000/labStaff/viewHiredEngineerForCourses")
+     fetch("http://localhost:5000/labStaff/viewHiredEngineerForCourses",{
+      method: "GET",
+    }
+      
+    )
      .then((res)=>{return res.json();})
      .then((res)=>{
       const labEngineer = document.getElementById("assignLabEngineer");
@@ -120,7 +132,7 @@ function AssignCourses() {
 
        }
      })
-     
+    
    }
 
   fetch_data();

@@ -7,6 +7,7 @@ function Courses_Dashboard_Sub_Manager(){
   
   function goToassigncourses(){
      navigate("/assigncourses");
+      window.location.reload();
   }
 
    function goToViewassigncourses(){

@@ -2,7 +2,9 @@ import Navbar from "../../Nav/Navbar";
 
 function fetch_courses(){
 
-    fetch("http://localhost:5000/Course/view_assigned_courses")
+    fetch("http://localhost:5000/Course/view_assigned_courses",{
+      method :"GET",
+    })
     .then((res)=>{return res.json()})
     .then((res)=>{
 
