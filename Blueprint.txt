@@ -5,6 +5,7 @@ Lab Super Manager:
 => Will set a list of courses (that sub managers will assign to their department labs) -> Being Done by Manal (Add remaining, view remaining, edit remaining)
 => Will be able to add new staff members to univeristy_staff list inside DB -> Being Done by Tooba (Edit remaining) & Umar (Add done, view done)
 
+
 Lab Sub Manager (e.g. sub-manager of engineering department labs):
 => Will request inventory from super manager, when the super manager approves, the available inventory from super manager will be deducted and that much inventory will be given to that whole department labs
    and then, sub-manager can allocate inventory to specific labs
@@ -13,6 +14,7 @@ Lab Sub Manager (e.g. sub-manager of engineering department labs):
 	-> A course will only be given 1 lab
 	-> A course can only be given to the lab which already has a lab engineer assigned
 	-> When a course will be assigned, the name of the lab engineer who teaches it is also to be given because a course in one lab can be taught by lab engineer of 	another lab
+
 
 Lab Engineer:
 => Will be able to view the lab allocated to him
@@ -33,15 +35,12 @@ Lab Engineer:
 => Will be able to see attendance of students in his labs
 	-> If a student has uploaded student manual for a lab, he is marked present, otherwise absent
 
+
 Student:
 => Will be able to see the names of lab courses he's enrolled in
 => Will be able to upload his labs
 => Will be able to view his marks for each lab
 
-Website admin:
-=> Will be able to view all the accounts present on LMS Portal
-=> Can delete any account
-=> etc
 
 Sign In page:
 => Types of accounts
@@ -50,3 +49,23 @@ Sign In page:
 	-> Sub Manager
 	-> Website admin
 	-> Lab Engineer
+
+
+Accounts Management:-
+1. There will be a table called as accounts and it will have the following columns
+	=> email password role status
+	=> role can be lab_engineer, super_manager, etc
+	=> status can be "active", "blocked"
+
+2. Whenever super manager adds lab staff, their account will be created, (an email will be sent to that mail containing the password and their role -> for future)
+
+3. Website admin will add the accounts of super manager and sub manager (an email will be sent to that mail containing the password and their role -> for future)
+
+4. When an account logs in, that account can not access anything that is not permitted, like if the user's role is sub_manager then if he types in the url for
+super manager, then his access will be blocked.
+
+5. There will be a website admin account which will have
+	=> A dashboard in which he can assign accounts for super manager and sub manager
+	=> A table in which he will be displayed all the accounts
+	=> He can also terminate user accounts or block them, if he blocks the account then the status for that account will become "blocked" and the user of that
+	account can not log in.
