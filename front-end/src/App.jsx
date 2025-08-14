@@ -65,7 +65,7 @@ function App() {
         <Route path="/RequestInventoryForLab" element={<RequestInventoryForLab/>} /> 
         <Route path="/InventoryAllocation" element={<InventoryAllocation/>} />
         <Route path="/superManager/handleInventoryRequests" element={<Handle_Pending_Requests />} />
-        <Route path="/superManager/IRDashboard" element={<Inventory_Requests_Dashboard />} />
+        <Route path="/superManager/handlePendingInventoryRequests" element={<Inventory_Requests_Dashboard />} />
         <Route path="/LabEngineerDashboard" element={<LabEngineerDashboard/>} />
         <Route path="/viewassigncourses" element={<ViewAssignedCourse/>}/>
       </Routes>
