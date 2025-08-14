@@ -14,6 +14,7 @@ const {
   getRequests,
   returnPendingInventoryRequests,
   markPendingRequest,
+  viewAllocatedInventory
 } = require("../controllers/inventoryController.js");
 
 router.post("/addInventoryItem", async(request, response)=>{
@@ -50,5 +51,7 @@ router.get("/labs", getLabs);
 router.get("/getInventoryItems", getInventoryItems);
 router.post("/sendRequest", sendInventoryRequest);
 router.get("/getRequests", getRequests);
+
+router.get("/fetchAllocatedInventory", viewAllocatedInventory);
 
 module.exports = router;

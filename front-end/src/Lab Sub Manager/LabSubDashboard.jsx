@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import inventoryPicture from "../assets/inventoryAssign.png";
 import courseAssignPicture from "../assets/course_assignment.png";
 import allocateInventory from "../assets/allocateInventory.png";
+import courseAssignment from "../assets/courseAssignment.png";
+
 import React, { useEffect } from "react";
 
 // import AssignInventory from "./assignInventoryToLab";
@@ -47,7 +49,7 @@ const LabSubDashboard = () => {
           </div>
           {/* Course Assignment  Card */}
           <div className="card" style={{ width: "17rem", background: "#fff", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(0,33,71,0.10)", border: "1.5px solid #002147", fontFamily: 'Segoe UI, Arial, sans-serif', minHeight: '340px' }}>
-            <img src={courseAssignPicture} className="card-img-top" alt="Inventory" style={{ borderTopLeftRadius: "1rem", borderTopRightRadius: "1rem", height: "140px", objectFit: "cover" }} />
+            <img src={courseAssignment} className="card-img-top" alt="Inventory" style={{ borderTopLeftRadius: "1rem", borderTopRightRadius: "1rem", height: "140px", objectFit: "cover" }} />
             <div className="card-body d-flex flex-column justify-content-between" style={{ background: "#fff", color: "#002147", borderRadius: "0 0 1rem 1rem", flex: 1 }}>
               <div className="text-center">
                 <h5 className="card-title" style={{ fontWeight: 700, color: '#002147', fontSize: '1.15rem', marginBottom: '0.5rem' }}>Course Assignment</h5>

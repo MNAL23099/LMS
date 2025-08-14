@@ -31,6 +31,7 @@ import Inventory_Requests_Dashboard from "./Admin/FacultyOfEngineering/Inventory
 import InventoryAllocation from "./Lab Sub Manager/Inventory Allocation/inventoryAllocation.jsx"
 import LabEngineerDashboard from "./Lab Engineer/LabEngineerDashboard.jsx";
 import { ViewAssignedCourse } from "./Lab Sub Manager/COURSES/View_Assigned_Courses.jsx";
+import { ViewAllocatedInventory } from "./Lab Engineer/viewAllocatedInventory.jsx";
 function App() {
 
   return(
@@ -68,6 +69,7 @@ function App() {
         <Route path="/superManager/IRDashboard" element={<Inventory_Requests_Dashboard />} />
         <Route path="/LabEngineerDashboard" element={<LabEngineerDashboard/>} />
         <Route path="/viewassigncourses" element={<ViewAssignedCourse/>}/>
+        <Route path="/viewAllocatedInventory" element={<ViewAllocatedInventory/>} />
       </Routes>
       <Footer />
     </BrowserRouter>

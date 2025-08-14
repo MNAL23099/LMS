@@ -387,6 +387,25 @@ async function markPendingRequest(req, res){ //Sets the statsus of row of pendin
 
 //-------------------------------------------------------------------Super Manager handling inventory requests from Sub Manager Ends here----------------------------------------------------------------------//
 
+// Controller function to fetch allocated inventory
+async function viewAllocatedInventory(req, res) {
+  try {
+    const query = `SELECT * FROM inventory`; // allocated inventory table
+    const lsmClient = await connectToDB();
+    const data = await lsmClient.query(query);
+
+    if (data.rowCount > 0) {
+      res.json(data.rows);
+    } else {
+      res.status(404).send("No allocated inventory found");
+    }
+  } catch (error) {
+    console.log(`error: inventoryController.js -> viewAllocatedInventory() -> ${error.message}`);
+    res.status(500).send("Server error");
+  }
+}
+
+
 
 
 module.exports = {
@@ -403,4 +422,5 @@ module.exports = {
   getRequests,
   returnPendingInventoryRequests,
   markPendingRequest,
+  viewAllocatedInventory
 };
