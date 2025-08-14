@@ -7,6 +7,7 @@ function EditStaff(){
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
+    const [currentEmail, setCurrentEmail] = useState(""); //This is the current email of the lab staff member in case he wants to change his email, we must have his current email
     const [id, setID] = useState("");
     const [currentRole, setCurrentRole] = useState(""); //This is the current role of staff member, we need to store this to
     //make sure that this staff member does not get edited or deleted while it is assigned to any lab
@@ -31,8 +32,8 @@ function EditStaff(){
                     <span className="input-group-text" id="basic-addon1">Role</span>
                     <input onChange={(e)=>{setCurrentRole(e.target.value)}} id="editStaff-input_CurrentRole" type="text" className="form-control" placeholder="Role" aria-label="Username" aria-describedby="basic-addon1" disabled/>
                 </div>
-                <button onClick={() => submitEditedStaff(name, email, id, currentRole, changedRole)} type="button" className="btn btn-success">Save Changes</button>
-                <button onClick={() => deleteStaffMember(id, email, currentRole)} type="button" className="btn btn-danger">Delete This Staff</button>
+                <button onClick={() => submitEditedStaff(name, email, id, currentRole, changedRole, currentEmail)} type="button" className="btn btn-success">Save Changes</button>
+                <button onClick={() => deleteStaffMember(id, email, currentRole, currentEmail)} type="button" className="btn btn-danger">Delete This Staff</button>
 
                 <div className="form-floating">
                     <select onChange={(e) => {setChangedRole(e.target.value)}} className="form-select" aria-label="Floating label select example" id="editStaff-select_ChangeRole">
@@ -70,6 +71,7 @@ function EditStaff(){
         setEmail(input_email.value);
         setID(input_id.value);
         setCurrentRole(input_role.value);
+        setCurrentEmail(input_email.value);
     }
 
     function fetchAndDisplayStaff() {
@@ -93,13 +95,13 @@ function EditStaff(){
             });
     }
 
-    function submitEditedStaff(name, email, id, currentRole, changedRole) {
+    function submitEditedStaff(name, email, id, currentRole, changedRole, currentEmail) {
         console.log(currentRole);
         console.log(changedRole);
         fetch("http://localhost:5000/labStaff/submitEditedStaff", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name: name, email: email, id: id, currentRole: currentRole, changedRole: changedRole })
+            body: JSON.stringify({ name: name, email: email, id: id, currentRole: currentRole, changedRole: changedRole, currentEmail: currentEmail })
         })
         .then((res) => res.text())
         .then((textRes) => {
@@ -120,7 +122,7 @@ function EditStaff(){
         fetch("http://localhost:5000/labStaff/deleteStaff", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id: id, email: email, currentRole: currentRole })
+            body: JSON.stringify({ id: id, email: email, currentRole: currentRole, currentEmail: currentEmail })
         })
             .then((res) => res.text())
             .then((textRes) => {

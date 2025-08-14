@@ -8,14 +8,15 @@ async function createTables(){
     await createTable_lab_staff();
     await createTable_university_staff();
     await createTable_labs();
-    await insertDummyData(); 
     await createTable_Courses();
     await createTable_free_inventory();
     await createTable_inventory_requests(); 
-    await createTable_Assigned_Courses()
-    
-}//Insert dummy data that is supposed to be received from another database
-// Standalone function to create labs table
+    await createTable_Assigned_Courses();
+    await createTable_accounts();
+
+    await insertDummyData();
+}
+
 async function createTable_Assigned_Courses(){
     const client = await connectoToDB();
     if (!client) {
@@ -36,6 +37,29 @@ async function createTable_Assigned_Courses(){
         }
     });
 }
+
+async function createTable_accounts(){ //This table stores all the accounts created on the website, from website admin to lab super manager and students
+    const client = await connectoToDB();
+    if (!client) {
+        return;
+    }
+    const query = `CREATE TABLE IF NOT EXISTS accounts (
+        name VARCHAR(100),
+        email VARCHAR(100),
+        password VARCHAR(100),
+        role VARCHAR(100),
+        account_status VARCHAR(100)
+    )`;
+    client.query(query, (err, data) => {
+        if (err) {
+            console.log("accounts table cannot be created!");
+            console.log(err.message);
+        } else {
+            console.log("accounts table created!");
+        }
+    });
+}
+
 async function createTable_Courses(){
     const client = await connectoToDB();
     if (!client) {
@@ -54,6 +78,8 @@ async function createTable_Courses(){
         }
     });
 }
+
+// Standalone function to create labs table
 async function createTable_labs(){
     // This table stores labs with id and lab_name
     const client = await connectoToDB();
@@ -150,115 +176,86 @@ async function createTable_assigned_labs(){ //This Table tells which lab enginee
 
 }
 
+//Insert dummy data that is supposed to be received from another database
 async function insertDummyData(){ //This function adds dummy data inside and university_staff
 
     const lmsClient = await connectoToDB();
 
-    //Assigned_labs dummy data
-    // let query_dummyData_Assigned_labs = `SELECT * FROM Assigned_labs WHERE lab_eng_mail = $1`;
-    // const targetValue_1 = "kashif@itu.edu.pk";
-    // const data = await lmsClient.query(query_dummyData_Assigned_labs, [targetValue_1]);
-
-    // if (data.rowCount == 0){
-    //     query_dummyData_Assigned_labs = `INSERT INTO Assigned_labs(lab_name, lab_eng_mail)
-    //     VALUES($1, $2)`;
-    //     try{
-    //         const name = "Controls Lab";
-    //         const lab_eng_mail = "kashif@itu.edu.pk";
-    //         lmsClient.query(query_dummyData_Assigned_labs, [name, lab_eng_mail]);
-    //         console.log("Assigned_labs dummy data done!");
-    //     }
-    //     catch (error){
-    //         console.log("Issue in adding dummy data to Assigned_labs");
-    //         console.log(error.message);
-    //     }
-        
-    // }
-    // else {
-    //     console.log("Dummy data of Assigned_labs done!");
-    // }
-
-    //Users dummy data
-    // let query_dummyData_Users = 'SELECT * FROM Users WHERE email = $1';
+    // //Add a lab engineer to university_staff
+    // let query_dummyData_university_staff = 'SELECT * FROM university_staff WHERE email = $1';
     // const targetValue = "kashif@itu.edu.pk";
-    // const data_1 = await lmsClient.query(query_dummyData_Users, [targetValue]);
+    // const data_1 = await lmsClient.query(query_dummyData_university_staff, [targetValue]);
     // if (data_1.rowCount == 0){
-    //     query_dummyData_Users = `INSERT INTO Users(name, email, password, account_type)
-    //     VALUES($1, $2, $3, $4)`;
+    //     query_dummyData_university_staff = `INSERT INTO university_staff(name, email, role)
+    //     VALUES($1, $2, $3)`;
     //     try{
     //         const name = "Kashif";
     //         const email = "kashif@itu.edu.pk";
-    //         const pass = "123";
-    //         const accountType = "lab_engineer";
-    //         lmsClient.query(query_dummyData_Users, [name, email, pass, accountType]);
-    //         console.log("Users dummy data done!");
+    //         const role = "lab_engineer";
+    //         lmsClient.query(query_dummyData_university_staff, [name, email, role]);
+    //         console.log("univeristy_staff dummy data done!");
     //     }
     //     catch (error){
-    //         console.log("Issue in adding dummy data to Users");
+    //         console.log("Issue in adding dummy data to university_staff");
     //         console.log(error.message);
     //     }
     // }
     // else {
-    //     console.log("Dummy data of Users done!");
+    //     console.log("Dummy data of university_staff done!");
     // }
 
-    //Add a lab engineer to university_staff
-    let query_dummyData_university_staff = 'SELECT * FROM university_staff WHERE email = $1';
-    const targetValue = "kashif@itu.edu.pk";
-    const data_1 = await lmsClient.query(query_dummyData_university_staff, [targetValue]);
-    if (data_1.rowCount == 0){
-        query_dummyData_university_staff = `INSERT INTO university_staff(name, email, role)
-        VALUES($1, $2, $3)`;
-        try{
-            const name = "Kashif";
-            const email = "kashif@itu.edu.pk";
-            const role = "lab_engineer";
-            lmsClient.query(query_dummyData_university_staff, [name, email, role]);
-            console.log("univeristy_staff dummy data done!");
-        }
-        catch (error){
-            console.log("Issue in adding dummy data to university_staff");
-            console.log(error.message);
-        }
-    }
-    else {
-        console.log("Dummy data of university_staff done!");
-    }
+    // //Add a lab technician to university_staff
+    // let query_dummyData_university_staff_2 = 'SELECT * FROM university_staff WHERE email = $1';
+    // const targetValue_2 = "usman@itu.edu.pk";
+    // const data_2 = await lmsClient.query(query_dummyData_university_staff_2, [targetValue_2]);
+    // if (data_2.rowCount == 0){
+    //     query_dummyData_university_staff_2 = `INSERT INTO university_staff(name, email, role)
+    //     VALUES($1, $2, $3)`;
+    //     try{
+    //         const name = "Usman";
+    //         const email = "usman@itu.edu.pk";
+    //         const role = "lab_technician";
+    //         lmsClient.query(query_dummyData_university_staff_2, [name, email, role]);
+    //     }
+    //     catch (error){
+    //         console.log("Issue in adding dummy data to university_staff");
+    //         console.log(error.message);
+    //     }
+    // }
 
-    //Add a lab technician to university_staff
-    let query_dummyData_university_staff_2 = 'SELECT * FROM university_staff WHERE email = $1';
-    const targetValue_2 = "usman@itu.edu.pk";
-    const data_2 = await lmsClient.query(query_dummyData_university_staff_2, [targetValue_2]);
-    if (data_2.rowCount == 0){
-        query_dummyData_university_staff_2 = `INSERT INTO university_staff(name, email, role)
-        VALUES($1, $2, $3)`;
-        try{
-            const name = "Usman";
-            const email = "usman@itu.edu.pk";
-            const role = "lab_technician";
-            lmsClient.query(query_dummyData_university_staff_2, [name, email, role]);
-        }
-        catch (error){
-            console.log("Issue in adding dummy data to university_staff");
-            console.log(error.message);
-        }
-    }
+    // //Add a lab assistant to university_staff
+    // let query_dummyData_university_staff_3 = 'SELECT * FROM university_staff WHERE email = $1';
+    // const targetValue_3 = "ali@itu.edu.pk";
+    // const data_3 = await lmsClient.query(query_dummyData_university_staff_3, [targetValue_3]);
+    // if (data_3.rowCount == 0){
+    //     query_dummyData_university_staff_3 = `INSERT INTO university_staff(name, email, role)
+    //     VALUES($1, $2, $3)`;
+    //     try{
+    //         const name = "Ali";
+    //         const email = "ali@itu.edu.pk";
+    //         const role = "lab_assistant";
+    //         lmsClient.query(query_dummyData_university_staff_3, [name, email, role]);
+    //     }
+    //     catch (error){
+    //         console.log("Issue in adding dummy data to university_staff");
+    //         console.log(error.message);
+    //     }
+    // }
 
-    //Add a lab assistant to university_staff
-    let query_dummyData_university_staff_3 = 'SELECT * FROM university_staff WHERE email = $1';
-    const targetValue_3 = "ali@itu.edu.pk";
-    const data_3 = await lmsClient.query(query_dummyData_university_staff_3, [targetValue_3]);
-    if (data_3.rowCount == 0){
-        query_dummyData_university_staff_3 = `INSERT INTO university_staff(name, email, role)
-        VALUES($1, $2, $3)`;
+    //Add 1 website admin account in accounts
+    let query_dummyData_accounts = 'SELECT * FROM accounts WHERE email = $1';
+    const targetValue_4 = "website_admin@itu.edu.pk";
+    const data_4 = await lmsClient.query(query_dummyData_accounts, [targetValue_4]);
+    if (data_4.rowCount == 0){
+        query_dummyData_accounts = `INSERT INTO accounts(email, password, role, account_status, name)
+        VALUES($1, $2, $3, $4, $5)`;
         try{
-            const name = "Ali";
-            const email = "ali@itu.edu.pk";
-            const role = "lab_assistant";
-            lmsClient.query(query_dummyData_university_staff_3, [name, email, role]);
+            const email = "website_admin@itu.edu.pk";
+            const role = "website_admin";
+            lmsClient.query(query_dummyData_accounts, [email, "123", role, "Active", "Website Admin"]);
         }
         catch (error){
-            console.log("Issue in adding dummy data to university_staff");
+            console.log("Issue in adding dummy data to accounts");
             console.log(error.message);
         }
     }

@@ -25,7 +25,7 @@ function Inventory_Dashboard(){
     }
 
     function goToHandleInventoryRequests(){
-        navigation("/superManager/handleInventoryRequests");
+        navigation("/superManager/IRDashboard");
     }
 
     return (

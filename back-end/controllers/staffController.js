@@ -1,5 +1,6 @@
 const connectToDB = require("../models/setupDB.js");
-const {getLabName} = require("../sharedFunctions.js");
+const { route } = require("../routes/labStaff.js");
+const {addUserAccount, editAccountEmail, editAccountRole, removeUserAccount, editAccountName} = require("../sharedFunctions.js");
 
 //------------------------------------------------------------------Add Staff Starts Here------------------------------------------------------------------//
 
@@ -28,6 +29,7 @@ async function addStaff(req, res){
         //But if the staff member email is not already present inside DB then create a new row for it
         else if(await staffMemberAlreadyInDB(email) == false) {
           await addNewRow(name, email, role);
+          await addUserAccount(name, email, 123, role); //Create account of this person
           res.write("new_row_added");
           res.end();
         }
@@ -140,7 +142,6 @@ async function editStaff(req, res) {
   res.json(data.rows);// to send all teh rows in resonse
 }
 
-
 async function fetchStaffFromDB() {
   try {
     const lsmClient = await connectToDB();  // This uses setupDB
@@ -182,7 +183,7 @@ async function staffMemberIsAssignedToLab(email, currentStaffType){ //This funct
 
 async function saveEditStaffChanges(req, res) {
 
-  const {id, name, email, currentRole, changedRole} = req.body;
+  const {id, name, email, currentRole, changedRole, currentEmail} = req.body;
 
   if ( await entriesExist(name, email, id)== false) {
     res.write("missing_entries");
@@ -191,7 +192,7 @@ async function saveEditStaffChanges(req, res) {
   }
 
   //If that staff member is already assigned to a lab then we won't edit him because otherwise all his info in other places will have to be edited
-  if (await staffMemberIsAssignedToLab(email, currentRole) == true){
+  if (await staffMemberIsAssignedToLab(currentEmail, currentRole) == true){
     res.write("staff_member_assingned_to_lab");
     res.end();
     return;
@@ -207,6 +208,12 @@ async function saveEditStaffChanges(req, res) {
       SET name = $1, email = $2, role = $3 
       WHERE id = $4`;
       await lsmClient.query(query, [name, email, changedRole, id]);
+
+      //Also make these changes inside the user account in accounts table
+      if (await editAccountRole(currentEmail, changedRole) && await editAccountName(currentEmail, name)){
+        await editAccountEmail(currentEmail, email);
+      }
+
       res.send("success");
     } catch (error) {
       console.error(`Error in saveEditStaffChanges: ${error.message}`);
@@ -220,6 +227,12 @@ async function saveEditStaffChanges(req, res) {
       SET name = $1, email = $2
       WHERE id = $3`;
       await lsmClient.query(query, [name, email, id]);
+
+      //Also edit these things in the user's account in accounts table
+      if (await editAccountName(currentEmail, name)){
+        await editAccountEmail(currentEmail, email);
+      }
+      
       res.send("success");
     } catch (error) {
       console.error(`Error in saveEditStaffChanges: ${error.message}`);
@@ -238,15 +251,15 @@ async function entriesExist(itemName, email, id){ //Check if all the entries exi
 }
 
 async function deleteStaffMember(req, res) {
-  const { id, currentRole, email } = req.body;
+  const { id, currentRole, email, currentEmail } = req.body;
 
-  if (!id || !currentRole || !email) {
+  if (!id || !currentRole || !currentEmail || !email) {
     res.write("missing_entries");
     res.end();
     return;
   }
 
-  if (await staffMemberIsAssignedToLab(email, currentRole) == true){
+  if (await staffMemberIsAssignedToLab(currentEmail, currentRole) == true){
     res.write("staff_member_assingned_to_lab");
     res.end();
     return;
@@ -256,6 +269,12 @@ async function deleteStaffMember(req, res) {
     const client = await connectToDB();
     const query = `DELETE FROM university_staff WHERE id = $1`;
     await client.query(query, [id]);
+
+    //Also remove the account of this lab staff member
+    if (await !removeUserAccount(email)){
+      console.log(`staffController.js -> deleteStaffMember() -> error removing staff member account while deleting staff member`);
+    }
+
     res.write("success");
     res.end();
   } catch (error) {

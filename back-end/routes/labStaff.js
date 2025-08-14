@@ -27,7 +27,6 @@ router.post("/deleteStaff", async (req, res) => {
   await deleteStaffMember(req, res);
 });
 
-
 router.post("/assignLabs", async(request, response)=>{
     await assignLabsHandler(request, response);
 })

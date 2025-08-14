@@ -32,6 +32,8 @@ import InventoryAllocation from "./Lab Sub Manager/Inventory Allocation/inventor
 import LabEngineerDashboard from "./Lab Engineer/LabEngineerDashboard.jsx";
 import { ViewAssignedCourse } from "./Lab Sub Manager/COURSES/View_Assigned_Courses.jsx";
 import { ViewAllocatedInventory } from "./Lab Engineer/viewAllocatedInventory.jsx";
+import Website_Admin_Dashboard from "./Website_Admin/Website_Admin_Dashboard.jsx";
+import Website_Admin_Add_Account from "./Website_Admin/Website_Admin_Add_Account.jsx";
 function App() {
 
   return(
@@ -70,6 +72,9 @@ function App() {
         <Route path="/LabEngineerDashboard" element={<LabEngineerDashboard/>} />
         <Route path="/viewassigncourses" element={<ViewAssignedCourse/>}/>
         <Route path="/viewAllocatedInventory" element={<ViewAllocatedInventory/>} />
+        <Route path="/websiteAdmin/dashboard" element={<Website_Admin_Dashboard />} />
+        {/* Website admin add account */}
+        <Route path="/websiteAdmin/Dashboard/addAccount" element={<Website_Admin_Add_Account />}/> 
       </Routes>
       <Footer />
     </BrowserRouter>
