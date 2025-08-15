@@ -150,16 +150,20 @@ try {
 }
 
 async function UnAssign_Courses(req,res){
-    const {id} = req.body;
-    if(!id){
-        console.log("no data");
-    }
-    try{
-            const query_4 = `DELETE FROM assicourses WHERE id = id`;
-            const lmsClient = await connectToDB();
-            await lmsClient.query(query_4);
-            res.json(data.rows);
-    }
+    const {ID} = req.body;
+   if (!ID){
+    res.write("missing_entries");
+    res.end();
+    return;
+  }
+
+  try{
+    const lsmClient = await connectToDB();
+    const query = `DELETE FROM assicourses WHERE id = $1`;
+    await lsmClient.query(query, [ID]);
+    res.write("success");
+    res.end();
+  }
     catch(error){
          console.log(`error: assicourses -> unassign_courses-> ${error.message}`);
     }

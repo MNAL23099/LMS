@@ -28,6 +28,9 @@ function render_courses(batchFilter) {
             const unassignBtn = document.createElement("button");
             unassignBtn.textContent = "Un_Assign";
             unassignBtn.className = "btn btn-danger btn-sm";
+              unassignBtn.onclick = function() {
+                Delete(res[i].id);
+            };
             tableBody.appendChild(tableRow);
             tableRow.appendChild(tablehead);
             tableRow.appendChild(tabledata);
@@ -42,13 +45,29 @@ function render_courses(batchFilter) {
     })
 }
 
-// function Delete(id){
-//    fetch("http://localhost:5000/Course//unassin_course", {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify({ batchNumber: batch })
-//   })
-// }
+function Delete(id){
+   fetch("http://localhost:5000/Course/unassin_course", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ID :id})
+  })
+  .then((res)=>res.text())
+  .then((res)=>{
+      if(res === "missing_entries"){
+        window.alert("Fill the required ID");
+      }
+      else if(res==="success"){
+        window.alert("Successfully deleted");
+        
+           window.location.reload();
+     
+      }
+      else {
+        window.alert("Error: ");
+      }
+  })
+}
+
 export function ViewAssignedCourse() {
 
   return (
