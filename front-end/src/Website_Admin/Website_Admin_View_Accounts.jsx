@@ -43,6 +43,8 @@ function Website_Admin_View_Accounts(){
                 terminateAccountButton.className = "btn btn-danger";
                 terminateAccountButton.textContent = "Terminate Account";
                 terminateAccountButton.onclick = ()=>{terminateAccount(data[i].email);}
+                if (data[i].email == "website_admin@itu.edu.pk") //Website admin can not disbale his own account
+                    terminateAccountButton.disabled = true;
 
                 //Restore account button
                 const restoreAccountButton = document.createElement("button");
@@ -50,6 +52,8 @@ function Website_Admin_View_Accounts(){
                 restoreAccountButton.className = "btn btn-success";
                 restoreAccountButton.textContent = "Restore Account";
                 restoreAccountButton.onclick = ()=>{restoreAccount(data[i].email);}
+                if (data[i].email == "website_admin@itu.edu.pk") //Website admin can not restore his own account
+                    restoreAccountButton.disabled = true;
 
                 tR.appendChild(rowCount);
                 tR.appendChild(accountName);
