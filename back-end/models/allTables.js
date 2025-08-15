@@ -22,11 +22,12 @@ async function createTable_Assigned_Courses(){
     if (!client) {
         return;
     }
-    const query = `CREATE TABLE IF NOT EXISTS assignedcourses (
+    const query = `CREATE TABLE IF NOT EXISTS assicourses (
         id SERIAL PRIMARY KEY,
         course_name VARCHAR(100),
         lab VARCHAR(100),
-        labEngineer VARCHAR(100)
+        labEngineer VARCHAR(100),
+        BatchNumber VARCHAR(100)
     )`;
     client.query(query, (err, data) => {
         if (err) {

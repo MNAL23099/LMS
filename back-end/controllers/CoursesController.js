@@ -91,15 +91,15 @@ async function Delete_Courses(req,res){
 
 async function Add_a_Row_to_AssignedCourses(req,res){
     console.log("hi");
-    const {Courses, lab, labeng} = req.body; //Corrected, the keys that are being sent from the frontend were not matching the keys being received here
-    if (!Courses|| !lab || !labeng) {
-        console.log("Missing entries:", Courses, lab, labeng);
+    const {Courses, lab, labeng,batchNumber } = req.body; //Corrected, the keys that are being sent from the frontend were not matching the keys being received here
+    if (!Courses|| !lab || !labeng || !batchNumber) {
+        console.log("Missing entries:", Courses, lab, labeng,batchNumber);
         res.write("missing_entries");
         res.end();
         return;
     }
     try{
-        console.log("Insert params:", Courses, lab, labeng);
+        console.log("Insert params:", Courses, lab, labeng,batchNumber);
         const lsmClient = await connectToDB();
         if (!lsmClient) {
             console.log("DB connection failed");
@@ -107,8 +107,8 @@ async function Add_a_Row_to_AssignedCourses(req,res){
             res.end();
             return;
         }
-        const query_yyy = `INSERT INTO assignedcourses(course_name, lab, labEngineer) VALUES($1, $2, $3)`;
-        await lsmClient.query(query_yyy, [Courses, lab, labeng]);
+        const query_yyy = `INSERT INTO assicourses (course_name, lab, labEngineer, batchnumber) VALUES($1, $2, $3, $4)`;
+        await lsmClient.query(query_yyy, [Courses, lab, labeng,batchNumber]);
         res.write("success");
         res.end();
     }
@@ -121,15 +121,50 @@ async function Add_a_Row_to_AssignedCourses(req,res){
 
 async function View_Assigned_Courses(req,res){
     try { 
-        console.log("fhjdhjf");
-        const query_view_1 = `SELECT * FROM assignedcourses`;
+   
+        const query_view_1 = `SELECT * FROM assicourses`;
         const lsmClient = await connectToDB();
         const data = await lsmClient.query(query_view_1);
         res.json(data.rows);
     } catch (error) {
-        console.log(`error: assignedcourses -> View()-> ${error.message}`);
+        console.log(`error: assicourses -> View()-> ${error.message}`);
+    }
+
+}
+async function Filter_Assigned_Courses(req,res){
+    console.log("here i sm tired");
+     const {batchNumber} = req.body;
+    if(!batchNumber){
+        console.log("no data");
+    }
+  
+try {
+    const query_view_2 = `SELECT * FROM assicourses WHERE batchnumber = $1`;
+    const lsmClient = await connectToDB();
+    const data = await lsmClient.query(query_view_2, [batchNumber]);
+    res.json(data.rows);
+} catch (error) {
+        console.log(`error: assicourses -> filter_View()-> ${error.message}`);
     }
 
 }
 
-module.exports = { Add_courses, view_courses, Delete_Courses, Add_a_Row_to_AssignedCourses,View_Assigned_Courses};
+async function UnAssign_Courses(req,res){
+    const {id} = req.body;
+    if(!id){
+        console.log("no data");
+    }
+    try{
+            const query_4 = `DELETE FROM assicourses WHERE id = id`;
+            const lmsClient = await connectToDB();
+            await lmsClient.query(query_4);
+            res.json(data.rows);
+    }
+    catch(error){
+         console.log(`error: assicourses -> unassign_courses-> ${error.message}`);
+    }
+
+
+}
+
+module.exports = { Add_courses, view_courses, Delete_Courses, Add_a_Row_to_AssignedCourses,View_Assigned_Courses,Filter_Assigned_Courses,UnAssign_Courses};

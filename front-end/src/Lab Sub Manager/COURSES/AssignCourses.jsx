@@ -8,16 +8,18 @@ function AssignCourses() {
   const [courses, setCourses] = useState("");
   const [labs, setLabs] = useState("");
   const [labEngineer, setLabEngineer] = useState("");
+  const [batch,setBatch] = useState("");
 
   
   function fetch_again() {
     console.log(courses);
     console.log(labs);
     console.log(labEngineer);
+    console.log(batch);
     fetch("http://localhost:5000/Course/assign_course", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ Courses: courses, lab: labs, labeng: labEngineer }),
+      body: JSON.stringify({ Courses: courses, lab: labs, labeng: labEngineer,batchNumber: batch}),
     })
       .then((res) => { return res.text(); }) //Corrected from res.json() to res.text()
       .then((res) => {
@@ -67,8 +69,14 @@ function AssignCourses() {
                 </select>
                 <label htmlFor="floatingSelect">Choose engineer</label>
               </div>
+              <div className="form-floating mb-3">
+                <input onChange={(e)=>{setBatch(e.target.value);}} type="text" className="form-control" id="batchInput" placeholder="21_BSSE" />
+                <label htmlFor="batchInput">Enter the Batch (e.g. 21_BSSE)</label>
+              </div>
+
               {/* The fetch_again function will get called when user clicks on Assign */}
               <button onClick={()=> {fetch_again()}} type="submit" className="btn btn-warning w-100 fw-bold" style={{ borderRadius: "25px" }}>Assign</button>
+                
             </form>
           </div>
         </div>
