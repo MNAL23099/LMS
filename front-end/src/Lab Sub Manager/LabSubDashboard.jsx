@@ -1,7 +1,7 @@
 import Navbar from "../Nav/Navbar";
 import { useNavigate } from "react-router-dom";
-import inventoryPicture from "../assets/inventoryAssign.png";
-import courseAssignPicture from "../assets/course_assignment.png";
+// import inventoryPicture from "../assets/inventoryAssign.png";
+// import courseAssignPicture from "../assets/course_assignment.png";
 import allocateInventory from "../assets/allocateInventory.png";
 import courseAssignment from "../assets/courseAssignment.png";
 
