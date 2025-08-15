@@ -100,4 +100,10 @@ export function ViewAssignedCourse() {
   );
 }
 
+//   <tr>
+//       <th scope="row">3</th>
+//       <td>John</td>
+//       <td>Doe</td>
+//       <td>@social</td>
+//     </tr>
 
