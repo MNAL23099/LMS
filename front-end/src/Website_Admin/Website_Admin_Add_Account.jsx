@@ -1,6 +1,39 @@
 import Navbar from "../Nav/Navbar";
+import { useState } from "react";
 
 function Website_Admin_Add_Account(){
+
+    const [accountName, setAccountName] = useState("");
+    const [accountRole, setAccountRole] = useState("");
+    const [accountEmail, setAccountEmail] = useState("");
+
+    function submitForm(e){
+        e.preventDefault();
+        
+        fetch("http://localhost:5000/accounts/addAccount", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({name: accountName, email: accountEmail, role: accountRole}),
+        })
+        .then((response)=>{return response.text()})
+        .then((textResponse)=>{
+            if (textResponse == "missing_entries"){
+                window.alert("Please fill all entries!");
+            }
+            else if (textResponse == "email_already_stored"){
+                window.alert("This staff member already exists!");
+            }
+            else if (textResponse == "new_row_added"){
+                window.alert("New staff member has been added!");
+            }
+            else if (textResponse == "error"){
+                window.alert("An unexpected error has occurred, please contact the developers!");
+            }
+            window.location.reload(); //Reload the window
+            }
+        );
+        }
+
     return(
         <>
         <Navbar pageType="Add Account"/>
@@ -13,7 +46,7 @@ function Website_Admin_Add_Account(){
             alignItems: "center",
             justifyContent: "center"
         }}>
-        <form onSubmit={"#"} id="inventory-div_1-form_1" style={{
+        <form onSubmit={submitForm} id="inventory-div_1-form_1" style={{
             background: "#fff",
             borderRadius: "18px",
             boxShadow: "0 8px 32px 0 rgba(0,33,71,0.10), 0 2px 8px 0 rgba(0,33,71,0.08)",
@@ -33,20 +66,19 @@ function Website_Admin_Add_Account(){
         }}>Add User Account</h2>
         <div className="mb-3">
             <label htmlFor="add-inventory-item-name" className="form-label" style={{fontWeight: 500, color: '#002147'}}>Name</label>
-            <input type="text" className="form-control" id="add-inventory-item-name" style={{borderRadius: "8px", background: '#fff', color: '#002147', border: '1px solid #0056b3'}} aria-describedby="emailHelp" />
+            <input onChange={(e)=>{setAccountName(e.target.value);}} type="text" className="form-control" id="add-inventory-item-name" style={{borderRadius: "8px", background: '#fff', color: '#002147', border: '1px solid #0056b3'}} aria-describedby="emailHelp" />
         </div>
         <div className="mb-3">
             <label htmlFor="add-inventory-item-name" className="form-label" style={{fontWeight: 500, color: '#002147'}}>Email</label>
-            <input type="email" className="form-control" id="add-inventory-item-name" style={{borderRadius: "8px", background: '#fff', color: '#002147', border: '1px solid #0056b3'}} aria-describedby="emailHelp" />
+            <input onChange={(e)=>{setAccountEmail(e.target.value);}} type="email" className="form-control" id="add-inventory-item-name" style={{borderRadius: "8px", background: '#fff', color: '#002147', border: '1px solid #0056b3'}} aria-describedby="emailHelp" />
             <div className="form-text" style={{color: '#002147'}}>University assigned email for this person.</div>
         </div>
         <div className="mb-3">
             <label htmlFor="add-inventory-quantity" className="form-label" style={{fontWeight: 500, color: '#002147'}}>Role</label>
-            <select className="form-select" aria-label="Default select example" style={{borderRadius: "8px", background: '#fff', color: '#002147', border: '1px solid #0056b3'}}>
-                <option selected>Choose Role</option>
-                <option value="lab_engineer">Lab Engineer</option>
-                <option value="lab_technician">Lab Technician</option>
-                <option value="lab_assistant">Lab Assistant</option>
+            <select onChange={(e)=>{setAccountRole(e.target.value);}} className="form-select" aria-label="Default select example" style={{borderRadius: "8px", background: '#fff', color: '#002147', border: '1px solid #0056b3'}}>
+                <option selected value="">Choose Role</option>
+                <option value="super_manager">Lab Super Manager</option>
+                <option value="sub_manager">Lab Sub Manager</option>
             </select>
         </div>
         <button type="submit" className="inventory-go-btn w-100" style={{

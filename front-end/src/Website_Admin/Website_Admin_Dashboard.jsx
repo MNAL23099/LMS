@@ -6,7 +6,7 @@ function Website_Admin_Dashboard(){
     const navigation = useNavigate();
 
     function goToViewWebsiteAccounts(){
-        navigation("websiteAdmin/viewWebsiteAccounts");
+        navigation("viewAccounts");
     }
 
     function goToAddAccount(){
@@ -19,7 +19,7 @@ function Website_Admin_Dashboard(){
 
             <div>
                 <div className="d-flex flex-wrap justify-content-center gap-4" style={{ marginTop: '3rem' }}>
-                    {/* FOE Card */}
+                    {/* View website accounts Card */}
                     <div className="card d-flex flex-column justify-content-between" style={{ width: "15rem", background: "#fff", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(0,33,71,0.10)", border: "1.5px solid #002147", fontFamily: 'Segoe UI, Arial, sans-serif', minHeight: '340px', marginTop: '1rem' }}>
                         <img src={"https://chipincorp.com/wp-content/uploads/2019/09/nt06-01-user-vs-group.jpg"} className="card-img-top" alt="Inventory" style={{ borderTopLeftRadius: "0.5rem", borderTopRightRadius: "0.5rem", height: "140px", objectFit: "cover" }} />
                         <div className="card-body d-flex flex-column justify-content-between" style={{ background: "#fff", color: "#002147", borderRadius: "0 0 1rem 1rem", flex: 1 }}>
@@ -30,7 +30,7 @@ function Website_Admin_Dashboard(){
                             <button onClick={goToViewWebsiteAccounts} className="btn w-100 mt-auto" style={{ background: "linear-gradient(90deg, #ffd700 0%, #ffb400 100%)", color: "#002147", borderRadius: "25px", fontWeight: 700, border: "none" }}>Go</button>
                         </div>
                     </div>
-                    {/* FOS Card */}
+                    {/* Add accounts Card */}
                     <div className="card d-flex flex-column justify-content-between" style={{ width: "15rem", background: "#fff", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(0,33,71,0.10)", border: "1.5px solid #002147", fontFamily: 'Segoe UI, Arial, sans-serif', minHeight: '340px', marginTop: '1rem' }}>
                         <img src={"https://www.cminds.com/wp-content/uploads/M2-Multi-User-Account.png"} className="card-img-top" alt="Inventory" style={{ borderTopLeftRadius: "1rem", borderTopRightRadius: "1rem", height: "140px", objectFit: "cover" }} />
                         <div className="card-body d-flex flex-column justify-content-between" style={{ background: "#fff", color: "#002147", borderRadius: "0 0 1rem 1rem", flex: 1 }}>
@@ -43,6 +43,7 @@ function Website_Admin_Dashboard(){
                     </div>
                 </div>
             </div>
+            
         </>
     );
 

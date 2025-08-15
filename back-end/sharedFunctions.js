@@ -180,6 +180,66 @@ async function editAccountName(targetEmail, newName){
   }
 }
 
+async function accountAlreadyExists(targetEmail){ //Return true if an account on this email already exists
+
+  const lmsClient = await connectToDB();
+  const query = `SELECT * FROM accounts WHERE email = $1`;
+
+  try {
+    const data = await lmsClient.query(query, [targetEmail]);
+    if (data.rowCount == 0){
+      return false;
+    }
+    else return true;
+  }
+  catch(error) {
+    console.log(`sharedFunctions.js -> accountAlreadyExists() -> ${error.message}`);
+    return true;
+  }
+}
+
+async function terminateUserAccount(targetEmail){ //Return true if account has been terminated successfully
+
+  const lmsClient = await connectToDB();
+  const query = `SELECT * FROM accounts WHERE email = $1`;
+
+  try {
+    const data = await lmsClient.query(query, [targetEmail]);
+    if (data.rowCount == 0){ //Return false if no such account exists
+      return false;
+    }
+    
+    const query1 = `UPDATE accounts SET account_status = $1 WHERE email = $2`;
+    await lmsClient.query(query1, ["Termiated", targetEmail]);
+    return true;
+  }
+  catch(error) {
+    console.log(`sharedFunctions.js -> terminateAccount() -> ${error.message}`);
+    return false;
+  }
+}
+
+async function restoreUserAccount(targetEmail){ //Return true if account has been restored successfully
+  
+  const lmsClient = await connectToDB();
+  const query = `SELECT * FROM accounts WHERE email = $1`;
+
+  try {
+    const data = await lmsClient.query(query, [targetEmail]);
+    if (data.rowCount == 0){ //Return false if no such account exists
+      return false;
+    }
+    
+    const query1 = `UPDATE accounts SET account_status = $1 WHERE email = $2`;
+    await lmsClient.query(query1, ["Active", targetEmail]);
+    return true;
+  }
+  catch(error) {
+    console.log(`sharedFunctions.js -> restoreAccount() -> ${error.message}`);
+    return false;
+  }
+}
+
 module.exports = {
   getCurrentSession,
   getLabName,
@@ -190,4 +250,7 @@ module.exports = {
   editAccountStatus,
   removeUserAccount,
   editAccountName,
+  accountAlreadyExists,
+  terminateUserAccount,
+  restoreUserAccount,
 }
