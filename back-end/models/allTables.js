@@ -46,7 +46,7 @@ async function createTable_accounts(){ //This table stores all the accounts crea
     }
     const query = `CREATE TABLE IF NOT EXISTS accounts (
         name VARCHAR(100),
-        email VARCHAR(100),
+        email VARCHAR(100) PRIMARY KEY,
         password VARCHAR(100),
         role VARCHAR(100),
         account_status VARCHAR(100)
@@ -100,7 +100,6 @@ async function createTable_labs(){
         }
     });
 }
-
 
 async function createTable_Users(){
 

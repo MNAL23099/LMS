@@ -1,3 +1,4 @@
+const { stat } = require("fs");
 const connectToDatabase = require("../models/setupDB"); //Import the lms client for our database
 const write_file = require ("fs").promises;
 
@@ -64,43 +65,34 @@ async function userAlreadyExists(targetEmail){// This function returns true if t
 async function signInUser(req,res){
   
   const {email, password} = req.body;
-  console.log(`${email}, ${password}`);
   
   if(await AllFilled(email , password) == false){
-    res.write("Entries are missing");
-    res.end();
+    // res.write("Entries are missing");
+    // res.end();
+    res.json({status: "missing_fields"});
     return;
   }
 
   try{
     const lmsdb = await connectToDatabase(); 
-    const query = `SELECT email, password FROM users
+    const query = `SELECT email, password FROM accounts
     WHERE email = $1 AND password = $2 `;
     const variable = await lmsdb.query(query, [email, password]);
 
     if (variable.rows.length > 0){
-   
-      const account_type =  await Accountype(email);
-      console.log(account_type);
-      // 
-      if(account_type == "lab_engineer"){
-      await write_file.writeFile("./userData/current_session.txt", email);
-
-      // Send JSON with role for frontend dropdown
-      res.json({ status: "success", role: "lab_engineer" });
-    }
-
+      const accountRole =  await getAccountRole(email);
+      if (await initializeUserSession(req, accountRole) == true){
+        res.json({ status: "success", role: accountRole });
+      }
+      else res.json({status: "error"});
     }
     else if (variable.rows.length == 0){
-      console.log("Hello_1");
-      res.write("credentials_mismatch");
-      res.end();
+      res.json({status: "credentials_mismatch"});
     }
   }
   catch(error){
     console.log(`error: authController.js -> signInUser()-> ${error.message}`)
   }
-  
 }
 
 async function AllFilled(email, password){
@@ -109,16 +101,24 @@ async function AllFilled(email, password){
   }
   return true;
 }
-async function Accountype(email){
+async function getAccountRole(targetEmail){
    const lmsdb = await connectToDatabase();
    try{
-   const query_2 = `SELECT account_type FROM users WHERE email = $1`
-   const variable_2 = await lmsdb.query(query_2,[email]); 
-   return variable_2.rows[0].account_type;
+   const query_2 = `SELECT role FROM accounts WHERE email = $1`
+   const variable_2 = await lmsdb.query(query_2,[targetEmail]); 
+   return variable_2.rows[0].role;
    }
    catch(error){
      console.log(`error: authController.js-> ACCOUNTYPE-> signInUser()-> ${error.message}`)
    }
    
+}
+
+async function initializeUserSession(req, role){
+  req.session.user = {role: role};
+  console.log(`signed in session role: ${req.session.user.role}`);
+  req.session.save(()=>{console.log("session saved!");});
+  
+  return true;
 }
 module.exports = {signUpUser, signInUser};

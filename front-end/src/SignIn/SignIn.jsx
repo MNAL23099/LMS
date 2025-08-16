@@ -1,42 +1,53 @@
 import { useState } from "react";
 import Navbar from "../Nav/Navbar";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
-function SignIn(){
+function SignIn() {
 
     const navigate = useNavigate();
-    function gotoInventory(){
-    navigate("/adminDashboard");
+
+    function goToSuperManager() {
+        navigate("/foe_dashboard");
     }
 
-   const [email, setEmail] = useState("");
+    function goToWebsiteAdmin() {
+        navigate("/websiteAdmin/Dashboard");
+    }
+
+    const [email, setEmail] = useState("");
     const [password, setPasseword] = useState("");
     const [showRoleDropdown, setShowRoleDropdown] = useState(false);
-    const [role, setRole] = useState(""); 
+    const [role, setRole] = useState("");
 
-    function submitform(e){
-    e.preventDefault();
-    fetch("http://localhost:5000/auth/signin", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({ email: email, password: password })
-    })
-    .then((res) => res.json())
-    .then((res) => {
-        if (res.status === "missing_fields") {
-            window.alert("Fill all the fields");
-        } else if (res.status === "credentials_mismatch") {
-            window.alert("Credentials mismatched, try again");
-        } else if (res.status === "success") {
-            setRole(res.role);
-            setShowRoleDropdown(true); // Show dropdown after login
-            window.alert(`Logged in as ${res.role}`);
-        } else {
-            window.alert("Unexpected response from server.");
-        }
-    });
-}
+    function submitform(e) {
+        e.preventDefault();
+        fetch("http://localhost:5000/auth/signin", {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: email, password: password })
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                if (res.status === "missing_fields") {
+                    window.alert("Fill all the fields");
+                } else if (res.status === "credentials_mismatch") {
+                    window.alert("Credentials mismatched, try again");
+                } else if (res.status === "success") {
+                    window.alert(`Logged in as ${res.role}`);
+                    if (res.role == "super_manager") {
+                        goToSuperManager();
+                    }
+                    else if (res.role == "website_admin") {
+                        goToWebsiteAdmin();
+                    }
+                }
+                else if (res.status == "error") {
+                    window.alert("Unexpected response from server.");
+                }
+            });
+    }
 
     return (
         <>
@@ -68,7 +79,7 @@ function SignIn(){
                         <h1 style={{
                             textAlign: "center",
                             marginBottom: "2rem",
-                            color:"#05105cff",
+                            color: "#05105cff",
                             fontWeight: 800,
                             letterSpacing: "1px",
                             fontFamily: "'Segoe UI', 'Roboto', 'Arial', sans-serif"
@@ -76,48 +87,44 @@ function SignIn(){
 
                         <div className="mb-3">
                             <label htmlFor="signin-email" className="form-label" style={{ fontWeight: 500, color: '#05105cff' }}>Email address</label>
-                            <input onChange={(e)=>{setEmail(e.target.value)}} type="email" className="form-control" id="signin-email" style={{ borderRadius: "8px", backgroundColor: ' #eb8f06ff', color: '#fff', border: '1px solid #800000' }} aria-describedby="emailHelp" />
+                            <input onChange={(e) => { setEmail(e.target.value) }} type="email" className="form-control" id="signin-email" style={{ borderRadius: "8px", backgroundColor: ' #eb8f06ff', color: '#fff', border: '1px solid #800000' }} aria-describedby="emailHelp" />
                             <div id="emailHelp" className="form-text" style={{ color: '#05105cff' }}>We'll never share your email with anyone else.</div>
                         </div>
 
                         <div className="mb-3">
                             <label htmlFor="signin-password" className="form-label" style={{ fontWeight: 500, color: '#05105cff' }}>Password</label>
-                            <input onChange={(e)=>{setPasseword(e.target.value)}} type="password" className="form-control" id="signin-password" style={{ borderRadius: "8px", backgroundColor: '#eb8f06ff', color: '#fff', border: '1px solid #800000' }} />
+                            <input onChange={(e) => { setPasseword(e.target.value) }} type="password" className="form-control" id="signin-password" style={{ borderRadius: "8px", backgroundColor: '#eb8f06ff', color: '#fff', border: '1px solid #800000' }} />
                         </div>
-                        
+
                         {showRoleDropdown && (
-                        <div style={{ marginTop: "1rem" }}>
-                            <label htmlFor="role-select" style={{ color: '#05105cff', fontWeight: 500 }}>Select your destination:</label>
-                            <select
-                                id="role-select"
-                                className="form-select mt-2"
-                                style={{ borderRadius: "8px", backgroundColor: ' #d7cfc4ff', border: '1px solid #e65100' }}
-                                onChange={(e) => {
-                                    const selected = e.target.value;
-                                    if (selected === "admin") {
-                                        navigate("/adminDashboard");
-                                    } else if (selected === "sub_manager") {
-                                        navigate("/subManagerDashboard");
-                                    } else if ( selected === "lab_engineer")
-                                    {
-                                        navigate("/LabEngineerDashboard");
-                                    }
-                                    else {
-                                        window.alert("No valid selection made.");
-                                    }
-                                    setShowRoleDropdown(false);
-                                }}
-                            >
-                                <option value="">-- Select Dashboard --</option>
-                                <option value="admin">Admin Dashboard</option>
-                                <option value="sub_manager">Sub Manager Dashboard</option>
-                                <option value="lab_engineer">Lab Engineer Dashboard</option>
-                            </select>
-                        </div>
-                    )}
-
-                       
-
+                            <div style={{ marginTop: "1rem" }}>
+                                <label htmlFor="role-select" style={{ color: '#05105cff', fontWeight: 500 }}>Select your destination:</label>
+                                <select
+                                    id="role-select"
+                                    className="form-select mt-2"
+                                    style={{ borderRadius: "8px", backgroundColor: ' #d7cfc4ff', border: '1px solid #e65100' }}
+                                    onChange={(e) => {
+                                        const selected = e.target.value;
+                                        if (selected === "admin") {
+                                            navigate("/adminDashboard");
+                                        } else if (selected === "sub_manager") {
+                                            navigate("/subManagerDashboard");
+                                        } else if (selected === "lab_engineer") {
+                                            navigate("/LabEngineerDashboard");
+                                        }
+                                        else {
+                                            window.alert("No valid selection made.");
+                                        }
+                                        setShowRoleDropdown(false);
+                                    }}
+                                >
+                                    <option value="">-- Select Dashboard --</option>
+                                    <option value="admin">Admin Dashboard</option>
+                                    <option value="sub_manager">Sub Manager Dashboard</option>
+                                    <option value="lab_engineer">Lab Engineer Dashboard</option>
+                                </select>
+                            </div>
+                        )}
                         <button type="submit" className="btn w-100" style={{
                             borderRadius: "25px",
                             fontWeight: 700,
