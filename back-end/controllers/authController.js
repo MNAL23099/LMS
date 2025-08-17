@@ -129,7 +129,12 @@ async function getAccountStatus(email) {
   }
 }
 
-
+async function AllFilled(email, password){
+  if(!email || !password){
+    return false;
+  }
+  return true;
+}
 async function initializeUserSession(req, role) {
 
   req.session.user = { role: role };
