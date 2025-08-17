@@ -12,6 +12,9 @@ function LabEngineerDashboard() {
  const goToViewAllocatedInventory = () => {
   navigate("/viewAllocatedInventory");
  }
+  function goToViewAllocatedCourses(){
+  navigate("/viewAllocatedCourses");
+ }
 
   useEffect(() => {
     fetch("http://localhost:5000/labEngineer/dashboard")
@@ -51,7 +54,7 @@ function LabEngineerDashboard() {
             <div className="card-body" style={{ background: "#fff3e0", color: "#e65100", borderRadius: "0 0 1rem 1rem" }}>
               <h5 className="card-title" style={{ fontWeight: 700 }}>View Assigned Courses</h5>
               <p className="card-text">See what courses it being given </p>
-              <button className="btn btn-primary" style={{ background: "linear-gradient(90deg, #ff9800 0%, #ffb74d 100%)", color: "#fff", borderRadius: "25px", fontWeight: 700, border: "none" }}>Go</button>
+              <button onClick={goToViewAllocatedCourses} className="btn btn-primary" style={{ background: "linear-gradient(90deg, #ff9800 0%, #ffb74d 100%)", color: "#fff", borderRadius: "25px", fontWeight: 700, border: "none" }}>Go</button>
             </div>
           </div>
           {/* View Labs Card */}

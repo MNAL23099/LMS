@@ -3,7 +3,7 @@ import Navbar from "../Nav/Navbar";
 import { useNavigate } from "react-router-dom";
 
 
-function SignIn() {
+function SignIn(){
 
     const navigate = useNavigate();
 
@@ -15,10 +15,18 @@ function SignIn() {
         navigate("/websiteAdmin/Dashboard");
     }
 
+    function goToSubManager() {
+        navigate("/subManagerDashboard");
+    }
+
+     function goToLabEngineer() {
+        navigate("/LabEngineerDashboar");
+    }
+
+
     const [email, setEmail] = useState("");
     const [password, setPasseword] = useState("");
-    const [showRoleDropdown, setShowRoleDropdown] = useState(false);
-    const [role, setRole] = useState("");
+
 
     function submitform(e) {
         e.preventDefault();
@@ -41,6 +49,12 @@ function SignIn() {
                     }
                     else if (res.role == "website_admin") {
                         goToWebsiteAdmin();
+                    }
+                    else if(res.role =="sub_manager"){
+                        goToSubManager();
+                    }
+                    else if(res.role =="lab_engineer"){
+                        goToLabEngineer();
                     }
                 }
                 else if (res.status == "error") {
@@ -96,35 +110,8 @@ function SignIn() {
                             <input onChange={(e) => { setPasseword(e.target.value) }} type="password" className="form-control" id="signin-password" style={{ borderRadius: "8px", backgroundColor: '#eb8f06ff', color: '#fff', border: '1px solid #800000' }} />
                         </div>
 
-                        {showRoleDropdown && (
-                            <div style={{ marginTop: "1rem" }}>
-                                <label htmlFor="role-select" style={{ color: '#05105cff', fontWeight: 500 }}>Select your destination:</label>
-                                <select
-                                    id="role-select"
-                                    className="form-select mt-2"
-                                    style={{ borderRadius: "8px", backgroundColor: ' #d7cfc4ff', border: '1px solid #e65100' }}
-                                    onChange={(e) => {
-                                        const selected = e.target.value;
-                                        if (selected === "admin") {
-                                            navigate("/adminDashboard");
-                                        } else if (selected === "sub_manager") {
-                                            navigate("/subManagerDashboard");
-                                        } else if (selected === "lab_engineer") {
-                                            navigate("/LabEngineerDashboard");
-                                        }
-                                        else {
-                                            window.alert("No valid selection made.");
-                                        }
-                                        setShowRoleDropdown(false);
-                                    }}
-                                >
-                                    <option value="">-- Select Dashboard --</option>
-                                    <option value="admin">Admin Dashboard</option>
-                                    <option value="sub_manager">Sub Manager Dashboard</option>
-                                    <option value="lab_engineer">Lab Engineer Dashboard</option>
-                                </select>
-                            </div>
-                        )}
+                       
+                             
                         <button type="submit" className="btn w-100" style={{
                             borderRadius: "25px",
                             fontWeight: 700,
