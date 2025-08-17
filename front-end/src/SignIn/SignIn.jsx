@@ -12,7 +12,7 @@ function SignIn(){
     }
 
     function goToWebsiteAdmin() {
-        navigate("/websiteAdmin/Dashboard");
+        navigate("/websiteAdmin/dashboard");
     }
 
     function goToSubManager() {
@@ -20,7 +20,7 @@ function SignIn(){
     }
 
      function goToLabEngineer() {
-        navigate("/LabEngineerDashboar");
+        navigate("/LabEngineerDashboard");
     }
 
 
@@ -44,20 +44,20 @@ function SignIn(){
                     window.alert("Credentials mismatched, try again");
                 } else if (res.status === "success") {
                     window.alert(`Logged in as ${res.role}`);
-                    if (res.role == "super_manager") {
+                    if (res.role === "super_manager") {
                         goToSuperManager();
                     }
-                    else if (res.role == "website_admin") {
+                    else if (res.role === "website_admin") {
                         goToWebsiteAdmin();
                     }
-                    else if(res.role =="sub_manager"){
+                    else if(res.role === "sub_manager"){
                         goToSubManager();
                     }
-                    else if(res.role =="lab_engineer"){
+                    else if(res.role === "lab_engineer"){
                         goToLabEngineer();
                     }
                 }
-                else if (res.status == "error") {
+                else if (res.status === "error") {
                     window.alert("Unexpected response from server.");
                 }
             });

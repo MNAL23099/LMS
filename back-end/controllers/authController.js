@@ -64,78 +64,71 @@ async function userAlreadyExists(targetEmail){// This function returns true if t
 async function signInUser(req, res) {
   const { email, password } = req.body;
 
-  if (await AllFilled(email, password) == false) {
-    res.write("Entries are missing");
-    res.end();
-    return;
+  if (!(await AllFilled(email, password))) {
+    return res.json({ status: "missing_fields" });
   }
 
   try {
-    const lmsdb = await connectToDatabase(); 
+    const lmsdb = await connectToDatabase();
     const query = `SELECT email, password, account_status 
                    FROM accounts
-                   WHERE email = $1 AND password = $2 AND account_status = $3`;
+                   WHERE email = $1 AND password = $2`;
 
-    const variable = await lmsdb.query(query, [email, password, "Active"]);
+    const variable = await lmsdb.query(query, [email, password]);
 
     if (variable.rows.length === 0) {
-      res.write("Invalid email or password");
-      res.end();
-      return;
+      return res.json({ status: "credentials_mismatch" });
     }
 
     const status = await getAccountStatus(email);
     if (status !== "Active") {
-      res.write("Terminated");
-      res.end();
-      return;
+      return res.json({ status: "terminated" });
     }
 
-    if (variable.rows.length > 0) {
-      const data_1 = await getAccountRole(email);
-      await initializeUserSession(req, data_1);
-      res.write(data_1);
-      res.end();
-    }
+    const role = await getAccountRole(email);
+    await initializeUserSession(req, role);
+
+    return res.json({ status: "success", role });
   } catch (error) {
     console.log(`error: authcontroller -> signinuser() -> ${error.message}`);
+    return res.json({ status: "error" });
   }
 }
 
 async function getAccountRole(email) {
   try {
-    const lmsdb = await connectToDatabase(); 
-    const query_1 = `SELECT role FROM accounts WHERE email = $1`;
-    const data = await lmsdb.query(query_1, [email]);
-    if (data.rows.length === 0){
+    const lmsdb = await connectToDatabase();
+    const query = `SELECT role FROM accounts WHERE email = $1`;
+    const data = await lmsdb.query(query, [email]);
+   
+    if(data.rows[0].role == 0){
       return null;
-    } 
+    }
     return data.rows[0].role;
+
   } catch (error) {
     console.log(`error: authcontroller -> getAccountRole() -> ${error.message}`);
+    return null;
   }
 }
 
 async function getAccountStatus(email) {
   try {
-    const lmsdb = await connectToDatabase(); 
-    const query_1 = `SELECT account_status FROM accounts WHERE email = $1`;
-    const data = await lmsdb.query(query_1, [email]);
-     if (data.rows.length === 0){
+    const lmsdb = await connectToDatabase();
+    const query = `SELECT account_status FROM accounts WHERE email = $1`;
+    const data = await lmsdb.query(query, [email]);
+
+    if(data.rows[0].account_status == 0){
       return null;
-    } 
+    }
     return data.rows[0].account_status;
+
   } catch (error) {
     console.log(`error: authcontroller -> getAccountStatus() -> ${error.message}`);
+    return null;
   }
 }
 
-async function AllFilled(email, password) {
-  if (!email || !password) {
-    return false;
-  }
-  return true;
-}
 
 async function initializeUserSession(req, role) {
 
