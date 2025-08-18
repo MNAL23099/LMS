@@ -35,6 +35,7 @@ import { ViewAllocatedInventory } from "./Lab Engineer/viewAllocatedInventory.js
 import Website_Admin_Dashboard from "./Website_Admin/Website_Admin_Dashboard.jsx";
 import Website_Admin_Add_Account from "./Website_Admin/Website_Admin_Add_Account.jsx";
 import Website_Admin_View_Accounts from "./Website_Admin/Website_Admin_View_Accounts.jsx";
+import Student_Dashboard from "./Student/st_dashboard.jsx";
 
 function App() {
 
@@ -74,6 +75,7 @@ function App() {
         <Route path="/LabEngineerDashboard" element={<LabEngineerDashboard/>} />
         <Route path="/viewassigncourses" element={<ViewAssignedCourse/>}/>
         <Route path="/viewAllocatedInventory" element={<ViewAllocatedInventory/>} />
+        <Route path="/studentDashboard" element={<Student_Dashboard/>}/>
 
         {/* Website admin Routes */}
         <Route path="/websiteAdmin/dashboard" element={<Website_Admin_Dashboard />} />
