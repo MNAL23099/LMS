@@ -170,5 +170,28 @@ async function UnAssign_Courses(req,res){
 
 
 }
+async function view_to_lab_engineer(req,res){
+    const {lab_email} = req.body;
+    // if(!lab_email){
+    //     res.write("missing_entries");
+    // }
+    try{
+        const lmsClient = await connectToDB();
+        const query_query = `SELECT course_name, batchnumber FROM assicourses WHERE labengineer = $1`;
+        const data = await lmsClient.query(query_query,[lab_email]);
+        return  res.json(data.rows);
+        res.end();
 
-module.exports = { Add_courses, view_courses, Delete_Courses, Add_a_Row_to_AssignedCourses,View_Assigned_Courses,Filter_Assigned_Courses,UnAssign_Courses};
+
+    }
+    catch(error){
+        console.log(`issue in view_to_lab_engineer-> coursescontroller-> ${error.message}`);
+
+    }
+
+}
+// async function  getLabEngineerEmail(req,res){
+
+// }
+
+module.exports = { Add_courses, view_courses, Delete_Courses, Add_a_Row_to_AssignedCourses,View_Assigned_Courses,Filter_Assigned_Courses,UnAssign_Courses,view_to_lab_engineer};

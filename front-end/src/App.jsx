@@ -36,6 +36,8 @@ import Website_Admin_Dashboard from "./Website_Admin/Website_Admin_Dashboard.jsx
 import Website_Admin_Add_Account from "./Website_Admin/Website_Admin_Add_Account.jsx";
 import Website_Admin_View_Accounts from "./Website_Admin/Website_Admin_View_Accounts.jsx";
 import Student_Dashboard from "./Student/st_dashboard.jsx";
+import { ViewToLabEngineer } from "./Lab Engineer/Courses_show/viewAssignedCourses.jsx";
+import { Fetch_lab_space } from "./Lab Engineer/Courses_show/FetchLabSpace.jsx";
 
 function App() {
 
@@ -81,6 +83,8 @@ function App() {
         <Route path="/websiteAdmin/dashboard" element={<Website_Admin_Dashboard />} />
         <Route path="/websiteAdmin/Dashboard/addAccount" element={<Website_Admin_Add_Account />}/> 
         <Route path="/websiteAdmin/Dashboard/viewAccounts" element={<Website_Admin_View_Accounts />} />
+        <Route path= "/view_courses_by_lab_engineer" element={<ViewToLabEngineer/>}/>
+         <Route path= "/fetch_space" element={<Fetch_lab_space/>}/>
       </Routes>
       <Footer />
     </BrowserRouter>

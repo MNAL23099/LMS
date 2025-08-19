@@ -6,7 +6,11 @@ const {Add_courses,
       Add_a_Row_to_AssignedCourses, 
       View_Assigned_Courses,
       Filter_Assigned_Courses,
-      UnAssign_Courses} = require("../controllers/CoursesController.js");
+      UnAssign_Courses,
+      view_to_lab_engineer,
+    //  getLabEngineerEmail
+     } = require("../controllers/CoursesController.js");
+    
 router.post("/addcourse", async (req, res)=>{
     await Add_courses(req,res);
 });
@@ -36,6 +40,12 @@ router.post("/filter_assign_course", async(req,res)=>{
 router.post("/unassin_course", async(req,res)=>{
     await UnAssign_Courses(req,res);
 })
+router.post("/view_courses_to_lab_engineer", async(req,res)=>{
+    await view_to_lab_engineer(req,res);
+})
+// router.post("/post_courses_to_lab_engineer", async(req,res)=>{
+//     await getLabEngineerEmail(req,res);              // for getting the email of lab engineer
+// })
 
 module.exports = router;
 

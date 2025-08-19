@@ -7,6 +7,8 @@ function fetchLabsData(){
     fetch("http://localhost:5000/labStaff/viewEditAssignedLabs")
     .then((res)=>{return res.json()})
     .then((data)=>{
+
+        
         for(let i= 0; i< data.length; i++){
 
             const tableBody = document.getElementById("viewEditAssignedLabs-tbody");

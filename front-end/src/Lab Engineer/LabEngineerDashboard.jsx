@@ -13,7 +13,7 @@ function LabEngineerDashboard() {
   navigate("/viewAllocatedInventory");
  }
   function goToViewAllocatedCourses(){
-  navigate("/viewAllocatedCourses");
+  navigate("/view_courses_by_lab_engineer");
  }
 
   useEffect(() => {
