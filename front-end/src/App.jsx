@@ -38,6 +38,7 @@ import Website_Admin_View_Accounts from "./Website_Admin/Website_Admin_View_Acco
 import Student_Dashboard from "./Student/st_dashboard.jsx";
 import { ViewToLabEngineer } from "./Lab Engineer/Courses_show/viewAssignedCourses.jsx";
 import { Fetch_lab_space } from "./Lab Engineer/Courses_show/FetchLabSpace.jsx";
+import FileUpload from "./fileUploadTest/FileUpload.jsx";
 
 function App() {
 
@@ -85,6 +86,9 @@ function App() {
         <Route path="/websiteAdmin/Dashboard/viewAccounts" element={<Website_Admin_View_Accounts />} />
         <Route path= "/view_courses_by_lab_engineer" element={<ViewToLabEngineer/>}/>
          <Route path= "/fetch_space" element={<Fetch_lab_space/>}/>
+
+        {/* Testing file uploading */}
+        <Route path="/uploadFile" element={<FileUpload />} />
       </Routes>
       <Footer />
     </BrowserRouter>

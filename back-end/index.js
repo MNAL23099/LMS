@@ -22,6 +22,8 @@ app.use("/LabSub" , require("./routes/LabSub"));
 app.use("/labEngineer", require("./routes/labEngineer"));
 app.use("/accounts", require("./routes/accounts"));
 app.use("/session", require("./routes/session"));
+app.use("/uploadFileTest", require("./routes/fileUploadTest.js"));
+
 
 app.get("/", (req, res) => {
   res.send("Backend is working!");
