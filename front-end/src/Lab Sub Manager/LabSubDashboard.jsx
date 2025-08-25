@@ -58,6 +58,7 @@ const LabSubDashboard = () => {
               <button onClick={goToCourseDasboard} className="btn w-100 mt-auto" style={{ background: "linear-gradient(90deg, #ffd700 0%, #ffb400 100%)", color: "#002147", borderRadius: "25px", fontWeight: 700, border: "none" }}>Go</button>
             </div>
           </div>
+
         </div>
       </div>
     </>

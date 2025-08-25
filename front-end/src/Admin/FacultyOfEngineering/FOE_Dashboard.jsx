@@ -7,6 +7,8 @@ import "./Inventory/Inventory_Dashboard.css";
 import image_labManagement from "../../assets/lab.jpg";
 import course_management from "../../assets/course management system.jpg";
 
+
+
 function FOE_Dashboard(){
 
     const navigation = useNavigate();
@@ -27,6 +29,11 @@ function FOE_Dashboard(){
 
     function goToCoursesManagement(){
         navigation("/Courses_manage");
+    }
+     
+    function goToAddFaculty()
+    {
+        navigation("/AddFaculty");
     }
 
 
@@ -84,9 +91,18 @@ function FOE_Dashboard(){
                     <a onClick={goToCoursesManagement} href="#" className="btn w-100 mt-auto" style={{ background: "linear-gradient(90deg, #ffd700 0%, #ffb400 100%)", color: "#002147", borderRadius: "25px", fontWeight: 700, border: "none" }}>Go</a>
                 </div>
                 </div>
-
-                </div>
-            
+                {/* Add Faculty Card */}
+                <div className="card" style={{ width: "17rem", background: "#fff", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(0,33,71,0.10)", border: "1.5px solid #002147", fontFamily: 'Segoe UI, Arial, sans-serif', minHeight: '340px' }}>
+                    <img src={course_management} className="card-img-top" alt="Inventory" style={{ borderTopLeftRadius: "1rem", borderTopRightRadius: "1rem", height: "140px", objectFit: "cover" }} />
+                    <div className="card-body d-flex flex-column justify-content-between" style={{ background: "#fff", color: "#002147", borderRadius: "0 0 1rem 1rem", flex: 1 }}>
+                    <div className="text-center">
+                        <h5 className="card-title" style={{ fontWeight: 700, color: '#002147', fontSize: '1.15rem', marginBottom: '0.5rem' }}>Course Assignment</h5>
+                        <p className="card-text" style={{ color: '#002147', fontSize: '1rem', marginBottom: '0.5rem' }}>Assign the courses to labs</p>
+                    </div>
+                    <button onClick={goToAddFaculty} className="btn w-100 mt-auto" style={{ background: "linear-gradient(90deg, #ffd700 0%, #ffb400 100%)", color: "#002147", borderRadius: "25px", fontWeight: 700, border: "none" }}>Go</button>
+                    </div>
+                    </div>
+                    </div>
         </div>
 
     );  
