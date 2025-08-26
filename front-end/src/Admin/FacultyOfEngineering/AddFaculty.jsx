@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Navbar from "../Nav/Navbar";
+import Navbar from "../../Nav/Navbar";
 
 const AddFaculty = () => {
   const [facultyName, setFacultyName] = useState("");

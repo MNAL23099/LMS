@@ -39,7 +39,7 @@ import Student_Dashboard from "./Student/st_dashboard.jsx";
 import { ViewToLabEngineer } from "./Lab Engineer/Courses_show/viewAssignedCourses.jsx";
 import { Fetch_lab_space } from "./Lab Engineer/Courses_show/FetchLabSpace.jsx";
 import FileUpload from "./fileUploadTest/FileUpload.jsx";
-import AddFaculty from "./Lab Sub Manager/AddFaculty.jsx";
+import AddFaculty from  "./Admin/FacultyOfEngineering/AddFaculty.jsx";
 
 function App() {
 
