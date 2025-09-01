@@ -1,33 +1,33 @@
-import AdminDashboard from "./Admin/AdminDashboard.jsx";
+import AdminDashboard from "./SuperManager/AdminDashboard.jsx";
 import SignUp from "./SignUp/signUp.jsx";
 import Homepage from "./Homepage/Homepage.jsx";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import SignIn from "./SignIn/SignIn.jsx";
 import Footer from "./Footer/Footer.jsx";
-import ViewStaff from "./Admin/FacultyOfEngineering/LabStaff/ViewStaff.jsx";
-import { ViewInventory } from "./Admin/FacultyOfEngineering/Inventory/ViewInventory.jsx";
-import Inventory_Dashboard from "./Admin/FacultyOfEngineering/Inventory/Inventory_Dashboard.jsx";
-import AddInventory from "./Admin/FacultyOfEngineering/Inventory/AddInventory.jsx";
-import EditInventory from "./Admin/FacultyOfEngineering/Inventory/EditInventory.jsx";
-import LabStaff_Dashboard from "./Admin/FacultyOfEngineering/LabStaff/LabStaff_Dashboard.jsx";
-import AssignLabs from "./Admin/FacultyOfEngineering/LabStaff/AssignLabs.jsx";
-import FOE_Dashboard from "./Admin/FacultyOfEngineering/FOE_Dashboard.jsx";
-import AddStaff from "./Admin/FacultyOfEngineering/LabStaff/AddStaff.jsx";
-import { Lab_Dasboard } from "./Admin/FacultyOfEngineering/LabManagement/Lab_dasboard.jsx";
-import AddLab from "./Admin/FacultyOfEngineering/LabManagement/AddLabs.jsx";
-import ViewEditAssignedLabs from "./Admin/FacultyOfEngineering/LabStaff/ViewEditAssignedLabs.jsx";
-import { ViewLabs } from "./Admin/FacultyOfEngineering/LabManagement/ViewLab.jsx";
-import { Courses_Dashboard } from "./Admin/FacultyOfEngineering/Course/Courses_Dasboardd.jsx";
-import { Add_Courses } from "./Admin/FacultyOfEngineering/Course/Add_Course.jsx";
-import EditStaff from "./Admin/FacultyOfEngineering/LabStaff/EditStaff.jsx";
-import { View_Course } from "./Admin/FacultyOfEngineering/Course/View_Courses.jsx";
+import ViewStaff from "./SuperManager/FacultyOfEngineering/LabStaff/ViewStaff.jsx";
+import { ViewInventory } from "./SuperManager/FacultyOfEngineering/Inventory/ViewInventory.jsx";
+import Inventory_Dashboard from "./SuperManager/FacultyOfEngineering/Inventory/Inventory_Dashboard.jsx";
+import AddInventory from "./SuperManager/FacultyOfEngineering/Inventory/AddInventory.jsx";
+import EditInventory from "./SuperManager/FacultyOfEngineering/Inventory/EditInventory.jsx";
+import LabStaff_Dashboard from "./SuperManager/FacultyOfEngineering/LabStaff/LabStaff_Dashboard.jsx";
+import AssignLabs from "./SuperManager/FacultyOfEngineering/LabStaff/AssignLabs.jsx";
+import FOE_Dashboard from "./SuperManager/FacultyOfEngineering/FOE_Dashboard.jsx";
+import AddStaff from "./SuperManager/FacultyOfEngineering/LabStaff/AddStaff.jsx";
+import { Lab_Dasboard } from "./SuperManager/FacultyOfEngineering/LabManagement/Lab_dasboard.jsx";
+import AddLab from "./SuperManager/FacultyOfEngineering/LabManagement/AddLabs.jsx";
+import ViewEditAssignedLabs from "./SuperManager/FacultyOfEngineering/LabStaff/ViewEditAssignedLabs.jsx";
+import { ViewLabs } from "./SuperManager/FacultyOfEngineering/LabManagement/ViewLab.jsx";
+import { Courses_Dashboard } from "./SuperManager/FacultyOfEngineering/Course/Courses_Dasboardd.jsx";
+import { Add_Courses } from "./SuperManager/FacultyOfEngineering/Course/Add_Course.jsx";
+import EditStaff from "./SuperManager/FacultyOfEngineering/LabStaff/EditStaff.jsx";
+import { View_Course } from "./SuperManager/FacultyOfEngineering/Course/View_Courses.jsx";
 import LabSubDashboard from "./Lab Sub Manager/LabSubDashboard.jsx";
 import Courses_Dashboard_Sub_Manager from "./Lab Sub Manager/COURSES/Courses_Dashboard.jsx";
 import AssignCourses from "./Lab Sub Manager/COURSES/AssignCourses.jsx";
 import AssignInventoryToLab from "./Lab Sub Manager/Inventory Allocation/assignInventoryToLab.jsx";
 import RequestInventoryForLab from "./Lab Sub Manager/Inventory Allocation/requestInventory.jsx";
-import Handle_Pending_Requests from "./Admin/FacultyOfEngineering/Inventory/InventoryRequests/Handle_Pending_Requests.jsx";
-import Inventory_Requests_Dashboard from "./Admin/FacultyOfEngineering/Inventory/InventoryRequests/Inventory_Requests_Dashboard.jsx";
+import Handle_Pending_Requests from "./SuperManager/FacultyOfEngineering/Inventory/InventoryRequests/Handle_Pending_Requests.jsx";
+import Inventory_Requests_Dashboard from "./SuperManager/FacultyOfEngineering/Inventory/InventoryRequests/Inventory_Requests_Dashboard.jsx";
 import InventoryAllocation from "./Lab Sub Manager/Inventory Allocation/inventoryAllocation.jsx"
 import LabEngineerDashboard from "./Lab Engineer/LabEngineerDashboard.jsx";
 import { ViewAssignedCourse } from "./Lab Sub Manager/COURSES/View_Assigned_Courses.jsx";
@@ -39,7 +39,7 @@ import Student_Dashboard from "./Student/st_dashboard.jsx";
 import { ViewToLabEngineer } from "./Lab Engineer/Courses_show/viewAssignedCourses.jsx";
 import { Fetch_lab_space } from "./Lab Engineer/Courses_show/FetchLabSpace.jsx";
 import FileUpload from "./fileUploadTest/FileUpload.jsx";
-import AddFaculty from  "./Admin/FacultyOfEngineering/AddFaculty.jsx";
+import AddFaculty from  "./SuperManager/FacultyOfEngineering/AddFaculty.jsx";
 
 function App() {
 
@@ -50,6 +50,8 @@ function App() {
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="/homepage" element={<Homepage />} />
         <Route path="/signin" element={<SignIn />}/>
+
+        {/* SuperManager Routes */}
         <Route path="/inventoryDashboard" element={<Inventory_Dashboard />} />
         <Route path="/addInventory" element={<AddInventory />}></Route>
         <Route path="/editInventory" element={<EditInventory />} />
@@ -60,14 +62,17 @@ function App() {
         <Route path="/viewInventory" element={<ViewInventory/>}/>
         <Route path="/assignLabs" element={<AssignLabs />} />
         <Route path="/foe_dashboard" element={<FOE_Dashboard />} />
-        <Route path="/lab_manage_dashboard" element= {<Lab_Dasboard/>}/>
         <Route path="/adminDashboard" element={<AdminDashboard />} />
+        <Route path="/lab_manage_dashboard" element= {<Lab_Dasboard/>}/>
         <Route path="/addlab" element = {<AddLab/>}/>
         <Route path="/viewlabss" element = {<ViewLabs/>}/>
         <Route path="/viewEditAssignedLabs" element = {<ViewEditAssignedLabs />} />
         <Route path="/Courses_manage" element = {<Courses_Dashboard/>}/>
         <Route path="/addCourse" element ={<Add_Courses/>}/>
         <Route path ="/viewCourse" element ={<View_Course/>}/>
+        <Route path= "/fetch_space" element={<Fetch_lab_space/>}/>
+
+        {/* SubManager Routes */}
         <Route path="/subManagerDashboard" element ={<LabSubDashboard/>} />
         <Route path="/Coursessubdash" element={<Courses_Dashboard_Sub_Manager/>}/>
         <Route path= "/assignCourses" element = {<AssignCourses/>}/>
@@ -87,8 +92,7 @@ function App() {
         <Route path="/websiteAdmin/Dashboard/addAccount" element={<Website_Admin_Add_Account />}/> 
         <Route path="/websiteAdmin/Dashboard/viewAccounts" element={<Website_Admin_View_Accounts />} />
         <Route path= "/view_courses_by_lab_engineer" element={<ViewToLabEngineer/>}/>
-         <Route path= "/fetch_space" element={<Fetch_lab_space/>}/>
-
+        
         {/* Testing file uploading */}
         <Route path="/uploadFile" element={<FileUpload />} />
       </Routes>
