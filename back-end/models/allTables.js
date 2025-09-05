@@ -395,7 +395,6 @@ async function createTable_faculties() {
         CREATE TABLE IF NOT EXISTS faculties (
             id SERIAL PRIMARY KEY,
             name TEXT NOT NULL,
-            department TEXT NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     `;

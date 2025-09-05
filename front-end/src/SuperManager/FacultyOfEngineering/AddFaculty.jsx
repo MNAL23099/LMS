@@ -3,7 +3,7 @@ import Navbar from "../../Nav/Navbar";
 
 const AddFaculty = () => {
   const [facultyName, setFacultyName] = useState("");
-  const [department, setDepartment] = useState("");
+  // const [department, setDepartment] = useState("");
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
@@ -16,8 +16,7 @@ const AddFaculty = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: facultyName,
-          department: department,
+          name: facultyName
         }),
       });
 
@@ -26,7 +25,7 @@ const AddFaculty = () => {
       if (res.ok) {
         setMessage("Faculty added successfully!");
         setFacultyName("");
-        setDepartment("");
+        // setDepartment("");
       } else {
         setMessage(data.error || "Something went wrong!");
       }
@@ -38,7 +37,7 @@ const AddFaculty = () => {
 
   return (
     <>
-      <Navbar pageType="SubManager" />
+      <Navbar pageType=" Super Manager" />
       <div className="min-h-screen flex justify-center items-center bg-gray-100">
         <div className="bg-white p-6 rounded-xl shadow-lg w-96">
           <h2 className="text-xl font-bold mb-4 text-center">Add Faculty</h2>
@@ -54,14 +53,14 @@ const AddFaculty = () => {
               className="p-2 border rounded"
               required
             />
-            <input
+            {/* <input
               type="text"
               placeholder="Department"
               value={department}
               onChange={(e) => setDepartment(e.target.value)}
               className="p-2 border rounded"
               required
-            />
+            /> */}
 
             <button
               type="submit"

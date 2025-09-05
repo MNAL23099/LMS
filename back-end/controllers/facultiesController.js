@@ -2,14 +2,14 @@ const connectoToDB = require("../models/setupDB.js");
 
 // Add Faculty
 async function addFaculty(req, res) {
-    const { name, department } = req.body;
+    const { name} = req.body;
     try {
         const client = await connectoToDB();
         const query = `
-            INSERT INTO faculties (name, department)
-            VALUES ($1, $2) RETURNING *
+            INSERT INTO faculties (name)
+            VALUES ($1) RETURNING *
         `;
-        const values = [name, department];
+        const values = [name];
         const result = await client.query(query, values);
         res.json({ success: true, faculty: result.rows[0] });
     } catch (err) {
