@@ -41,6 +41,11 @@ function FOE_Dashboard(){
         navigation("/adminDashboard");
     }
 
+    function goToAddStudents()
+    {
+        navigation("/addStudents");
+    }
+
 
 
     return(
@@ -118,6 +123,18 @@ function FOE_Dashboard(){
                     <button onClick={goToViewFaculty} className="btn w-100 mt-auto" style={{ background: "linear-gradient(90deg, #ffd700 0%, #ffb400 100%)", color: "#002147", borderRadius: "25px", fontWeight: 700, border: "none" }}>Go</button>
                     </div>
                     </div>
+
+                    {/* Card for adding students  */}
+                <div className="card d-flex flex-column justify-content-between" style={{width: "18rem", background: "#fff", borderRadius: "1rem", boxShadow: "0 4px 24px rgba(0,33,71,0.10)", border: "1.5px solid #002147", fontFamily: 'Segoe UI, Arial, sans-serif', minHeight: '340px', marginTop: '1rem'}}>
+                <img src={labStaffPicture} className="card-img-top" alt="..." style={{ borderTopLeftRadius: "0.5rem", borderTopRightRadius: "0.5rem", height: "140px", objectFit: "cover" }} />
+                <div className="card-body d-flex flex-column justify-content-between" style={{ background: "#fff", color: "#002147", borderRadius: "0 0 1rem 1rem", flex: 1 }}>
+                    <div className="text-center">
+                        <h5 className="card-title" style={{ fontWeight: 700, color: '#002147', fontSize: '1.15rem', marginBottom: '0.5rem' }}>Add students</h5>
+                        <p className="card-text" style={{ color: '#002147', fontSize: '1rem', marginBottom: '0.5rem' }}>Add students for specific batch and streams </p>
+                    </div>
+                    <a onClick={goToAddStudents} href="#" className="btn w-100 mt-auto" style={{ background: "linear-gradient(90deg, #ffd700 0%, #ffb400 100%)", color: "#002147", borderRadius: "25px", fontWeight: 700, border: "none" }}>Go</a>
+                </div>
+                </div>
                     </div>
         </div>
 

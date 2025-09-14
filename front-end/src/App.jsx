@@ -40,7 +40,7 @@ import { ViewToLabEngineer } from "./Lab Engineer/Courses_show/viewAssignedCours
 import { Fetch_lab_space } from "./Lab Engineer/Courses_show/FetchLabSpace.jsx";
 import FileUpload from "./fileUploadTest/FileUpload.jsx";
 import AddFaculty from  "./SuperManager/FacultyOfEngineering/AddFaculty.jsx";
-
+import AddStudents from "./Student/addStudent.jsx";
 function App() {
 
   return(
@@ -86,6 +86,7 @@ function App() {
         <Route path="/viewAllocatedInventory" element={<ViewAllocatedInventory/>} />
         <Route path="/studentDashboard" element={<Student_Dashboard/>}/>
         <Route path="/AddFaculty" element={<AddFaculty/>} />
+        <Route path="/addStudents" element={<AddStudents/>} />
 
         {/* Website admin Routes */}
         <Route path="/websiteAdmin/dashboard" element={<Website_Admin_Dashboard />} />

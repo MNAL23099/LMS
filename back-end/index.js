@@ -24,6 +24,7 @@ app.use("/accounts", require("./routes/accounts"));
 app.use("/session", require("./routes/session"));
 app.use("/uploadFileTest", require("./routes/fileUploadTest.js"));
 app.use("/faculties", require("./routes/faculties"));
+app.use("/students", require("./routes/student") );
 
 
 app.get("/", (req, res) => {

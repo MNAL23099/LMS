@@ -14,6 +14,7 @@ async function createTables(){
     await createTable_Assigned_Courses();
     await createTable_accounts();
     await createTable_faculties();
+    await createTable_students();
 
     await insertDummyData();
 }
@@ -407,6 +408,26 @@ async function createTable_faculties() {
             console.log("faculties table created!");
         }
     });
+}
+async function createTable_students() {
+  const client = await connectoToDB();
+  if (!client) return;
+
+  const query = `
+    CREATE TABLE IF NOT EXISTS students (
+      id SERIAL PRIMARY KEY,
+      name TEXT NOT NULL,
+      roll_number TEXT UNIQUE NOT NULL,
+      batch TEXT NOT NULL,
+      account_email TEXT UNIQUE,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+  `;
+
+  client.query(query, (err) => {
+    if (err) console.error("students table cannot be created!", err.message);
+    else console.log("students table created!");
+  });
 }
 module.exports = createTables;
 

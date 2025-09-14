@@ -239,6 +239,31 @@ async function restoreUserAccount(targetEmail){ //Return true if account has bee
     return false;
   }
 }
+async function addStudentService({ name, rollNumber, batch }) {
+  const client = await connectToDB();
+
+  // generate login email & password
+  const email = `${name}@itu.edu.pk`;
+  const password = "123";
+
+  // 1️⃣ create login in accounts table
+  await addUserAccount(name, email, password, "student");
+
+  // 2️⃣ insert row in students table
+  const query = `
+    INSERT INTO students (name, roll_number, batch, account_email)
+    VALUES ($1, $2, $3, $4)
+    RETURNING *
+  `;
+  const { rows } = await client.query(query, [name, rollNumber, batch, email]);
+  return rows[0];
+}
+
+async function getAllStudentsService() {
+  const client = await connectToDB();
+  const { rows } = await client.query("SELECT * FROM students ORDER BY created_at DESC");
+  return rows;
+}
 
 module.exports = {
   getCurrentSession,
@@ -253,4 +278,6 @@ module.exports = {
   accountAlreadyExists,
   terminateUserAccount,
   restoreUserAccount,
+  addStudentService,
+  getAllStudentsService,
 }

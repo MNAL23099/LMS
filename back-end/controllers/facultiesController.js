@@ -2,7 +2,7 @@ const connectoToDB = require("../models/setupDB.js");
 
 // Add Faculty
 async function addFaculty(req, res) {
-    const { name} = req.body;
+    const {name} = req.body;
     try {
         const client = await connectoToDB();
         const query = `
